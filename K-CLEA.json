@@ -1,0 +1,352 @@
+{
+  "construct_id": "K-CLEA",
+  "construct_name": "Contextual Learning Environment Agent Master Construct",
+  "layer": "L03",
+  "agent": "CLEA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-CLEA",
+  "theoretical_foundation": {
+    "primary_theory": "Bronfenbrenner's Ecological Systems Theory (EST)",
+    "supporting_theories": [
+      "Adaptive Learning Systems Theory",
+      "Barrier Analysis Methods (WHO ICF)",
+      "Boundary-Crossing Theory (Akkerman & Bakker)",
+      "Bronfenbrenner's Bioecological Model (2006)",
+      "Bronfenbrenner's Ecological Systems Theory (1979, 1994)",
+      "Context-Aware Computing",
+      "Critical Pedagogy (Freire)",
+      "Cultural Capital Theory (Bourdieu)",
+      "Culturally Responsive Pedagogy (Gay)",
+      "Cumulative Disadvantage Theory"
+    ]
+  },
+  "core_principle": "Assess the learner's ecological context across all EST levels (Micro through Chrono) to identify barriers, enablers, and readiness signals that modulate the pedagogical path.",
+  "global_governance": {
+    "hard_gates": [
+      "EPR readiness gate must pass for deployment"
+    ],
+    "escalation_policy": "Blocked EST level → escalate to CLEA supervisor or human review",
+    "iteration_policy": "Re-assess EST levels when context changes (session start, environment shift)"
+  },
+  "sections": [
+    {
+      "section_id": "S-CLEA-0",
+      "was": "K-CLEA-0",
+      "section_name": "Microsystem Assessment Framework",
+      "theoretical_basis": "Bronfenbrenner's Ecological Systems Theory (1979, 1994) + Vygotsky's Zone of Proximal Development, Digital Divide Theory, Social Presence Theory",
+      "what_to_measure": [
+        "Device usability and exclusivity",
+        "Learning space adequacy and privacy",
+        "Time availability and routine predictability",
+        "Caregiver and peer availability",
+        "Emotional safety and belonging anchors",
+        "Health and functional state"
+      ],
+      "measurement_principles": {
+        "immediacy": "Focus on current, directly experienced environment",
+        "bidirectionality": "Consider both learner impact on and from environment",
+        "proximal_processes": "Assess quality of regular, progressive interactions"
+      },
+      "decision_rules": {
+        "barrier_threshold": "Any microsystem factor below 40/100 triggers barrier flag",
+        "enabler_threshold": "Factors above 70/100 are leverageable strengths",
+        "critical_factors": [
+          "device_usability",
+          "emotional_safety",
+          "time_availability"
+        ]
+      },
+      "validation_criteria": [
+        "All immediate environment dimensions assessed",
+        "Bidirectional influences considered",
+        "Proximal process quality evaluated",
+        "Barrier/enabler classification applied"
+      ],
+      "est_level": "MICROSYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-1",
+      "was": "K-CLEA-1",
+      "section_name": "Mesosystem Coherence Framework",
+      "theoretical_basis": "Bronfenbrenner's Ecological Systems Theory (1979, 1994) + Boundary-Crossing Theory (Akkerman & Bakker), Home-School Partnership Research, Identity Continuity Theory",
+      "what_to_measure": [
+        "Routine schedule alignment across contexts",
+        "Expectation coherence between home and school",
+        "Communication quality between contexts",
+        "Cross-context feedback integration",
+        "Identity continuity across settings",
+        "Assessment context alignment"
+      ],
+      "measurement_principles": {
+        "interconnection_quality": "Strength of links between microsystems",
+        "consistency": "Agreement in expectations and values across contexts",
+        "information_flow": "Bidirectional communication between settings"
+      },
+      "decision_rules": {
+        "coherence_threshold": "Mesosystem coherence below 50/100 requires intervention",
+        "critical_disconnects": [
+          "home_school_communication",
+          "expectation_coherence"
+        ],
+        "leverage_points": "Strong connections can compensate for weak ones"
+      },
+      "validation_criteria": [
+        "All microsystem pairs assessed for connection quality",
+        "Consistency of expectations evaluated",
+        "Communication pathways mapped",
+        "Identity continuity verified"
+      ],
+      "est_level": "MESOSYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-2",
+      "was": "K-CLEA-2",
+      "section_name": "Exosystem Enablement Framework",
+      "theoretical_basis": "Bronfenbrenner's Ecological Systems Theory (1979, 1994) + Institutional Theory (DiMaggio & Powell), Digital Infrastructure Studies, Educational Governance Research",
+      "what_to_measure": [
+        "Institutional access and eligibility",
+        "Resource availability and entitlement",
+        "Platform governance and stability",
+        "Connectivity and data affordability",
+        "Technical support availability",
+        "Funding and cost barriers"
+      ],
+      "measurement_principles": {
+        "indirect_influence": "Assess structures learner doesn't directly participate in",
+        "accessibility": "Evaluate barriers to institutional resources",
+        "stability": "Consider reliability and predictability of support systems"
+      },
+      "decision_rules": {
+        "enablement_threshold": "Exosystem enablement below 40/100 is critical barrier",
+        "accessibility_requirements": [
+          "institutional_access",
+          "connectivity",
+          "resource_availability"
+        ],
+        "stability_requirements": [
+          "platform_governance",
+          "technical_support"
+        ]
+      },
+      "validation_criteria": [
+        "All institutional support systems assessed",
+        "Accessibility barriers identified",
+        "Stability and reliability evaluated",
+        "Cost barriers mapped"
+      ],
+      "est_level": "EXOSYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-3",
+      "was": "K-CLEA-3",
+      "section_name": "Macrosystem Alignment Framework",
+      "theoretical_basis": "Bronfenbrenner's Ecological Systems Theory (1979, 1994) + Cultural Capital Theory (Bourdieu), Critical Pedagogy (Freire), Intersectionality Theory (Crenshaw)",
+      "what_to_measure": [
+        "Cultural valuation of education and learning",
+        "Socioeconomic positioning effects",
+        "Knowledge legitimacy in curriculum",
+        "Gendered participation norms",
+        "Structural inequality indicators",
+        "Authority trust patterns"
+      ],
+      "measurement_principles": {
+        "cultural_sensitivity": "Respect diverse cultural values and practices",
+        "equity_orientation": "Identify and address structural inequalities",
+        "epistemic_justice": "Ensure diverse knowledge forms are valued"
+      },
+      "decision_rules": {
+        "alignment_threshold": "Macrosystem misalignment below 50/100 requires cultural bridging",
+        "equity_flags": [
+          "structural_inequality",
+          "knowledge_delegitimization",
+          "gendered_barriers"
+        ],
+        "cultural_strengths": "High cultural valuation is leverageable asset"
+      },
+      "validation_criteria": [
+        "Cultural context fully considered",
+        "Equity dimensions assessed",
+        "Knowledge legitimacy evaluated",
+        "Structural barriers identified"
+      ],
+      "est_level": "MACROSYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-4",
+      "was": "K-CLEA-4",
+      "section_name": "Chronosystem Stability Framework",
+      "theoretical_basis": "Bronfenbrenner's Ecological Systems Theory (1979, 1994) + Life Course Theory (Elder), Transition Theory (Schlossberg), Cumulative Disadvantage Theory",
+      "what_to_measure": [
+        "Current transition load",
+        "Recovery window availability",
+        "Disruption accumulation history",
+        "Participation decay patterns",
+        "Reentry friction risk",
+        "Developmental timing considerations"
+      ],
+      "measurement_principles": {
+        "temporal_sensitivity": "Consider timing and sequencing of events",
+        "cumulative_effects": "Track accumulation of disruptions over time",
+        "recovery_capacity": "Assess ability to recover from transitions"
+      },
+      "decision_rules": {
+        "stability_threshold": "Chronosystem stability below 40/100 triggers protective measures",
+        "transition_load_max": "More than 2 concurrent major transitions is high risk",
+        "recovery_minimum": "Learner needs minimum recovery window before new challenges"
+      },
+      "validation_criteria": [
+        "Transition history documented",
+        "Current transition load quantified",
+        "Recovery capacity assessed",
+        "Cumulative effects considered"
+      ],
+      "est_level": "CHRONOSYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-5",
+      "was": "K-CLEA-5",
+      "section_name": "Barrier Synthesis Framework",
+      "theoretical_basis": "Bronfenbrenner's Bioecological Model (2006) + Barrier Analysis Methods (WHO ICF), Cumulative Risk Theory, Protective Factor Framework",
+      "what_to_measure": [
+        "Barrier inventory across all EST levels",
+        "Barrier severity and urgency ratings",
+        "Barrier interaction patterns",
+        "Cascading effect chains",
+        "Intersectional barrier compounds",
+        "Priority ranking for intervention",
+        "Technology hard gate failures (from K-CLEA-EPR-TECH)",
+        "Human context vulnerabilities (from K-CLEA-EPR-HUMAN)"
+      ],
+      "measurement_principles": {
+        "holistic_view": "Consider barriers across all ecological levels simultaneously",
+        "interaction_effects": "Identify how barriers compound and cascade",
+        "actionability": "Prioritize barriers that can be addressed"
+      },
+      "decision_rules": {
+        "severity_classification": {
+          "CRITICAL": "Barrier prevents participation entirely",
+          "HIGH": "Barrier significantly impairs learning",
+          "MODERATE": "Barrier creates friction but manageable",
+          "LOW": "Barrier is minor inconvenience"
+        },
+        "priority_algorithm": "severity × urgency × actionability",
+        "cascade_detection": "If barrier_A triggers barrier_B, address A first"
+      },
+      "validation_criteria": [
+        "All EST levels represented in barrier inventory",
+        "Severity classifications applied consistently",
+        "Interaction effects mapped",
+        "Priority ranking is actionable"
+      ],
+      "est_level": "CROSS-SYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-6",
+      "was": "K-CLEA-6",
+      "section_name": "Context Adaptation Framework",
+      "theoretical_basis": "Bronfenbrenner's Bioecological Model (2006) + Universal Design for Learning (CAST), Strengths-Based Approach, Culturally Responsive Pedagogy (Gay)",
+      "what_to_measure": [
+        "Contextual strengths available for leverage",
+        "Barrier mitigation feasibility",
+        "Equity adjustment requirements",
+        "Learner preference signals",
+        "Strategy feasibility in context",
+        "Resource requirements for adaptation",
+        "Technology constraint profile (from K-CLEA-EPR-TECH)",
+        "Ecological modality constraints (from MML atoms)"
+      ],
+      "measurement_principles": {
+        "strength_leverage": "Build on existing contextual assets",
+        "equity_orientation": "Address structural barriers, not just symptoms",
+        "feasibility": "Strategies must be actionable within constraints"
+      },
+      "decision_rules": {
+        "strategy_selection": {
+          "strength_available": "Leverage existing strength first",
+          "barrier_addressable": "Apply mitigation strategy",
+          "barrier_structural": "Flag for equity adjustment or escalation"
+        },
+        "adaptation_priority": "strengths > mitigation > compensation > escalation",
+        "personality_integration": "Adjust strategies based on learner preferences"
+      },
+      "validation_criteria": [
+        "All priority barriers have strategy assigned",
+        "Strengths are leveraged where possible",
+        "Equity considerations applied",
+        "Strategies are feasible in context"
+      ],
+      "est_level": "CROSS-SYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-7",
+      "was": "K-CLEA-7",
+      "section_name": "Ecological Handoff Framework",
+      "theoretical_basis": "Bronfenbrenner's Bioecological Model (2006) + Context-Aware Computing, Adaptive Learning Systems Theory, Interoperability Standards (IEEE LOM)",
+      "what_to_measure": [
+        "Completeness of ecological assessment",
+        "Constraint summary accuracy",
+        "Opportunity signal clarity",
+        "Downstream requirement coverage",
+        "Personality-context integration",
+        "Handoff validation status"
+      ],
+      "measurement_principles": {
+        "completeness": "All EST levels represented in handoff",
+        "actionability": "Downstream agents can act on provided context",
+        "integration": "Personality and ecological context are coherent"
+      },
+      "validation_criteria": [
+        "All downstream agents have required context",
+        "Constraint summary is complete",
+        "Opportunity signals are actionable",
+        "Handoff is validated against schema"
+      ],
+      "est_level": "CROSS-SYSTEM"
+    },
+    {
+      "section_id": "S-CLEA-8",
+      "was": "K-CLEA-EPR",
+      "section_name": "Ecological Participation Readiness Framework",
+      "theoretical_basis": "Ecological Participation Registry (EPR) + Bronfenbrenner's Ecological Systems Theory, Digital Divide Theory, Universal Design for Learning",
+      "what_to_measure": [
+        "Technology hard gate status (5 gates)",
+        "Technology constraint profile (23 constraint atoms)",
+        "Human context factors (21 atoms across EST levels)",
+        "Combined participation readiness band"
+      ],
+      "est_level": "CROSS-SYSTEM"
+    }
+  ],
+  "output_schema": {
+    "primary": "context_vector",
+    "includes": [
+      "microsystem_assessment",
+      "mesosystem_assessment",
+      "exosystem_assessment",
+      "macrosystem_assessment",
+      "chronosystem_assessment",
+      "multimodal_assessment",
+      "epr_readiness_verdict",
+      "barrier_inventory",
+      "enabler_inventory"
+    ]
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-CLEA-0",
+      "K-CLEA-1",
+      "K-CLEA-2",
+      "K-CLEA-3",
+      "K-CLEA-4",
+      "K-CLEA-5",
+      "K-CLEA-6",
+      "K-CLEA-7",
+      "K-CLEA-EPR"
+    ],
+    "original_count": 9,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

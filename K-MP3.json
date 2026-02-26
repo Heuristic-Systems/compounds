@@ -1,0 +1,621 @@
+{
+  "construct_id": "K-MP3",
+  "construct_name": "MP3 Vision Council Gate Master Construct",
+  "layer": "MP03",
+  "agent": "MP3",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MP3",
+  "theoretical_foundation": {
+    "primary_theory": "North Star Vision Generation",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-MP3-0",
+      "was": "K-MP3-0_MP2_Package_Intake",
+      "section_name": "MP2 Package Intake",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-0.1",
+          "compound_name": "ADR Presence Validation",
+          "description": "Verify ADR record exists with layer_configuration_snapshot and coherence_validation",
+          "execution_order": 1,
+          "validation_rules": [
+            "ADR record must be present",
+            "layer_configuration_snapshot must contain L01-L08 hashes",
+            "coherence_validation must show all checks passed"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-0.2",
+          "compound_name": "Gate Presence Validation",
+          "description": "Verify all 4 quality gates (delivery, response, time, ethical) are configured",
+          "execution_order": 2,
+          "validation_rules": [
+            "Exactly 4 gate types present",
+            "Each gate has thresholds and monitoring_rules",
+            "Enforcement modes are appropriate"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-0.3",
+          "compound_name": "Layer Stack Extraction",
+          "description": "Extract L01-L08 outputs for vision synthesis, noting L07 may be null if human involvement not required",
+          "execution_order": 3,
+          "layer_requirements": {
+            "L01": "Required - Pedagogical Core outputs",
+            "L02": "Required - Technology Architecture outputs",
+            "L03": "Required - Ecological Context outputs",
+            "L04": "Required - Ethical Governance outputs",
+            "L05": "Required - Multimodal Interaction outputs",
+            "L06": "Required - Holistic Outcomes outputs",
+            "L07": "Optional - Human-Institutional outputs (may be null)",
+            "L08": "Required - Strategic Foresight outputs"
+          }
+        },
+        {
+          "compound_id": "CP-MP3-0.4",
+          "compound_name": "MP1 Validation Carryover",
+          "description": "Verify MP1 validation passed and charter context is present",
+          "execution_order": 4,
+          "validation_rules": [
+            "mp1_validation.passed must be true",
+            "charter_context must be present",
+            "All layer outputs must have MP1 approval stamps"
+          ]
+        }
+      ],
+      "description": "Validates the MP2 forward package, extracts layer stack, and prepares intake bundle for vision synthesis. Entry point for MP3 processing."
+    },
+    {
+      "section_id": "S-MP3-1",
+      "was": "K-MP3-1_Input_Stream_Synthesis",
+      "section_name": "Input Stream Synthesis",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-1.1",
+          "compound_name": "Foresight Ingestion",
+          "description": "Extract L08 scenarios, trend scans, weak signals - the 'what might be'",
+          "execution_order": 1,
+          "source_layer": "L08",
+          "extracted_elements": [
+            "future_scenarios",
+            "trend_scans",
+            "weak_signals",
+            "horizon_projections",
+            "technology_trajectories"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-1.2",
+          "compound_name": "Ethics Binding",
+          "description": "Extract L04 justice posture and non-negotiable constraints - the 'what must be'",
+          "execution_order": 2,
+          "source_layer": "L04",
+          "extracted_elements": [
+            "justice_posture",
+            "ethical_constraints",
+            "non_negotiable_principles",
+            "equity_requirements",
+            "harm_boundaries"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-1.3",
+          "compound_name": "Outcomes Grounding",
+          "description": "Extract L06 longitudinal data on agency, metacognition, transfer - the 'what is'",
+          "execution_order": 3,
+          "source_layer": "L06",
+          "extracted_elements": [
+            "agency_metrics",
+            "metacognition_measures",
+            "transfer_evidence",
+            "competency_attainment_data",
+            "equity_outcome_signals"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-1.4",
+          "compound_name": "Charter Anchoring",
+          "description": "Extract MP1 near-term goals, SESOI, equity thresholds - the 'what is now'",
+          "execution_order": 4,
+          "source": "MP01",
+          "extracted_elements": [
+            "near_term_goals",
+            "SESOI_definitions",
+            "equity_thresholds",
+            "current_constraints",
+            "operational_bounds"
+          ]
+        }
+      ],
+      "description": "Fuses the 4 critical input streams (L08 Foresight, L04 Ethics, L06 Outcomes, MP01 Charter) into a unified synthesis context. Performs strategic transduction from high-level signals to actionable constraints."
+    },
+    {
+      "section_id": "S-MP3-2",
+      "was": "K-MP3-2_North_Star_Generation",
+      "section_name": "North Star Generation",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-2.1",
+          "compound_name": "SESOI Definition Anchoring",
+          "description": "Apply 8-priority decision algorithm to synthesis context",
+          "execution_order": 1,
+          "process": [
+            "Evaluate all inputs against justice & dignity criterion first",
+            "Only proceed to lower criteria after higher are satisfied",
+            "Document any trade-offs with explicit justification",
+            "Flag any efficiency gains that could compromise justice"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-2.2",
+          "compound_name": "Core Statement Synthesis",
+          "description": "Generate justice-first mission statement (1-page)",
+          "execution_order": 2,
+          "requirements": [
+            "Must prioritize human dignity and agency",
+            "Must reference long-horizon flourishing",
+            "Must be concise yet comprehensive",
+            "Must contain testable implications"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-2.3",
+          "compound_name": "Justice Stance Articulation",
+          "description": "Define equity as structural invariant, not outcome",
+          "execution_order": 3,
+          "key_assertion": "Equity is not an outcome but a structural invariant",
+          "requirements": [
+            "Specify equity thresholds from charter",
+            "Define rejection criteria for efficiency models that marginalize",
+            "Reference SESOI target population"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-2.4",
+          "compound_name": "Calculus Application",
+          "description": "Generate 6-page narrative with testable implications",
+          "execution_order": 4,
+          "narrative_structure": [
+            "Page 1: Core Mission and Justice Stance",
+            "Page 2: Horizon Definitions (Near 1-2y, Mid 3-5y, Far 6-15y)",
+            "Page 3: Strategic Context and Foresight Alignment",
+            "Page 4: Ethical Boundaries and Non-Negotiables",
+            "Page 5: Testable Implications and Success Criteria",
+            "Page 6: Traceability and Governance"
+          ],
+          "mitigates": "Aspirational Fog failure mode"
+        }
+      ],
+      "description": "Applies the lexicographic decision calculus to generate the justice-oriented North Star statement, justice stance, and 6-page vision narrative with testable implications."
+    },
+    {
+      "section_id": "S-MP3-3",
+      "was": "K-MP3-3_Horizon_Competency_Lattice",
+      "section_name": "Horizon Competency Lattice",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-3.1",
+          "compound_name": "Temporal Horizon Definition",
+          "description": "Define Near/Mid/Far capability expectations",
+          "execution_order": 1,
+          "horizon_definitions": {
+            "near": {
+              "timeframe": "1-2 years",
+              "level": "Operational Proficiency"
+            },
+            "mid": {
+              "timeframe": "3-5 years",
+              "level": "Systemic Adaptability"
+            },
+            "far": {
+              "timeframe": "6-15 years",
+              "level": "Generative Sovereignty"
+            }
+          }
+        },
+        {
+          "compound_id": "CP-MP3-3.2",
+          "compound_name": "Competency Level Mapping",
+          "description": "Extract competencies from L06 (measurable) and L08 (future-needed)",
+          "execution_order": 2,
+          "core_competencies": [
+            {
+              "id": "META-REASONING",
+              "name": "Meta-reasoning",
+              "descriptor": "Plan, monitor, and adapt one's own reasoning strategies, particularly when interacting with AI systems"
+            },
+            {
+              "id": "ETHICAL-DELIBERATION",
+              "name": "Ethical Deliberation",
+              "descriptor": "Identify stakeholders, weigh conflicting values, and reason transparently about socio-technical trade-offs"
+            },
+            {
+              "id": "COLLABORATIVE-FRAMING",
+              "name": "Collaborative Problem-Framing",
+              "descriptor": "Co-define complex, ambiguous problems with diverse human and AI partners; negotiate shared goals and constraints"
+            },
+            {
+              "id": "CONTEXTUAL-INNOVATION",
+              "name": "Contextual Innovation",
+              "descriptor": "Apply and adapt technical/scientific principles to solve local problems, leveraging indigenous knowledge and low-resource constraints"
+            }
+          ],
+          "ai_complementarity": "Prioritize skills where humans, working with AI, create more value than either alone"
+        },
+        {
+          "compound_id": "CP-MP3-3.3",
+          "compound_name": "Lattice Structure Generation",
+          "description": "Map competencies to supporting layers",
+          "execution_order": 3,
+          "layer_mappings": {
+            "L01": "Discover/design pedagogies that teach competencies",
+            "L02": "Build technical operators that support competencies",
+            "L05": "Create interfaces that render competencies accessible",
+            "L06": "Develop valid and fair methods for assessing competencies"
+          }
+        },
+        {
+          "compound_id": "CP-MP3-3.4",
+          "compound_name": "Lattice Equity Overlay",
+          "description": "Align lattice with NDP 2030 and RISDP 2020-2030 strategic goals",
+          "execution_order": 4,
+          "regional_alignment": {
+            "NDP_2030": [
+              "Improving educational outcomes in science and mathematics",
+              "Developing skills to reduce inequality and unemployment"
+            ],
+            "RISDP_2020_2030": [
+              "Development of human and social capital",
+              "Science, technology, and skills development for regional competitiveness"
+            ]
+          },
+          "decolonial_action": "Populate far horizon with competencies strategically vital for SADC region's future autonomy, resilience, and prosperity"
+        }
+      ],
+      "description": "Generates the Horizon Competency Lattice defining AI-complementary human capabilities across Near (1-2y), Mid (3-5y), and Far (6-15y) horizons, contextualized for SADC region."
+    },
+    {
+      "section_id": "S-MP3-4",
+      "was": "K-MP3-4_Strategic_Themes_Bets",
+      "section_name": "Strategic Themes & Bets",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-4.1",
+          "compound_name": "Theme Identification",
+          "description": "Define 3-5 strategic investment areas aligned with L08 scenarios",
+          "execution_order": 1,
+          "requirements": [
+            "Each bet must align with specific L08 scenario",
+            "Bets must collectively cover near, mid, and far horizons",
+            "Portfolio must be balanced across risk profiles"
+          ],
+          "portfolio_size": "3-5 bets"
+        },
+        {
+          "compound_id": "CP-MP3-4.2",
+          "compound_name": "Strategic Bet Formulation",
+          "description": "Define explicit success conditions and kill conditions for each bet",
+          "execution_order": 2,
+          "criteria_requirements": {
+            "success_criteria": [
+              "Must be measurable",
+              "Must have clear thresholds",
+              "Must align with competency lattice goals"
+            ],
+            "kill_criteria": [
+              "Explicit conditions that would terminate the bet",
+              "Include equity violation triggers",
+              "Include harm detection triggers"
+            ]
+          }
+        },
+        {
+          "compound_id": "CP-MP3-4.3",
+          "compound_name": "Counterfactual Trigger Design",
+          "description": "Ensure each bet has explicit equity protections",
+          "execution_order": 3,
+          "requirements": [
+            "Every bet must have at least one equity safeguard",
+            "Safeguards must reference charter equity thresholds",
+            "Safeguards must be enforceable via L04"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-4.4",
+          "compound_name": "Bet-Theme Coherence Validation",
+          "description": "Record deprioritized alternatives and explicit rationale for not choosing them",
+          "execution_order": 4,
+          "counterfactual_accountability": {
+            "description": "For every major strategic shift, specify which alternative futures are being deprioritized and why",
+            "purpose": "Enables future Vision Councils to understand original rationale and make informed pivots",
+            "required_fields": [
+              "deprioritised_futures",
+              "deprioritisation_rationale",
+              "conditions_for_reconsideration"
+            ]
+          },
+          "organizational_learning": "Transforms decision-making from isolated events into continuous learning conversation with organization's strategic history"
+        }
+      ],
+      "description": "Formulates portfolio of 3-5 strategic investment areas with explicit success/kill criteria, equity safeguards, and counterfactual accountability documenting deprioritized alternatives."
+    },
+    {
+      "section_id": "S-MP3-5",
+      "was": "K-MP3-5_Principles_Sunset_Synthesis",
+      "section_name": "Principles & Sunset Synthesis",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-5.1",
+          "compound_name": "Guiding Principle Derivation",
+          "description": "Generate rationale-first tenets that provide direct guidance to L2 and L5",
+          "execution_order": 1,
+          "principle_requirements": [
+            "Rationale MUST come before rule statement",
+            "Must be testable and enforceable",
+            "Must trace to North Star or specific bet"
+          ],
+          "example_principles": [
+            {
+              "id": "P-RATIONALE-FIRST",
+              "name": "Rationale-First UX",
+              "statement": "UI must present 'Why' before 'What'",
+              "rationale": "Enables learner agency by making system reasoning transparent",
+              "target_layers": [
+                "L5"
+              ]
+            },
+            {
+              "id": "P-EXPLAINABILITY",
+              "name": "Explainability-by-Design",
+              "statement": "All adaptive decisions must be accompanied by machine-readable and human-legible rationale",
+              "rationale": "Builds trust and supports metacognitive development",
+              "target_layers": [
+                "L2",
+                "L5"
+              ]
+            },
+            {
+              "id": "P-MULTI-PATH",
+              "name": "Multi-Path Mastery",
+              "statement": "Learning pathways must offer multiple valid routes to competency",
+              "rationale": "Respects learner diversity and prevents single-track optimization",
+              "target_layers": [
+                "L1",
+                "L2"
+              ]
+            },
+            {
+              "id": "P-EQUITY-DEFAULTS",
+              "name": "Equity Defaults",
+              "statement": "Default settings must benefit SESOI populations",
+              "rationale": "Counteracts systemic drift toward majority optimization",
+              "target_layers": [
+                "L2"
+              ]
+            }
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-5.2",
+          "compound_name": "Sunset Clause Generation",
+          "description": "Assign each principle to specific target layers",
+          "execution_order": 2,
+          "layer_obligations": {
+            "L1": "Re-weight pedagogy toward horizon competencies per principles",
+            "L2": "Encode principles into operators/flags; expose audit hooks",
+            "L5": "Render explanations; support multiple paths per principles"
+          }
+        },
+        {
+          "compound_id": "CP-MP3-5.3",
+          "compound_name": "Time Consistency Validation",
+          "description": "Identify practices to deprecate because they no longer serve the renewed vision",
+          "execution_order": 3,
+          "detection_criteria": [
+            "Practice conflicts with North Star justice stance",
+            "Practice violates context parity invariant",
+            "Practice optimizes for metrics that erode long-term competencies",
+            "Practice creates vendor lock-in or equity barriers"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-5.4",
+          "compound_name": "No Myopia Guard Application",
+          "description": "Define Immediate/Gradual/Long-term deprecation horizons",
+          "execution_order": 4,
+          "deprecation_horizons": {
+            "Immediate": {
+              "timeframe": "Within current cycle",
+              "criteria": "Practice causes active harm or equity violation"
+            },
+            "Gradual": {
+              "timeframe": "1-2 cycles",
+              "criteria": "Practice is suboptimal but not harmful; replacement available"
+            },
+            "Long-term": {
+              "timeframe": "3+ cycles",
+              "criteria": "Practice is legacy but deeply embedded; requires significant migration"
+            }
+          },
+          "required_fields": [
+            "practice_id",
+            "reason",
+            "deprecation_horizon",
+            "replacement_reference"
+          ]
+        }
+      ],
+      "description": "Generates Vision-to-Design Principles (rationale-first tenets for L2, L5) and Sunset Signals identifying practices to deprecate with explicit timelines."
+    },
+    {
+      "section_id": "S-MP3-6",
+      "was": "K-MP3-6_Vision_Layer_Coherence",
+      "section_name": "Vision-Layer Coherence",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-6.1",
+          "compound_name": "Layer Binding Verification",
+          "description": "Verify near-term gains don't erode long-term competencies",
+          "execution_order": 1,
+          "validation_logic": [
+            "Compare each near-horizon bet against far-horizon competencies",
+            "Flag any bet that could reduce capacity for far-horizon competency development",
+            "Check that near-term optimizations don't create path dependencies that limit future options"
+          ],
+          "output": {
+            "passed": "boolean",
+            "violations": "TimeConsistencyViolation[]"
+          }
+        },
+        {
+          "compound_id": "CP-MP3-6.2",
+          "compound_name": "Gate Consistency Check",
+          "description": "Verify foresight horizon >= vision horizon",
+          "execution_order": 2,
+          "validation_logic": [
+            "L08 foresight must project at least as far as vision far horizon (6-15y)",
+            "L08 scenarios must support each strategic bet",
+            "Weak signals must be compatible with vision direction"
+          ],
+          "output": {
+            "passed": "boolean",
+            "gap": "string | null"
+          }
+        },
+        {
+          "compound_id": "CP-MP3-6.3",
+          "compound_name": "Drift Detection Analysis",
+          "description": "Verify every lattice competency is measurable by L06",
+          "execution_order": 3,
+          "validation_logic": [
+            "Each competency in lattice must have corresponding L06 measurement capability",
+            "L06 must be able to detect regression on long-term competencies",
+            "Assessment methods must be fair across equity strata"
+          ],
+          "output": {
+            "passed": "boolean",
+            "unmeasurable_competencies": "string[]"
+          }
+        },
+        {
+          "compound_id": "CP-MP3-6.4",
+          "compound_name": "Coherence Score Calculation",
+          "description": "Verify each principle's target layers have capacity to implement",
+          "execution_order": 4,
+          "validation_logic": [
+            "For each principle, check target layer has required capabilities",
+            "For each competency, check supporting layers can deliver",
+            "Identify any capacity gaps that would prevent vision realization"
+          ],
+          "output": {
+            "passed": "boolean",
+            "capacity_gaps": "LayerCapacityGap[]"
+          }
+        }
+      ],
+      "description": "Validates vision coherence with layer capabilities using Time-Consistency Rule and No-Myopia Guard. Ensures near-term gains don't erode long-term competencies."
+    },
+    {
+      "section_id": "S-MP3-7",
+      "was": "K-MP3-7_Vision_Output_Emission",
+      "section_name": "Vision Output Emission",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP3-7.1",
+          "compound_name": "Vision Package Assembly",
+          "description": "Determine FORWARD_TO_MP4 or EMIT_DIRECTIVE_BUNDLE based on coherence result",
+          "execution_order": 1,
+          "decision_logic": {
+            "FORWARD_TO_MP4": [
+              "coherence_result.passed === true",
+              "All time-consistency checks pass",
+              "All layer capability checks pass"
+            ],
+            "EMIT_DIRECTIVE_BUNDLE": [
+              "Any coherence check failed",
+              "Time-consistency violations detected",
+              "Layer capacity gaps identified"
+            ]
+          }
+        },
+        {
+          "compound_id": "CP-MP3-7.2",
+          "compound_name": "Vision Tag Generation",
+          "description": "Create machine-readable policy tags for CI/CD enforcement",
+          "execution_order": 2,
+          "vision_tag_schema": {
+            "north_star_id": "Unique ID of the North Star",
+            "principle_id": "Specific principle this tag relates to",
+            "charter_hash": "Cryptographic hash of governing Charter (from MP1)",
+            "policy_hash": "Cryptographic hash of governing Policy (from L4)",
+            "adr_link": "Link to evidentiary ADR (from MP2)",
+            "sunset_signal": "Reference to applicable sunset signal if any",
+            "timestamp": "Tag generation timestamp"
+          },
+          "automated_enforcement": {
+            "description": "Tags enable CI/CD pipeline gates to validate strategic compliance",
+            "validations": [
+              "policy_hash matches currently active L4 policy",
+              "Code commits include valid Vision Tag",
+              "Deprecated principles trigger build warnings"
+            ]
+          }
+        },
+        {
+          "compound_id": "CP-MP3-7.3",
+          "compound_name": "Decision Determination",
+          "description": "Link all vision artifacts to source inputs for full provenance",
+          "execution_order": 3,
+          "traceability_entries": [
+            "north_star -> charter_hash",
+            "north_star -> policy_hash",
+            "each_bet -> l8_scenario",
+            "each_principle -> north_star_statement",
+            "each_competency -> l06_outcome_metric"
+          ]
+        },
+        {
+          "compound_id": "CP-MP3-7.4",
+          "compound_name": "Forward Package Emission",
+          "description": "Record complete execution trace, SLO compliance, and governance attestation",
+          "execution_order": 4,
+          "audit_record": {
+            "started_at": "ISO timestamp",
+            "completed_at": "ISO timestamp",
+            "constructs_executed": "8 (K-MP3-0 through K-MP3-7)",
+            "compounds_executed": "32 (4 per construct)",
+            "lexicographic_attestation": "Declaration that calculus was applied correctly",
+            "output_mode": "FORWARD_TO_MP4 | EMIT_DIRECTIVE_BUNDLE"
+          }
+        }
+      ],
+      "description": "Packages vision artifacts for MP4 or issues DIRECTIVE_BUNDLE to Layer Agents when vision-capability gaps exist. Generates machine-readable Vision Tags for CI/CD enforcement."
+    }
+  ],
+  "output_schema": {
+    "primary": "mp3_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-MP3-0_MP2_Package_Intake",
+      "K-MP3-1_Input_Stream_Synthesis",
+      "K-MP3-2_North_Star_Generation",
+      "K-MP3-3_Horizon_Competency_Lattice",
+      "K-MP3-4_Strategic_Themes_Bets",
+      "K-MP3-5_Principles_Sunset_Synthesis",
+      "K-MP3-6_Vision_Layer_Coherence",
+      "K-MP3-7_Vision_Output_Emission"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

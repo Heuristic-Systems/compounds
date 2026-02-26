@@ -1,0 +1,365 @@
+{
+  "construct_id": "K-PER",
+  "construct_name": "Personality Agent Master Construct",
+  "layer": "L01",
+  "agent": "Personality",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-PER",
+  "theoretical_foundation": {
+    "primary_theory": "Integrative Personality Assessment",
+    "supporting_theories": [
+      "Five-Factor Model (Costa & McCrae, 1992)",
+      "Jung/Myers-Briggs Type Theory",
+      "Enneagram of Personality (Riso-Hudson tradition)",
+      "Holland's Theory of Vocational Personalities and Work Environments"
+    ],
+    "core_principles": [
+      "Multiple frameworks provide complementary perspectives",
+      "Cross-framework validation increases confidence",
+      "Inconsistencies signal measurement error or complexity",
+      "Synthesis should be additive, not reductive",
+      "Final profile should be actionable for pedagogy",
+      "Personality informs but does not determine learning capability"
+    ]
+  },
+  "core_principle": "Assess personality across four validated frameworks (FFM, MBTI, Enneagram, RIASEC), cross-validate for consistency, and synthesise into a unified signature with pedagogical recommendations.",
+  "global_governance": {
+    "hard_gates": [
+      "At least FFM OR MBTI data must be present for valid profile",
+      "Assessment completion rate >= 90%",
+      "No response set patterns detected",
+      "Adaptations must be preferences, not restrictions — allow learner override"
+    ],
+    "escalation_policy": "Cannot synthesise valid personality profile within bounded loops → request reassessment",
+    "iteration_policy": "Reinterpretation max 3, more_data max 2 per framework"
+  },
+  "sections": [
+    {
+      "section_id": "S-PER-FFM",
+      "was": "K-PER-FFM",
+      "section_name": "Five-Factor Model Personality Framework",
+      "theoretical_basis": "Five-Factor Model (Costa & McCrae, 1992) — NEO-PI-R, IPIP-NEO, BFI-2",
+      "what_to_measure": [
+        "Five personality domains: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism",
+        "Six facets per domain (30 facet-level scores)",
+        "Assessment validity indicators (inconsistency, acquiescence)"
+      ],
+      "measurement_principles": {
+        "measurement_rules": [
+          "Use validated FFM instruments only (NEO-PI-R, IPIP-NEO, BFI-2)",
+          "Report scores as T-scores (M=50, SD=10) or percentiles",
+          "Require facet-level data for nuanced adaptation",
+          "Domain scores alone are insufficient for detailed personalisation"
+        ],
+        "interpretation_rules": [
+          "Avoid trait-based value judgments (no trait is 'good' or 'bad')",
+          "Consider cultural context in interpretation",
+          "Acknowledge measurement error in individual scores",
+          "Use bands (Very Low/Low/Average/High/Very High) for communication"
+        ],
+        "application_rules": [
+          "Adaptations should be preferences, not restrictions",
+          "Allow learner override of personality-based adaptations",
+          "Re-assess periodically (12-24 months for adults)"
+        ]
+      },
+      "decision_rules": {
+        "VALID_FFM_PROFILE": {
+          "condition": "all_five_domains_scored AND validity_checks_passed AND confidence >= 0.7",
+          "action": "emit_full_ffm_profile"
+        },
+        "PARTIAL_FFM_PROFILE": {
+          "condition": "at_least_three_domains_scored AND confidence >= 0.5",
+          "action": "emit_partial_ffm_profile_with_missing_flags"
+        },
+        "INVALID_FFM_DATA": {
+          "condition": "validity_checks_failed OR confidence < 0.5",
+          "action": "reject_and_request_reassessment"
+        }
+      },
+      "validation_criteria": [
+        "Assessment completion rate >= 90%",
+        "No response set patterns detected",
+        "All 5 domains scored",
+        "Confidence intervals calculated",
+        "Cultural norms applied where available"
+      ]
+    },
+    {
+      "section_id": "S-PER-MBTI",
+      "was": "K-PER-MBTI",
+      "section_name": "Myers-Briggs Type Indicator Framework",
+      "theoretical_basis": "Jung/Myers-Briggs Type Theory — Psychological Types (Jung, 1921)",
+      "what_to_measure": [
+        "Four preference dimensions (E/I, S/N, T/F, J/P)",
+        "Preference clarity scores per dimension",
+        "Dominant and auxiliary cognitive functions"
+      ],
+      "measurement_principles": {
+        "measurement_rules": [
+          "Use official MBTI instrument or validated alternatives",
+          "Report preference clarity alongside type",
+          "Low clarity indicates midzone — type less meaningful",
+          "Self-verification of type is essential"
+        ],
+        "interpretation_rules": [
+          "Type is not destiny — all types can succeed at any task",
+          "Focus on preference, not proficiency",
+          "Consider type dynamics (dominant/auxiliary functions)",
+          "Avoid stereotyping based on type"
+        ],
+        "application_rules": [
+          "E/I dimension most relevant for social learning design",
+          "S/N dimension most relevant for content presentation",
+          "Type should inform, not dictate, learning path"
+        ]
+      },
+      "decision_rules": {
+        "CLEAR_TYPE": {
+          "condition": "all_clarities >= 15 AND no_midzone_preferences",
+          "action": "emit_confident_type_code"
+        },
+        "MIDZONE_TYPE": {
+          "condition": "any_clarity < 15 AND at_least_two_clear",
+          "action": "emit_type_with_midzone_flags"
+        },
+        "UNCLEAR_TYPE": {
+          "condition": "multiple_midzones OR all_clarities < 10",
+          "action": "flag_for_self_verification"
+        }
+      },
+      "ffm_correlation_mapping": {
+        "E_I": "Extraversion (E) dimension",
+        "S_N": "Openness (O) dimension",
+        "T_F": "Agreeableness (A) dimension (partial)",
+        "J_P": "Conscientiousness (C) dimension"
+      },
+      "validation_criteria": [
+        "All four preferences determined",
+        "Clarity scores above threshold (>15) for confident typing",
+        "Type code valid format (4 letters)"
+      ]
+    },
+    {
+      "section_id": "S-PER-ENNEA",
+      "was": "K-PER-ENNEA",
+      "section_name": "Enneagram Personality Framework",
+      "theoretical_basis": "Enneagram of Personality (Riso-Hudson tradition) — 9 types, wings, instincts, centers",
+      "what_to_measure": [
+        "Nine type resonance scores",
+        "Wing identification (adjacent types)",
+        "Instinctual stacking (SP/SX/SO)",
+        "Dominant center (Head/Heart/Body)",
+        "Integration/disintegration paths",
+        "Health level"
+      ],
+      "measurement_principles": {
+        "measurement_rules": [
+          "Use validated Enneagram assessments (RHETI, iEQ9)",
+          "Report resonance scores for all 9 types, not just top type",
+          "Include instinctual stacking assessment",
+          "Consider integration level (health level)"
+        ],
+        "interpretation_rules": [
+          "Core motivation matters more than behavior",
+          "All types have healthy and unhealthy expressions",
+          "Wings provide secondary motivational influence",
+          "Instincts affect learning environment preferences"
+        ],
+        "application_rules": [
+          "Use type motivation to frame learning relevance",
+          "Instinct stack affects preferred learning context",
+          "Growth direction suggests aspirational adaptations",
+          "Stress direction indicates what to avoid"
+        ]
+      },
+      "decision_rules": {
+        "CLEAR_TYPE": {
+          "condition": "top_type_gap >= 10 AND instincts_differentiated",
+          "action": "emit_confident_enneagram_profile"
+        },
+        "AMBIGUOUS_TYPE": {
+          "condition": "top_type_gap < 10 OR flat_resonance_profile",
+          "action": "emit_type_with_alternatives"
+        },
+        "UNCLEAR_TYPE": {
+          "condition": "no_clear_peak OR contradictory_patterns",
+          "action": "flag_for_deeper_assessment"
+        }
+      },
+      "type_core_motivations": {
+        "T1": "To be good, right, and improve things",
+        "T2": "To be loved and needed",
+        "T3": "To be successful and admired",
+        "T4": "To be unique and authentic",
+        "T5": "To understand and be competent",
+        "T6": "To be secure and supported",
+        "T7": "To be satisfied and experience variety",
+        "T8": "To be powerful and in control",
+        "T9": "To be at peace and harmonious"
+      },
+      "validation_criteria": [
+        "All nine type resonances measured",
+        "Clear differentiation between top types",
+        "Instinctual preferences assessed",
+        "Wing determined from adjacent types"
+      ]
+    },
+    {
+      "section_id": "S-PER-RIASEC",
+      "was": "K-PER-RIASEC",
+      "section_name": "Holland RIASEC Vocational Interest Framework",
+      "theoretical_basis": "Holland's Theory of Vocational Personalities (1997) — hexagonal model",
+      "what_to_measure": [
+        "Six interest dimension scores (R/I/A/S/E/C)",
+        "Three-letter Holland code",
+        "Profile differentiation",
+        "Profile consistency (hexagonal adjacency)"
+      ],
+      "measurement_principles": {
+        "measurement_rules": [
+          "Use validated RIASEC instruments (SDS, O*NET Interest Profiler)",
+          "Report all six dimension scores, not just top code",
+          "Calculate differentiation (profile distinctiveness)",
+          "Calculate consistency (hexagonal adjacency of top codes)"
+        ],
+        "interpretation_rules": [
+          "High differentiation means clearer preferences",
+          "High consistency means more integrated interests",
+          "Flat profiles indicate broad interests, not lack of interest"
+        ],
+        "application_rules": [
+          "Match content themes and examples to top codes",
+          "Learning context can be adapted to interest type",
+          "Interests suggest motivation sources, not abilities",
+          "Career relevance framing based on Holland code"
+        ]
+      },
+      "decision_rules": {
+        "DIFFERENTIATED_PROFILE": {
+          "condition": "differentiation >= 0.6 AND consistency >= 0.7",
+          "action": "emit_confident_holland_code"
+        },
+        "FLAT_PROFILE": {
+          "condition": "differentiation < 0.4",
+          "action": "emit_holland_code_with_flat_warning"
+        },
+        "INCONSISTENT_PROFILE": {
+          "condition": "consistency < 0.5",
+          "action": "emit_holland_code_with_inconsistency_flag"
+        }
+      },
+      "hexagonal_model": {
+        "adjacencies": {
+          "R": ["I", "C"], "I": ["R", "A"], "A": ["I", "S"],
+          "S": ["A", "E"], "E": ["S", "C"], "C": ["E", "R"]
+        },
+        "opposites": { "R": "S", "I": "E", "A": "C" }
+      },
+      "type_descriptions": {
+        "R": "Realistic: Practical, hands-on, physical, mechanical",
+        "I": "Investigative: Analytical, intellectual, scientific, curious",
+        "A": "Artistic: Creative, expressive, unconventional, original",
+        "S": "Social: Helping, teaching, cooperative, interpersonal",
+        "E": "Enterprising: Persuading, leading, ambitious, competitive",
+        "C": "Conventional: Organizing, detail-oriented, systematic, structured"
+      },
+      "validation_criteria": [
+        "All six dimensions scored",
+        "Sufficient differentiation for meaningful code",
+        "Three-letter code derived",
+        "Consistency assessed"
+      ]
+    },
+    {
+      "section_id": "S-PER-SYN",
+      "was": "K-PER-SYNTHESIS",
+      "section_name": "Personality Profile Synthesis Framework",
+      "theoretical_basis": "Integrative Personality Assessment — cross-framework validation and unification",
+      "what_to_measure": [
+        "Cross-framework consistency (FFM-MBTI, FFM-Enneagram correlations)",
+        "Aggregate confidence across all frameworks",
+        "Completeness of multi-framework data",
+        "Unified signature validity"
+      ],
+      "measurement_principles": {
+        "integration_rules": [
+          "FFM provides dimensional foundation",
+          "MBTI provides type-based cognitive style overlay",
+          "Enneagram provides motivational depth",
+          "RIASEC provides vocational/interest context",
+          "Weight frameworks by assessment validity"
+        ],
+        "cross_validation_rules": [
+          "Check FFM-MBTI consistency (known correlations)",
+          "Check Enneagram-FFM alignment (e.g., T5→high O)",
+          "Flag major inconsistencies for review",
+          "Low cross-validation reduces confidence"
+        ],
+        "output_rules": [
+          "Generate unified personality signature",
+          "Include confidence metrics",
+          "Provide pedagogical recommendations",
+          "Enable downstream agent consumption"
+        ]
+      },
+      "decision_rules": {
+        "VALID_PROFILE": {
+          "condition": "ffm_complete AND cross_validation_passed AND confidence >= 0.6",
+          "action": "emit_full_personality_signature"
+        },
+        "PARTIAL_PROFILE": {
+          "condition": "(ffm_complete OR mbti_complete) AND confidence >= 0.4",
+          "action": "emit_partial_signature_with_caveats"
+        },
+        "INVALID_PROFILE": {
+          "condition": "confidence < 0.4 OR critical_inconsistencies_detected",
+          "action": "request_reassessment"
+        }
+      },
+      "known_correlations": {
+        "FFM_MBTI": {
+          "E_high": "E preference likely",
+          "O_high": "N preference likely",
+          "A_high": "F preference slight tendency",
+          "C_high": "J preference likely"
+        },
+        "FFM_Enneagram": {
+          "N_high": "T4, T6 more likely",
+          "E_high": "T7, T3, T2 more likely",
+          "O_high": "T4, T5, T7 more likely",
+          "A_high": "T2, T9 more likely",
+          "C_high": "T1, T3, T6 more likely"
+        }
+      },
+      "validation_criteria": [
+        "At least FFM OR MBTI data present",
+        "Cross-validation performed",
+        "Confidence calculated",
+        "Recommendations generated",
+        "Unified signature format valid"
+      ]
+    }
+  ],
+  "output_schema": {
+    "primary": "personality_profile_signature",
+    "format": "FFM:O##C##E##A##N##.MBTI:XXXX-Fn.ENNEA:#w#-XX-G#S#.RIASEC:XXX-##.CONF:L##",
+    "includes": [
+      "ffm_profile (domain_scores, facet_profiles, interpretation_bands)",
+      "mbti_type (type_code, clarity_scores, cognitive_functions)",
+      "enneagram_type (core_type, wing, instinctual_stack, integration_level)",
+      "riasec_profile (holland_code, differentiation, consistency)",
+      "cross_validation_flags",
+      "confidence_scores",
+      "adaptation_recommendations"
+    ]
+  },
+  "metadata": {
+    "consolidated_from": ["K-PER-FFM", "K-PER-MBTI", "K-PER-ENNEA", "K-PER-RIASEC", "K-PER-SYNTHESIS"],
+    "original_count": 5,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

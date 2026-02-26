@@ -1,0 +1,215 @@
+{
+  "construct_id": "K-MIA",
+  "construct_name": "Multimodal Interaction Agent Master Construct",
+  "layer": "L05",
+  "agent": "MIA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MIA",
+  "theoretical_foundation": {
+    "primary_theory": "Mayer's Cognitive Theory of Multimedia Learning",
+    "supporting_theories": [
+      "Dual Coding Theory (Paivio)",
+      "Cognitive Load Theory (Sweller)",
+      "OER Curation Principles",
+      "Content Reuse Optimization",
+      "WCAG 2.1 Accessibility Standards",
+      "UDL (Universal Design for Learning)",
+      "Agent Handoff Protocol"
+    ]
+  },
+  "core_principle": "CURATE before CREATE — Use quality existing content when available; generate only when necessary. All content must comply with Mayer's 12 principles, pass quality assurance, and be L06-handoff-ready.",
+  "global_governance": {
+    "hard_gates": [
+      "Mayer compliance: no critical principle (coherence, multimedia, modality) below 40",
+      "Factual accuracy >= 70 (non-negotiable)",
+      "Accessibility (WCAG 2.1 AA) >= 60 (non-negotiable)",
+      "Content must be accessible (URL reachable if curated)"
+    ],
+    "escalation_policy": "If mayer_score < 50 OR content_inaccessible → escalate for manual review",
+    "iteration_policy": "If below threshold but above 50, revise and re-evaluate before escalation"
+  },
+  "sections": [
+    {
+      "section_id": "S-MIA-0",
+      "was": "K-MIA-0",
+      "section_name": "Multimodal Content Processing Framework",
+      "theoretical_basis": "Mayer's Multimedia Learning Theory + OER Curation Principles",
+      "what_to_measure": [
+        "Content source decision appropriateness (curate vs generate)",
+        "Compliance with Mayer's 12 principles (curated or generated)",
+        "Accessibility overlay quality for curated content",
+        "Per-modality content generation quality (when generating)",
+        "Integration quality (when augmenting)",
+        "Alignment with MSA specifications",
+        "Learning objective coverage"
+      ],
+      "measurement_principles": {
+        "curate_first": "Prefer quality existing content over generation to save resources and leverage vetted material",
+        "mayer_always": "All content (curated or generated) must comply with Mayer's principles",
+        "accessibility_mandatory": "Curated content must have accessibility overlays applied",
+        "msa_alignment": "Content must match MSA modality recommendations",
+        "objective_coverage": "All learning objectives must be addressable by final content package"
+      },
+      "decision_rules": {
+        "curate_path": {
+          "condition": "content_source_decision = CURATE_EXISTING",
+          "requirements": ["content_accessible", "mayer_score >= 60", "accessibility_overlays_applied"],
+          "interpretation": "Wrap existing content with overlays"
+        },
+        "augment_path": {
+          "condition": "content_source_decision = AUGMENT",
+          "requirements": ["base_content_accessible", "gaps_identified", "supplements_generated", "mayer_score >= 65"],
+          "interpretation": "Combine existing with generated supplements"
+        },
+        "generate_path": {
+          "condition": "content_source_decision = GENERATE_NEW",
+          "requirements": ["mayer_score >= 70", "msa_compliance >= 80"],
+          "interpretation": "Generate all content from scratch"
+        },
+        "threshold_revise": {
+          "condition": "mayer_score >= 50 AND mayer_score < threshold_for_path",
+          "interpretation": "Content needs revision before delivery"
+        },
+        "threshold_escalate": {
+          "condition": "mayer_score < 50 OR content_inaccessible",
+          "interpretation": "Escalate for manual review or alternative sourcing"
+        }
+      },
+      "validation_criteria": [
+        "Content source decision received from MSA",
+        "If CURATE: discovered_content present and accessible",
+        "If AUGMENT: gaps identified and supplements integrated",
+        "If GENERATE: all modalities generated",
+        "Mayer compliance evaluated for all paths"
+      ]
+    },
+    {
+      "section_id": "S-MIA-1",
+      "was": "K-MIA-1",
+      "section_name": "Mayer Principles Compliance Framework",
+      "theoretical_basis": "Mayer's Cognitive Theory of Multimedia Learning (Dual-Channel, Limited Capacity, Active Processing)",
+      "what_to_measure": [
+        "Individual compliance with each of 12 Mayer principles",
+        "Reduction of extraneous cognitive load",
+        "Optimization of germane cognitive load",
+        "Integration of verbal and pictorial information"
+      ],
+      "measurement_principles": {
+        "principle_independence": "Each principle measured independently",
+        "weighted_importance": "Coherence and Multimedia weighted higher",
+        "violation_detection": "Low-scoring principles flagged for correction"
+      },
+      "decision_rules": {
+        "threshold_compliant": {
+          "condition": "all_principles >= 50 AND mean >= 70",
+          "interpretation": "Content is Mayer-compliant"
+        },
+        "threshold_partial": {
+          "condition": "any_principle < 50 AND mean >= 60",
+          "interpretation": "Address specific principle violations"
+        },
+        "threshold_noncompliant": {
+          "condition": "mean < 60 OR critical_principles < 40",
+          "interpretation": "Major redesign required"
+        }
+      },
+      "validation_criteria": [
+        "No principle scores below 40 (critical)",
+        "Coherence principle >= 60",
+        "Multimedia principle >= 60"
+      ]
+    },
+    {
+      "section_id": "S-MIA-2",
+      "was": "K-MIA-2",
+      "section_name": "Content Quality Assurance Framework",
+      "theoretical_basis": "Educational Content Quality Standards + WCAG 2.1 + UDL",
+      "what_to_measure": [
+        "Factual accuracy of generated content",
+        "Accessibility compliance (WCAG 2.1 AA)",
+        "Sensory channel balance",
+        "Cognitive load appropriateness",
+        "Learner engagement potential"
+      ],
+      "measurement_principles": {
+        "accuracy_gate": "Factual accuracy is non-negotiable",
+        "accessibility_gate": "Accessibility failures block delivery",
+        "balance_optimization": "Seek optimal sensory distribution"
+      },
+      "decision_rules": {
+        "threshold_approved": {
+          "condition": "accuracy >= 80 AND accessibility >= 70 AND all_dimensions >= 60",
+          "interpretation": "Content approved for delivery"
+        },
+        "threshold_conditional": {
+          "condition": "accuracy >= 70 AND accessibility >= 60",
+          "interpretation": "Approved with flagged improvements"
+        },
+        "threshold_blocked": {
+          "condition": "accuracy < 70 OR accessibility < 60",
+          "interpretation": "Content blocked - must fix before delivery"
+        }
+      },
+      "validation_criteria": [
+        "Factual accuracy verified against sources",
+        "WCAG 2.1 AA compliance checked",
+        "No sensory channel exceeds 70% allocation"
+      ]
+    },
+    {
+      "section_id": "S-MIA-3",
+      "was": "K-MIA-3",
+      "section_name": "MIA Output Synthesis Framework",
+      "theoretical_basis": "Agent Handoff Protocol + Learning Content Packaging Standards",
+      "what_to_measure": [
+        "Completeness of output package",
+        "Handoff readiness for L06 agents",
+        "Integration of all quality scores",
+        "Final delivery manifest validity"
+      ],
+      "measurement_principles": {
+        "completeness": "All required output fields must be present",
+        "integration": "All upstream scores must be synthesized",
+        "handoff_ready": "Output must be consumable by L06"
+      },
+      "decision_rules": {
+        "threshold_ready": {
+          "condition": "handoff_score >= 90 AND all_fields_present",
+          "interpretation": "Ready for L06 handoff"
+        },
+        "threshold_needs_work": {
+          "condition": "handoff_score >= 70 AND handoff_score < 90",
+          "interpretation": "Minor gaps - review before handoff"
+        },
+        "threshold_not_ready": {
+          "condition": "handoff_score < 70 OR missing_critical_fields",
+          "interpretation": "Not ready - must complete package"
+        }
+      },
+      "validation_criteria": [
+        "All required handoff fields present",
+        "Quality scores integrated",
+        "Delivery manifest valid"
+      ]
+    }
+  ],
+  "output_schema": {
+    "primary": "mia_output_package",
+    "includes": [
+      "content_package",
+      "mayer_audit_report",
+      "quality_assurance_verdict",
+      "delivery_manifest",
+      "mia_signature",
+      "handoff_metadata"
+    ]
+  },
+  "metadata": {
+    "consolidated_from": ["K-MIA-0", "K-MIA-1", "K-MIA-2", "K-MIA-3"],
+    "original_count": 4,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

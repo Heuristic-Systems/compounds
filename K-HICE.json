@@ -1,0 +1,186 @@
+{
+  "construct_id": "K-HICE",
+  "construct_name": "Human-Institutional Co-Evolution Master Construct",
+  "layer": "L07",
+  "agent": "HICE",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-HICE",
+  "theoretical_foundation": {
+    "primary_theory": "Human-Institutional Co-Evolution Theory",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-HICE-0",
+      "was": "K-HICE-0",
+      "section_name": "Epistemic Escalation Assessment Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Epistemic Escalation Assessment: Assess epistemic anomalies and theory-level concerns requiring human research review."
+    },
+    {
+      "section_id": "S-HICE-1",
+      "was": "K-HICE-1",
+      "section_name": "Uncertainty Governance Evaluation Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Uncertainty Governance Evaluation: Evaluate confidence and saturation levels for uncertainty-based escalation."
+    },
+    {
+      "section_id": "S-HICE-2",
+      "was": "K-HICE-10",
+      "section_name": "Change Control & Rollback Management Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Change Control & Rollback Management: Manage change freeze windows, rollback triggers, and outcome renewal."
+    },
+    {
+      "section_id": "S-HICE-3",
+      "was": "K-HICE-11",
+      "section_name": "Human Escalation Handoff Compilation Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Human Escalation Handoff Compilation: Compile escalation package for human decision-makers with full context."
+    },
+    {
+      "section_id": "S-HICE-4",
+      "was": "K-HICE-12",
+      "section_name": "Multimodal Governance Assessment Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework for evaluating multimodal learning pathway governance — ensures longitudinal modality exposure prevents representational narrowing."
+    },
+    {
+      "section_id": "S-HICE-5",
+      "was": "K-HICE-2",
+      "section_name": "Context Drift Detection Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Context Drift Detection: Detect context ambiguity, semantic drift, and policy misalignment."
+    },
+    {
+      "section_id": "S-HICE-6",
+      "was": "K-HICE-3",
+      "section_name": "Ethical Escalation Routing Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Ethical Escalation Routing: Route ethical conflicts, novel situations, and high-stakes decisions to human judgment."
+    },
+    {
+      "section_id": "S-HICE-7",
+      "was": "K-HICE-4",
+      "section_name": "Pedagogical Governance Assessment Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Pedagogical Governance Assessment: Assess pedagogical optimisation limits, deadlocks, and innovation needs."
+    },
+    {
+      "section_id": "S-HICE-8",
+      "was": "K-HICE-5",
+      "section_name": "Assessment Governance Evaluation Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Assessment Governance Evaluation: Evaluate assessment ambiguity, validity concerns, and potential harm."
+    },
+    {
+      "section_id": "S-HICE-9",
+      "was": "K-HICE-6",
+      "section_name": "Strategic Impact Assessment Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Strategic Impact Assessment: Assess strategic uncertainty, values alignment, and institutional impact."
+    },
+    {
+      "section_id": "S-HICE-10",
+      "was": "K-HICE-7",
+      "section_name": "Integration Coherence Check Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Integration Coherence Check: Check for integration incoherence and escalation cascade prevention."
+    },
+    {
+      "section_id": "S-HICE-11",
+      "was": "K-HICE-8",
+      "section_name": "Educator Role Transition Management Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Educator Role Transition Management: Manage educator role evolution, metacognitive coaching, and equity oversight."
+    },
+    {
+      "section_id": "S-HICE-12",
+      "was": "K-HICE-9",
+      "section_name": "Identity & Interoperability Verification Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Decision framework implementing Identity & Interoperability Verification: Verify identity federation and interoperability standards compliance."
+    }
+  ],
+  "output_schema": {
+    "primary": "hice_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-HICE-0",
+      "K-HICE-1",
+      "K-HICE-10",
+      "K-HICE-11",
+      "K-HICE-12",
+      "K-HICE-2",
+      "K-HICE-3",
+      "K-HICE-4",
+      "K-HICE-5",
+      "K-HICE-6",
+      "K-HICE-7",
+      "K-HICE-8",
+      "K-HICE-9"
+    ],
+    "original_count": 13,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

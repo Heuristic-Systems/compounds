@@ -1,0 +1,66 @@
+{
+  "construct_id": "K-MP1",
+  "construct_name": "MP1 Tiered Clearance Gate Master Construct",
+  "layer": "MP01",
+  "agent": "MP1",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MP1",
+  "theoretical_foundation": {
+    "primary_theory": "Tiered Clearance Governance",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-MP1-0",
+      "was": "K-MP1-0_Pedagogical_Context_Comprehension",
+      "section_name": "Pedagogical Context Comprehension"
+    },
+    {
+      "section_id": "S-MP1-1",
+      "was": "K-MP1-1_Learning_Science_Grounding",
+      "section_name": "Learning Science Grounding Check"
+    },
+    {
+      "section_id": "S-MP1-2",
+      "was": "K-MP1-2_Cross_Layer_Coherence",
+      "section_name": "Cross-Layer Coherence Analysis"
+    },
+    {
+      "section_id": "S-MP1-3",
+      "was": "K-MP1-3_Critical_Pedagogical_Inquiry",
+      "section_name": "Critical Pedagogical Inquiry"
+    },
+    {
+      "section_id": "S-MP1-4",
+      "was": "K-MP1-4_Directive_Generation",
+      "section_name": "Directive Generation Gate"
+    },
+    {
+      "section_id": "S-MP1-5",
+      "was": "K-MP1-5_Governance_Decision",
+      "section_name": "Governance Decision Synthesis"
+    }
+  ],
+  "output_schema": {
+    "primary": "mp1_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-MP1-0_Pedagogical_Context_Comprehension",
+      "K-MP1-1_Learning_Science_Grounding",
+      "K-MP1-2_Cross_Layer_Coherence",
+      "K-MP1-3_Critical_Pedagogical_Inquiry",
+      "K-MP1-4_Directive_Generation",
+      "K-MP1-5_Governance_Decision"
+    ],
+    "original_count": 6,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

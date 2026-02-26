@@ -1,0 +1,174 @@
+{
+  "construct_id": "K-SFE",
+  "construct_name": "Strategic Foresight Engine Master Construct",
+  "layer": "L08",
+  "agent": "SFE",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-SFE",
+  "theoretical_foundation": {
+    "primary_theory": "Strategic Foresight and Futures Thinking",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-SFE-0",
+      "was": "K-SFE-0",
+      "section_name": "Signal Ingestion Integrity Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Verify diversity, licensing, and inclusion/exclusion policies of signal sources."
+    },
+    {
+      "section_id": "S-SFE-1",
+      "was": "K-SFE-1",
+      "section_name": "Horizon Scanning Quality Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Assess bibliometric pipelines, patent landscapes, and OSS trend tracking quality."
+    },
+    {
+      "section_id": "S-SFE-2",
+      "was": "K-SFE-10",
+      "section_name": "Portfolio Rationality Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Assess cap adherence, EVI calculation, and sunset discipline."
+    },
+    {
+      "section_id": "S-SFE-3",
+      "was": "K-SFE-11",
+      "section_name": "Foresight Handoff Compilation Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Compile complete foresight package for Meta-P6 audit and downstream agents."
+    },
+    {
+      "section_id": "S-SFE-4",
+      "was": "K-SFE-2",
+      "section_name": "Policy Radar Monitoring Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Track standards monitoring coverage and regulatory change detection."
+    },
+    {
+      "section_id": "S-SFE-5",
+      "was": "K-SFE-3",
+      "section_name": "Evidence Graph Validation Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Validate claim-evidence linkage, provenance, grading, and replication accounting."
+    },
+    {
+      "section_id": "S-SFE-6",
+      "was": "K-SFE-4",
+      "section_name": "Evidence Translation Mapping Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Verify operator mapping and what-works-for-whom translation quality."
+    },
+    {
+      "section_id": "S-SFE-7",
+      "was": "K-SFE-5",
+      "section_name": "Scenario Modelling Discipline Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Assess parameter explicitness, cross-impact modelling, and Bayesian auditability."
+    },
+    {
+      "section_id": "S-SFE-8",
+      "was": "K-SFE-6",
+      "section_name": "Stress Testing Integration Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Verify L3 and L4 constraint incorporation in stress testing."
+    },
+    {
+      "section_id": "S-SFE-9",
+      "was": "K-SFE-7",
+      "section_name": "Standards Compliance Verification Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Verify spec-diff detection and test suite execution coverage."
+    },
+    {
+      "section_id": "S-SFE-10",
+      "was": "K-SFE-8",
+      "section_name": "Decision Hub Integrity Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Verify ADP completeness, decision trace chains, and four-lens scoring."
+    },
+    {
+      "section_id": "S-SFE-11",
+      "was": "K-SFE-9",
+      "section_name": "Research Governance Controls Framework",
+      "validation_criteria": {
+        "required_elements_present": true,
+        "key_atoms_responsive": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Verify pre-registration, replication archiving, and independence controls."
+    }
+  ],
+  "output_schema": {
+    "primary": "sfe_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-SFE-0",
+      "K-SFE-1",
+      "K-SFE-10",
+      "K-SFE-11",
+      "K-SFE-2",
+      "K-SFE-3",
+      "K-SFE-4",
+      "K-SFE-5",
+      "K-SFE-6",
+      "K-SFE-7",
+      "K-SFE-8",
+      "K-SFE-9"
+    ],
+    "original_count": 12,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

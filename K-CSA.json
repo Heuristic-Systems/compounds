@@ -1,0 +1,149 @@
+{
+  "construct_id": "K-CSA",
+  "construct_name": "Content Sequencing Agent Master Construct",
+  "layer": "L02",
+  "agent": "CSA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-CSA",
+  "theoretical_foundation": {
+    "primary_theory": "Instructional Sequencing Theory",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-CSA-0",
+      "was": "K-CSA-0",
+      "section_name": "Prerequisite Validation Framework",
+      "validation_criteria": {
+        "dag_validity": "Dependency graph must be acyclic",
+        "prerequisite_satisfaction": "Each content unit's prerequisites must precede it in sequence",
+        "gap_detection": "Missing prerequisites must be flagged"
+      },
+      "description": "Framework defining how to validate prerequisite dependencies and ensure logical content ordering before delivery."
+    },
+    {
+      "section_id": "S-CSA-1",
+      "was": "K-CSA-1",
+      "section_name": "Sequence Coherence Framework",
+      "validation_criteria": {
+        "coherence_threshold": "Transition coherence score >= 0.70",
+        "load_distribution": "No cognitive load spikes exceeding learner capacity",
+        "pacing_feasibility": "Content pacing matches available time and attention"
+      },
+      "description": "Framework defining how to optimize content sequence for coherence, cognitive load management, and learning flow."
+    },
+    {
+      "section_id": "S-CSA-2",
+      "was": "K-CSA-2",
+      "section_name": "Platform Compatibility Framework",
+      "validation_criteria": {
+        "api_availability": "Required APIs must be accessible",
+        "schema_alignment": "Content schema must match platform requirements",
+        "resource_feasibility": "Bandwidth and storage must accommodate content"
+      },
+      "description": "Framework defining how to validate technical feasibility of content delivery on target platform."
+    },
+    {
+      "section_id": "S-CSA-3",
+      "was": "K-CSA-3",
+      "section_name": "Modality Selection Framework",
+      "validation_criteria": {
+        "modality_fit": "Content type matches optimal modality",
+        "device_compatibility": "Selected modality works on learner's device",
+        "accessibility_compliance": "Modality meets accessibility requirements"
+      },
+      "description": "Framework defining how to match content modalities to learner needs, preferences, and device capabilities."
+    },
+    {
+      "section_id": "S-CSA-4",
+      "was": "K-CSA-4",
+      "section_name": "Content Integrity Framework",
+      "validation_criteria": {
+        "version_consistency": "All content units use compatible versions",
+        "terminology_alignment": "Terms used consistently across sequence",
+        "reference_validity": "All cross-references resolve correctly"
+      },
+      "description": "Framework defining how to ensure content quality, consistency, and integrity across the learning sequence."
+    },
+    {
+      "section_id": "S-CSA-5",
+      "was": "K-CSA-5",
+      "section_name": "Constraint Enforcement Framework",
+      "validation_criteria": {
+        "regulatory_compliance": "Content meets regulatory requirements",
+        "privacy_protection": "Data handling meets privacy standards",
+        "time_feasibility": "Sequence fits within time budget",
+        "accessibility_standard": "Content meets accessibility requirements"
+      },
+      "description": "Framework defining how to enforce external constraints including regulatory, privacy, time, and accessibility requirements."
+    },
+    {
+      "section_id": "S-CSA-6",
+      "was": "K-CSA-6",
+      "section_name": "MSA Handoff Framework",
+      "validation_criteria": {
+        "completeness": "All required fields present in handoff spec",
+        "traceability": "All decisions traceable to upstream evidence",
+        "msa_readiness": "Spec format matches MSA input requirements"
+      },
+      "description": "Framework defining how to package content sequencing decisions for handoff to Modality Selection Agent (MSA)."
+    },
+    {
+      "section_id": "S-CSA-7",
+      "was": "K-CSA-7",
+      "section_name": "Content Acquisition Framework",
+      "validation_criteria": {
+        "all_specifications_resolved": "Every specification has MATCH, UPLOAD, or GENERATE route",
+        "minimum_match_score": "Matched/uploaded content scores >= 0.70 against specification",
+        "no_orphan_specifications": "No specification left without content source"
+      },
+      "core_principle": "Automatically route each specification to the optimal content source: existing catalog, user upload, or AI generation.",
+      "description": "Framework defining how to acquire actual content to fulfill CSA specifications. Routes to MATCH (existing), UPLOAD (user-provided), or GENERATE (AI-created)."
+    },
+    {
+      "section_id": "S-CSA-8",
+      "was": "K-CSA-9",
+      "section_name": "Open Content Discovery Framework",
+      "description": "Framework for discovering, evaluating, and segmenting open educational content from external sources (YouTube, OER repositories, MOOCs). Enables AI to find existing content that matches specifications rather than generating new content."
+    },
+    {
+      "section_id": "S-CSA-9",
+      "was": "K-CSA-SCAFFOLD",
+      "section_name": "Scaffold-to-Content Specification Framework",
+      "validation_criteria": {
+        "full_coverage": "100% of scaffold layers have complete content specifications",
+        "specification_completeness": "Each specification includes: type, depth, length, difficulty, topic, prerequisites",
+        "pedagogical_alignment": "Specifications align with scaffold layer's pedagogical intent",
+        "feasibility_check": "Specifications are realistic given time/platform constraints"
+      },
+      "core_principle": "CSA does NOT create the learning path - CogniStruct does. CSA SPECIFIES what content is NEEDED for each scaffold layer. Content may or may not exist yet.",
+      "description": "Framework defining how to SPECIFY content requirements for each CogniStruct scaffold layer. CSA does NOT assume content exists - it specifies what is NEEDED."
+    }
+  ],
+  "output_schema": {
+    "primary": "csa_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-CSA-0",
+      "K-CSA-1",
+      "K-CSA-2",
+      "K-CSA-3",
+      "K-CSA-4",
+      "K-CSA-5",
+      "K-CSA-6",
+      "K-CSA-7",
+      "K-CSA-9",
+      "K-CSA-SCAFFOLD"
+    ],
+    "original_count": 10,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

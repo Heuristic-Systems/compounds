@@ -1,0 +1,378 @@
+{
+  "construct_id": "K-MSA",
+  "construct_name": "Modality Selection Agent Master Construct",
+  "layer": "L05",
+  "agent": "MSA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MSA",
+  "theoretical_foundation": {
+    "primary_theory": "Multimodal Learning Theory",
+    "supporting_theories": [
+      "AI Ethics Frameworks (IEEE, ACM)",
+      "Accessibility Standards (WCAG)",
+      "Accessibility-First Design",
+      "Adaptive Learning Systems Theory",
+      "Affordance Theory (Gibson)",
+      "Algorithmic Fairness",
+      "Bloom's Taxonomy",
+      "Cognitive Apprenticeship"
+    ]
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-MSA-0",
+      "was": "K-MSA-0",
+      "section_name": "Sensory Channel Balance Framework",
+      "theoretical_basis": "Dual Coding Theory (Paivio) + Cognitive Load Theory (Sweller) + Multimedia Learning Theory (Mayer)",
+      "what_to_measure": [
+        "Primary sensory channel dominance (visual/auditory/haptic)",
+        "Multi-channel coordination demand",
+        "Sensory bottleneck risk",
+        "Channel balance score"
+      ],
+      "measurement_principles": {
+        "channel_independence": "Measure each sensory channel separately before combining",
+        "bottleneck_detection": "Identify when single channel is overloaded",
+        "balance_optimization": "Seek distribution across available channels"
+      },
+      "decision_rules": {
+        "threshold_balanced": {
+          "condition": "channel_variance < 0.20",
+          "interpretation": "Channels are well-balanced"
+        },
+        "threshold_dominant": {
+          "condition": "primary_channel_load > 0.70",
+          "interpretation": "Single channel dominance - review alternatives"
+        },
+        "threshold_bottleneck": {
+          "condition": "any_channel_load > 0.90",
+          "interpretation": "Bottleneck detected - require fallback"
+        }
+      },
+      "validation_criteria": [
+        "Channel allocation sums to 1.0",
+        "No channel exceeds capacity threshold",
+        "Accessibility constraints are satisfied"
+      ]
+    },
+    {
+      "section_id": "S-MSA-1",
+      "was": "K-MSA-1",
+      "section_name": "Objective-Modality Alignment Framework",
+      "theoretical_basis": "Bloom's Taxonomy + Affordance Theory (Gibson) + Representational Theory of Mind",
+      "what_to_measure": [
+        "Learning objective domain classification (cognitive/affective/psychomotor)",
+        "Cognitive complexity level (Bloom's)",
+        "Modality-representation alignment",
+        "Objective coverage completeness"
+      ],
+      "measurement_principles": {
+        "domain_specificity": "Each domain requires specific modality affordances",
+        "complexity_scaling": "Higher cognitive levels need richer representations",
+        "coverage_verification": "All objective facets must be addressable by selected modalities"
+      },
+      "decision_rules": {
+        "threshold_aligned": {
+          "condition": "alignment_score >= 0.80",
+          "interpretation": "Modality well-suited for objective"
+        },
+        "threshold_partial": {
+          "condition": "alignment_score >= 0.50 AND alignment_score < 0.80",
+          "interpretation": "Partial alignment - supplement with additional modalities"
+        },
+        "threshold_misaligned": {
+          "condition": "alignment_score < 0.50",
+          "interpretation": "Modality mismatch - select alternative"
+        }
+      },
+      "validation_criteria": [
+        "Every objective has at least one aligned modality",
+        "Cognitive complexity is matched to modality richness",
+        "Assessment method is compatible with modality"
+      ]
+    },
+    {
+      "section_id": "S-MSA-2",
+      "was": "K-MSA-2",
+      "section_name": "Learner Agency Integration Framework",
+      "theoretical_basis": "Self-Determination Theory (Deci & Ryan) + Learner Autonomy Theory + Metacognition Theory",
+      "what_to_measure": [
+        "Learner preference data availability and freshness",
+        "Preference-objective conflict detection",
+        "Meshing hypothesis violation check",
+        "Metacognitive rationale quality"
+      ],
+      "measurement_principles": {
+        "agency_respect": "Honor stated preferences within pedagogical bounds",
+        "myth_rejection": "Never assume modality preference equals learning effectiveness",
+        "transparency": "Explain when preferences are overridden and why"
+      },
+      "decision_rules": {
+        "threshold_apply": {
+          "condition": "preference_available AND no_conflict AND no_meshing_violation",
+          "interpretation": "Apply learner preference"
+        },
+        "threshold_override": {
+          "condition": "preference_conflicts_with_objective OR meshing_violation",
+          "interpretation": "Override preference with logged rationale"
+        },
+        "threshold_absent": {
+          "condition": "no_preference_data",
+          "interpretation": "Use default pedagogical selection"
+        }
+      },
+      "validation_criteria": [
+        "Preferences are never assumed from demographics",
+        "Learning style inventories are rejected as evidence",
+        "Override decisions are logged with rationale"
+      ]
+    },
+    {
+      "section_id": "S-MSA-3",
+      "was": "K-MSA-3",
+      "section_name": "Contextual Constraint Resolution Framework",
+      "theoretical_basis": "Ecological Systems Theory (Bronfenbrenner) + Universal Design for Learning + Digital Divide Theory",
+      "what_to_measure": [
+        "Device capability compatibility",
+        "Bandwidth and network stability",
+        "Physical environment constraints",
+        "Accessibility requirement satisfaction",
+        "Institutional resource availability"
+      ],
+      "measurement_principles": {
+        "hard_gate_first": "Device/network incompatibilities are hard failures",
+        "graceful_degradation": "Provide fallback modalities for constraint violations",
+        "accessibility_priority": "Accessibility needs override preference"
+      },
+      "decision_rules": {
+        "threshold_compliant": {
+          "condition": "all_constraints_satisfied",
+          "interpretation": "Proceed with selected modality"
+        },
+        "threshold_fallback": {
+          "condition": "constraint_violation AND fallback_available",
+          "interpretation": "Switch to fallback modality"
+        },
+        "threshold_blocked": {
+          "condition": "constraint_violation AND no_fallback",
+          "interpretation": "Block delivery - require resolution"
+        }
+      },
+      "validation_criteria": [
+        "Device capabilities are verified before delivery",
+        "Accessibility requirements are non-negotiable",
+        "Fallback options are always evaluated"
+      ]
+    },
+    {
+      "section_id": "S-MSA-4",
+      "was": "K-MSA-4",
+      "section_name": "Ethical Modality Governance Framework",
+      "theoretical_basis": "AI Ethics Frameworks (IEEE, ACM) + GDPR/FERPA Privacy Principles + Algorithmic Fairness",
+      "what_to_measure": [
+        "Personalization consent status",
+        "Data minimisation compliance",
+        "Algorithmic bias indicators",
+        "Equity of access verification",
+        "Learner override availability"
+      ],
+      "measurement_principles": {
+        "consent_first": "No personalization without valid consent",
+        "bias_detection": "Actively detect and mitigate algorithmic bias",
+        "equity_guarantee": "Low-resource pathways must exist"
+      },
+      "decision_rules": {
+        "threshold_ethical": {
+          "condition": "consent_valid AND no_bias_detected AND equity_satisfied",
+          "interpretation": "Proceed with personalization"
+        },
+        "threshold_fallback": {
+          "condition": "consent_missing OR consent_revoked",
+          "interpretation": "Fall back to non-personalized mode"
+        },
+        "threshold_block": {
+          "condition": "bias_detected OR equity_violation",
+          "interpretation": "Block and escalate for review"
+        }
+      },
+      "validation_criteria": [
+        "Consent tokens are validated before data access",
+        "Bias audits are logged",
+        "Low-resource alternatives are always available"
+      ]
+    },
+    {
+      "section_id": "S-MSA-5",
+      "was": "K-MSA-5",
+      "section_name": "Content Typology Matching Framework",
+      "theoretical_basis": "Content-Affordance Alignment Theory + Cognitive Load Theory (Sweller) + Split-Attention Effect",
+      "what_to_measure": [
+        "Content typology classification (conceptual/procedural/affective)",
+        "Spatial structure requirements",
+        "Temporal sequencing needs",
+        "Content complexity and density",
+        "Split-attention risk"
+      ],
+      "measurement_principles": {
+        "affordance_match": "Select modalities that afford content type needs",
+        "complexity_scaling": "Segment complex content appropriately",
+        "attention_management": "Avoid split-attention through integration"
+      },
+      "decision_rules": {
+        "threshold_matched": {
+          "condition": "typology_match_score >= 0.80",
+          "interpretation": "Modality well-suited for content type"
+        },
+        "threshold_partial": {
+          "condition": "typology_match_score >= 0.50 AND typology_match_score < 0.80",
+          "interpretation": "Consider supplementary modalities"
+        },
+        "threshold_mismatch": {
+          "condition": "typology_match_score < 0.50",
+          "interpretation": "Select alternative modality"
+        }
+      },
+      "validation_criteria": [
+        "Content classification is explicit (not inferred from filename)",
+        "Spatial content uses visual modalities",
+        "Procedural content includes demonstration capability"
+      ]
+    },
+    {
+      "section_id": "S-MSA-6",
+      "was": "K-MSA-6",
+      "section_name": "Scaffolded Modality Sequencing Framework",
+      "theoretical_basis": "Scaffolding Theory (Vygotsky ZPD) + Cognitive Apprenticeship + Fading and Transfer",
+      "what_to_measure": [
+        "Modality sequence specification",
+        "High-guidance entry verification",
+        "Scaffolding withdrawal trajectory",
+        "Remediation branch availability",
+        "Transfer task inclusion"
+      ],
+      "measurement_principles": {
+        "progression": "Move from high to low guidance",
+        "representation_shift": "Transition concrete to abstract",
+        "safety_net": "Always have remediation paths"
+      },
+      "decision_rules": {
+        "threshold_sequenced": {
+          "condition": "sequence_defined AND scaffolding_planned",
+          "interpretation": "Sequence ready for delivery"
+        },
+        "threshold_incomplete": {
+          "condition": "sequence_defined AND no_scaffolding_plan",
+          "interpretation": "Add scaffolding before delivery"
+        },
+        "threshold_undefined": {
+          "condition": "no_sequence_defined",
+          "interpretation": "Generate sequence from objectives"
+        }
+      },
+      "validation_criteria": [
+        "Novices start with high guidance",
+        "Scaffolding fades as mastery increases",
+        "Remediation branches prevent infinite loops"
+      ]
+    },
+    {
+      "section_id": "S-MSA-7",
+      "was": "K-MSA-7",
+      "section_name": "Adaptive Modality Control Framework",
+      "theoretical_basis": "Adaptive Learning Systems Theory + Control Theory + Stability Theory",
+      "what_to_measure": [
+        "Adaptation trigger definitions",
+        "Response appropriateness (support vs. progression)",
+        "Stability constraint satisfaction",
+        "Switch cost estimation",
+        "Effectiveness evidence tracking"
+      ],
+      "measurement_principles": {
+        "explicit_triggers": "Triggers must be defined and measurable",
+        "anti_thrashing": "Prevent rapid oscillation between modalities",
+        "do_no_harm": "Adaptation must not increase extraneous load"
+      },
+      "decision_rules": {
+        "threshold_trigger": {
+          "condition": "trigger_fired AND stability_window_passed",
+          "interpretation": "Execute adaptation"
+        },
+        "threshold_suppress": {
+          "condition": "trigger_fired AND within_stability_window",
+          "interpretation": "Suppress adaptation - too soon"
+        },
+        "threshold_audit": {
+          "condition": "adaptation_count > threshold_per_session",
+          "interpretation": "Flag for audit - possible instability"
+        }
+      },
+      "validation_criteria": [
+        "All triggers are explicitly defined",
+        "Stability windows prevent thrashing",
+        "Adaptations are logged for effectiveness review"
+      ]
+    },
+    {
+      "section_id": "S-MSA-8",
+      "was": "K-MSA-8",
+      "section_name": "Multimodal Output Compilation Framework",
+      "theoretical_basis": "Multimedia Learning Theory (Mayer) + Universal Design for Learning + Accessibility-First Design",
+      "what_to_measure": [
+        "Integration of all upstream modality decisions",
+        "Delivery manifest completeness",
+        "Rendering instruction validity",
+        "Accessibility overlay coverage",
+        "Final compliance verification"
+      ],
+      "measurement_principles": {
+        "synthesis": "Combine all decisions into coherent output",
+        "completeness": "Every required field must be populated",
+        "accessibility_overlay": "Accessibility features are additive, not alternative"
+      },
+      "decision_rules": {
+        "threshold_complete": {
+          "condition": "all_upstream_received AND manifest_valid AND accessibility_included",
+          "interpretation": "Ready for delivery"
+        },
+        "threshold_incomplete": {
+          "condition": "missing_upstream OR manifest_invalid",
+          "interpretation": "Block and request missing data"
+        },
+        "threshold_accessibility_gap": {
+          "condition": "accessibility_required AND not_included",
+          "interpretation": "Add accessibility overlay before delivery"
+        }
+      },
+      "validation_criteria": [
+        "All 8 upstream compounds have contributed",
+        "Delivery manifest passes schema validation",
+        "Accessibility requirements are satisfied"
+      ]
+    }
+  ],
+  "output_schema": {
+    "primary": "msa_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-MSA-0",
+      "K-MSA-1",
+      "K-MSA-2",
+      "K-MSA-3",
+      "K-MSA-4",
+      "K-MSA-5",
+      "K-MSA-6",
+      "K-MSA-7",
+      "K-MSA-8"
+    ],
+    "original_count": 9,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

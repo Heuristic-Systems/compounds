@@ -1,0 +1,126 @@
+{
+  "construct_id": "K-MP6",
+  "construct_name": "MP6 Four Pillars Gate Master Construct",
+  "layer": "MP06",
+  "agent": "MP6",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MP6",
+  "theoretical_foundation": {
+    "primary_theory": "Four Pillars Non-Compensatory Audit",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-MP6-0",
+      "was": "K-MP6-0",
+      "section_name": "Intake & Scoping",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Define audit scope from trigger signal, query L3/L6/L7 for cohort refinement"
+    },
+    {
+      "section_id": "S-MP6-1",
+      "was": "K-MP6-1",
+      "section_name": "Evidence Assembly",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Orchestrate parallel evidence gathering from L4/L6/L7 via formal interfaces"
+    },
+    {
+      "section_id": "S-MP6-2",
+      "was": "K-MP6-2",
+      "section_name": "Efficacy Gate",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "SESOI threshold validation for holistic educational impact"
+    },
+    {
+      "section_id": "S-MP6-3",
+      "was": "K-MP6-3",
+      "section_name": "Fairness Gate",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Equity Suite validation: 4 parity metrics + stratification"
+    },
+    {
+      "section_id": "S-MP6-4",
+      "was": "K-MP6-4",
+      "section_name": "Validity Gate",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Psychometric validation: reliability, invariance, DIF"
+    },
+    {
+      "section_id": "S-MP6-5",
+      "was": "K-MP6-5",
+      "section_name": "Governance Gate",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Traceability, contestability, and legal compliance"
+    },
+    {
+      "section_id": "S-MP6-6",
+      "was": "K-MP6-6",
+      "section_name": "Decision Synthesis",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Non-compensatory four-pillar integration producing verdict"
+    },
+    {
+      "section_id": "S-MP6-7",
+      "was": "K-MP6-7",
+      "section_name": "Directive Emission",
+      "validation_criteria": {
+        "required_inputs_present": true,
+        "primitives_evaluated": true,
+        "decision_outputs_valid": true
+      },
+      "description": "Emit PROMOTE/QUARANTINE/REDESIGN + public artefacts"
+    }
+  ],
+  "output_schema": {
+    "primary": "mp6_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-MP6-0",
+      "K-MP6-1",
+      "K-MP6-2",
+      "K-MP6-3",
+      "K-MP6-4",
+      "K-MP6-5",
+      "K-MP6-6",
+      "K-MP6-7"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

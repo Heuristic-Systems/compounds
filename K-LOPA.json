@@ -1,0 +1,242 @@
+{
+  "construct_id": "K-LOPA",
+  "construct_name": "Learner Profile Agent Master Construct",
+  "layer": "L01",
+  "agent": "LOPA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-LOPA",
+  "theoretical_foundation": {
+    "primary_theory": "Multi-domain Learner State Assessment",
+    "supporting_theories": [
+      "Bayesian Inference",
+      "Cognitive Load Theory",
+      "Conceptual Change Theory",
+      "Consolidation Theory",
+      "Debugging Theory",
+      "Desirable Difficulties",
+      "Epistemic Vigilance",
+      "Error Analysis"
+    ]
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-LOPA-0",
+      "was": "K0-EVIDENCE-INTEGRITY",
+      "section_name": "Evidence Integrity Framework",
+      "theoretical_basis": "Measurement Theory; Signal Detection Theory; Epistemic Vigilance",
+      "framework_rules": {
+        "multi_source_requirement": {
+          "description": "Evidence must come from at least 2 family sources",
+          "min_families": 2,
+          "rationale": "Single-source evidence is unreliable for profile inference"
+        },
+        "recency_requirement": {
+          "description": "Signals must be recent enough for valid inference",
+          "max_age_days": 30,
+          "weight_decay": "exponential"
+        },
+        "confidence_floor": {
+          "description": "Minimum aggregate confidence for downstream use",
+          "min_confidence": 0.5,
+          "action_if_below": "request_more_evidence"
+        }
+      },
+      "description": "Governance framework for validating evidence quality before downstream inference. Acts as the quality gate for all L01 operations."
+    },
+    {
+      "section_id": "S-LOPA-1",
+      "was": "K1-STATE-SYNTHESIS",
+      "section_name": "Learner State Synthesis Framework",
+      "theoretical_basis": "Cognitive Load Theory; Self-Determination Theory; Metacognition Theory",
+      "framework_rules": {
+        "family_coverage": {
+          "description": "Profile must include evidence from core families",
+          "core_families": [
+            "MAI",
+            "MC",
+            "REP",
+            "TLD"
+          ],
+          "min_core_coverage": 3
+        },
+        "contradiction_detection": {
+          "description": "Flag when family scores conflict",
+          "conflict_threshold": 30,
+          "action": "flag_and_weight_by_recency"
+        },
+        "confidence_aggregation": {
+          "description": "Aggregate confidence from all families",
+          "method": "weighted_harmonic_mean",
+          "weights_source": "family_atom_count"
+        }
+      },
+      "description": "Governance framework for deriving a coherent, uncertainty-aware learner profile from multi-domain evidence."
+    },
+    {
+      "section_id": "S-LOPA-2",
+      "was": "K2-OBJECTIVE-GATING",
+      "section_name": "Objective Gating Framework",
+      "theoretical_basis": "Zone of Proximal Development (Vygotsky); Goal Setting Theory (Locke & Latham); Cognitive Load Theory",
+      "framework_rules": {
+        "zpd_alignment": {
+          "description": "Objective must be within learner's zone of proximal development",
+          "readiness_threshold": 0.4,
+          "stretch_max": 0.3
+        },
+        "prerequisite_coverage": {
+          "description": "Required prerequisites must be met",
+          "min_prerequisite_score": 0.6,
+          "action_if_unmet": "suggest_prerequisite_path"
+        },
+        "motivational_fit": {
+          "description": "Objective should align with learner's motivational state",
+          "frustration_risk_max": 0.7,
+          "engagement_min": 0.4
+        }
+      },
+      "description": "Governance framework for determining if a learning objective is feasible and appropriate given current learner state."
+    },
+    {
+      "section_id": "S-LOPA-3",
+      "was": "K3-PEDAGOGY-GATING",
+      "section_name": "Pedagogy Gating Framework",
+      "theoretical_basis": "Spacing Effect; Testing Effect; Feedback Theory",
+      "framework_rules": {
+        "spacing_alignment": {
+          "description": "Practice schedule must respect spacing sensitivity",
+          "min_spacing_score": 0.5,
+          "saturation_check": true
+        },
+        "feedback_interpretability": {
+          "description": "Feedback must be interpretable given learner's capacity",
+          "complexity_match": "feedback_complexity <= processing_capacity",
+          "action_if_mismatch": "simplify_feedback"
+        },
+        "load_management": {
+          "description": "Total cognitive load must be manageable",
+          "intrinsic_plus_extraneous_max": 0.8,
+          "fatigue_adjustment": true
+        }
+      },
+      "description": "Governance framework for validating that pedagogical plans respect learning science principles and learner constraints."
+    },
+    {
+      "section_id": "S-LOPA-4",
+      "was": "K4-SCAFFOLDING-SELECTION",
+      "section_name": "Scaffolding Selection Framework",
+      "theoretical_basis": "Scaffolding Theory (Wood, Bruner, Ross); Zone of Proximal Development; Gradual Release of Responsibility",
+      "framework_rules": {
+        "intensity_calibration": {
+          "description": "Scaffolding intensity matched to learner need",
+          "base_formula": "1.0 - (self_efficacy * 0.4 + control_calibration * 0.3 + capacity * 0.3)",
+          "min_intensity": 0.1,
+          "max_intensity": 0.9
+        },
+        "timing_triggers": {
+          "description": "When to provide scaffolding",
+          "proactive": "frustration_predicted > 0.6",
+          "reactive": "error_detected AND help_seeking_calibration < 0.5",
+          "preventive": "cognitive_fatigue > 0.7"
+        },
+        "fading_rules": {
+          "description": "How to reduce scaffolding over time",
+          "fade_trigger": "success_streak >= 3 AND confidence_increasing",
+          "fade_rate": 0.1,
+          "min_support_floor": 0.05
+        }
+      },
+      "description": "Governance framework for selecting scaffolding intensity, timing, and fading based on learner state."
+    },
+    {
+      "section_id": "S-LOPA-5",
+      "was": "K5-REPRESENTATION-REPAIR",
+      "section_name": "Representation Repair Framework",
+      "theoretical_basis": "Conceptual Change Theory; Schema Theory; Error Analysis",
+      "framework_rules": {
+        "breakdown_detection": {
+          "description": "Identify type of representational breakdown",
+          "types": [
+            "misconception",
+            "schema_gap",
+            "procedural_error",
+            "abstraction_mismatch"
+          ],
+          "detection_threshold": 0.4
+        },
+        "severity_classification": {
+          "description": "Classify severity of breakdown",
+          "levels": [
+            "minor",
+            "moderate",
+            "severe",
+            "blocking"
+          ],
+          "blocking_threshold": 0.7
+        },
+        "repair_pathway": {
+          "description": "Select appropriate repair strategy",
+          "misconception": "confrontation_then_reconstruction",
+          "schema_gap": "bridging_analogy",
+          "procedural_error": "worked_example_fading",
+          "abstraction_mismatch": "concrete_to_abstract_scaffolding"
+        }
+      },
+      "description": "Governance framework for detecting representational breakdowns and routing to targeted repair actions."
+    },
+    {
+      "section_id": "S-LOPA-6",
+      "was": "K6-TEMPORAL-SCHEDULING",
+      "section_name": "Temporal Scheduling Framework",
+      "theoretical_basis": "Spacing Effect; Testing Effect; Forgetting Curve (Ebbinghaus)",
+      "framework_rules": {
+        "spacing_calculation": {
+          "description": "Calculate optimal inter-session intervals",
+          "base_formula": "consolidation_efficiency * spacing_sensitivity * (1 - forgetting_rate)",
+          "min_interval_hours": 4,
+          "max_interval_days": 14
+        },
+        "retrieval_schedule": {
+          "description": "Schedule retrieval practice for retention",
+          "expanding_intervals": true,
+          "initial_interval_hours": 24,
+          "expansion_factor": 2.0,
+          "max_intervals": 7
+        },
+        "saturation_check": {
+          "description": "Detect when practice is no longer effective",
+          "saturation_threshold": 0.85,
+          "action_if_saturated": "advance_to_transfer"
+        },
+        "transfer_bridging": {
+          "description": "When to introduce transfer practice",
+          "trigger": "retrieval_strength > 0.7 AND transfer_latency < 0.5",
+          "bridge_type": "near_to_far_progression"
+        }
+      },
+      "description": "Governance framework for determining optimal spacing, retrieval cadence, and transfer bridging requirements."
+    }
+  ],
+  "output_schema": {
+    "primary": "lopa_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K0-EVIDENCE-INTEGRITY",
+      "K1-STATE-SYNTHESIS",
+      "K2-OBJECTIVE-GATING",
+      "K3-PEDAGOGY-GATING",
+      "K4-SCAFFOLDING-SELECTION",
+      "K5-REPRESENTATION-REPAIR",
+      "K6-TEMPORAL-SCHEDULING"
+    ],
+    "original_count": 7,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

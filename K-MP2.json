@@ -1,0 +1,60 @@
+{
+  "construct_id": "K-MP2",
+  "construct_name": "MP2 Coherence Dimensions Gate Master Construct",
+  "layer": "MP02",
+  "agent": "MP2",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MP2",
+  "theoretical_foundation": {
+    "primary_theory": "Cross-Layer Coherence Validation",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-MP2-0",
+      "was": "K-MP2-0_Proposal_Intake_Validation",
+      "section_name": "Layer Data Intake Validation"
+    },
+    {
+      "section_id": "S-MP2-1",
+      "was": "K-MP2-1_Architecture_Coherence_Assessment",
+      "section_name": "Architecture Coherence Assessment"
+    },
+    {
+      "section_id": "S-MP2-2",
+      "was": "K-MP2-2_ADR_Generation",
+      "section_name": "Architecture Decision Record Generation"
+    },
+    {
+      "section_id": "S-MP2-3",
+      "was": "K-MP2-3_Gate_Configuration",
+      "section_name": "Quality Gate Configuration"
+    },
+    {
+      "section_id": "S-MP2-4",
+      "was": "K-MP2-4_Governance_Output",
+      "section_name": "MP2 Output Emission"
+    }
+  ],
+  "output_schema": {
+    "primary": "mp2_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-MP2-0_Proposal_Intake_Validation",
+      "K-MP2-1_Architecture_Coherence_Assessment",
+      "K-MP2-2_ADR_Generation",
+      "K-MP2-3_Gate_Configuration",
+      "K-MP2-4_Governance_Output"
+    ],
+    "original_count": 5,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

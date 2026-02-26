@@ -1,0 +1,385 @@
+{
+  "construct_id": "K-ETHCORE",
+  "construct_name": "Ethical Core Agent Master Construct",
+  "layer": "L04",
+  "agent": "ETHCORE",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-ETHCORE",
+  "theoretical_foundation": {
+    "primary_theory": "Educational Ethics and Privacy Governance",
+    "supporting_theories": [
+      "Accountability Principle (GDPR Art. 5(2), Art. 24)",
+      "Algorithmic Accountability (Diakopoulos, 2015)",
+      "Algorithmic Accountability Act concepts",
+      "Algorithmic Fairness (Barocas & Selbst, 2016)",
+      "Anti-Discrimination Law (EU, ZA, US frameworks)",
+      "Belmont Report (Respect for Persons)",
+      "Children's Consent Provisions (COPPA, GDPR Art. 8)",
+      "Cognitive Load Theory (Sweller) — explanation must be comprehensible"
+    ]
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-ETHCORE-0",
+      "was": "K-ETHCORE-0",
+      "section_name": "Legal Regime Determination Framework",
+      "theoretical_basis": "Legal Positivism & Jurisdictional Sovereignty + GDPR Territorial Scope (Art. 3) + POPIA (South Africa Protection of Personal Information Act)",
+      "what_to_measure": [
+        "Applicable legal jurisdiction identification",
+        "Action-law permissibility for proposed processing",
+        "Mandatory legal requirements for jurisdiction",
+        "Prohibited data practices under applicable law"
+      ],
+      "measurement_principles": {
+        "no_legal_vacuum": "System must never operate without a positively identified legal regime",
+        "strictest_regime": "When signals conflict, apply the most restrictive applicable law",
+        "explicit_identification": "Jurisdiction must be positively determined, never assumed"
+      },
+      "decision_rules": {
+        "hard_veto": "If legal regime cannot be determined → SYSTEM HALT (absolute prohibition)",
+        "conflict_resolution": "If tenant jurisdiction differs from user jurisdiction → apply stricter regime",
+        "default_rule": "If signals are fully obscured → apply Global_Restrictive_Baseline or FAIL",
+        "prohibited_signals": [
+          "Timezone heuristics",
+          "Language-based inference"
+        ]
+      },
+      "validation_criteria": [
+        "Jurisdiction positively identified from valid signals",
+        "Jurisdiction database is reachable and current",
+        "Legal regime locked for session duration",
+        "All mandatory requirements extracted",
+        "No prohibited practices in proposed action"
+      ],
+      "description": "Framework defining how to identify and lock the applicable legal jurisdiction before any data processing or pedagogical action proceeds."
+    },
+    {
+      "section_id": "S-ETHCORE-1",
+      "was": "K-ETHCORE-1",
+      "section_name": "Purpose Limitation Framework",
+      "theoretical_basis": "Purpose Limitation Principle (GDPR Art. 5(1)(b)) + OECD Privacy Guidelines (Purpose Specification Principle) + Fair Information Practice Principles (FIPPs)",
+      "what_to_measure": [
+        "Declared data purpose existence and clarity",
+        "Action-purpose alignment score",
+        "Declared purpose scope boundaries",
+        "Continued purpose compliance over time"
+      ],
+      "measurement_principles": {
+        "declared_first": "Purpose must be declared before any data collection begins",
+        "alignment_check": "Each proposed action is checked against declared purpose",
+        "no_scope_creep": "Data cannot be repurposed without new declaration and consent"
+      },
+      "decision_rules": {
+        "purpose_match": "Action purpose must fall within declared scope boundaries",
+        "purpose_drift": "If action purpose diverges from declared purpose → DENY unless re-declared",
+        "continued_compliance": "Periodic re-validation that processing still serves original purpose",
+        "scope_violation": "Any use beyond declared scope → immediate QUARANTINE"
+      },
+      "validation_criteria": [
+        "Declared purpose exists and is specific",
+        "Proposed action falls within declared purpose scope",
+        "No function creep detected",
+        "Continued compliance verified for ongoing processing"
+      ],
+      "description": "Framework defining how to enforce the purpose limitation principle — ensuring data is collected and processed only for declared, legitimate purposes."
+    },
+    {
+      "section_id": "S-ETHCORE-2",
+      "was": "K-ETHCORE-2",
+      "section_name": "Consent Integrity Framework",
+      "theoretical_basis": "Informed Consent Doctrine (Bioethics → Data Ethics) + GDPR Consent Requirements (Art. 6(1)(a), Art. 7) + Belmont Report (Respect for Persons)",
+      "what_to_measure": [
+        "Consent existence for data subject",
+        "Consent scope covers proposed action",
+        "Consent temporal validity (not expired/revoked)",
+        "Consent policy compliance (age-appropriate, language-accessible)",
+        "Contextual pressure indicators (dark patterns, power imbalances)",
+        "Meaningful refusal pathway availability"
+      ],
+      "measurement_principles": {
+        "freely_given": "Consent must be voluntary, without coercion or undue influence",
+        "specific": "Consent must cover the specific processing being proposed",
+        "informed": "Data subject must understand what they are consenting to",
+        "unambiguous": "Consent must be a clear affirmative act",
+        "withdrawable": "Right to withdraw must be as easy as giving consent"
+      },
+      "decision_rules": {
+        "no_consent": "If no consent record exists → DENY action",
+        "scope_mismatch": "If consent does not cover proposed action → DENY and request new consent",
+        "expired_consent": "If consent has expired or been revoked → DENY until renewed",
+        "pressure_detected": "If contextual pressure indicators found → QUARANTINE for review",
+        "minor_protection": "If data subject is a minor → apply enhanced consent requirements",
+        "refusal_blocked": "If meaningful refusal is not available → DENY (consent is not freely given)"
+      },
+      "validation_criteria": [
+        "Valid consent record exists for data subject",
+        "Consent scope covers the specific proposed action",
+        "Consent is temporally valid (not expired or revoked)",
+        "Consent meets policy requirements (age, language, format)",
+        "No contextual pressure indicators detected",
+        "Meaningful refusal pathway is available and accessible"
+      ],
+      "description": "Framework defining how to validate that informed, voluntary, uncoerced consent exists for all data processing actions, with scope coverage and temporal validity."
+    },
+    {
+      "section_id": "S-ETHCORE-3",
+      "was": "K-ETHCORE-3",
+      "section_name": "Fairness & Non-Discrimination Framework",
+      "theoretical_basis": "Algorithmic Fairness (Barocas & Selbst, 2016) + Rawls' Theory of Justice (Difference Principle) + Anti-Discrimination Law (EU, ZA, US frameworks)",
+      "what_to_measure": [
+        "Protected attribute presence in input features",
+        "High-correlation proxy detection",
+        "Differential treatment risk across groups",
+        "Justification adequacy for attribute-correlated decisions",
+        "Cumulative disparity score over time"
+      ],
+      "measurement_principles": {
+        "demographic_parity": "Outcomes should not vary significantly across protected groups",
+        "individual_fairness": "Similar individuals should receive similar treatment",
+        "proxy_vigilance": "Features highly correlated with protected attributes are treated as proxies",
+        "cumulative_tracking": "Disparity must be tracked across multiple decisions, not just single instances"
+      },
+      "decision_rules": {
+        "protected_attribute_detected": "If protected attributes found in decision features → require justification",
+        "proxy_detected": "If high-correlation proxy detected → treat as protected attribute",
+        "differential_treatment": "If treatment differs significantly across groups → QUARANTINE for review",
+        "unjustified_disparity": "If disparity exists without pedagogical justification → DENY",
+        "cumulative_threshold": "If cumulative disparity score exceeds threshold → trigger remediation"
+      },
+      "validation_criteria": [
+        "All input features scanned for protected attributes",
+        "Proxy features identified and flagged",
+        "Differential treatment analysis completed",
+        "Justification provided for any attribute-correlated decision",
+        "Cumulative disparity within acceptable bounds"
+      ],
+      "description": "Framework defining how to detect and prevent discriminatory outcomes, ensure equitable treatment across protected attributes, and flag cumulative disparities."
+    },
+    {
+      "section_id": "S-ETHCORE-4",
+      "was": "K-ETHCORE-4",
+      "section_name": "Explainability & Contestability Framework",
+      "theoretical_basis": "Right to Explanation (GDPR Art. 22, Recital 71) + Explainable AI (XAI) Principles (DARPA, 2016) + Procedural Justice Theory (Tyler, 1990)",
+      "what_to_measure": [
+        "Causal trace existence for decision",
+        "Rationale fidelity to actual decision logic",
+        "Explanation renderability to affected user",
+        "Explanation cognitive load appropriateness",
+        "Contestation pathway availability and accessibility"
+      ],
+      "measurement_principles": {
+        "causal_fidelity": "Explanation must reflect actual decision logic, not post-hoc rationalization",
+        "audience_appropriate": "Explanation must be comprehensible to affected party (age, expertise, language)",
+        "contestation_right": "Every automated decision must have a pathway for human challenge",
+        "trace_completeness": "Full causal chain from input to output must be reconstructable"
+      },
+      "decision_rules": {
+        "no_trace": "If no causal trace exists → DENY (opaque decisions prohibited)",
+        "unfaithful_rationale": "If rationale diverges from actual logic → QUARANTINE for correction",
+        "unrenderable": "If explanation cannot be presented to user → QUARANTINE until rendered",
+        "excessive_cognitive_load": "If explanation exceeds user comprehension → simplify before delivery",
+        "no_contestation": "If no contestation pathway exists → DENY (right to challenge is mandatory)"
+      },
+      "validation_criteria": [
+        "Causal trace exists and is complete",
+        "Rationale faithfully represents actual decision logic",
+        "Explanation is renderable in user-appropriate format",
+        "Cognitive load of explanation is appropriate for audience",
+        "Contestation pathway is available and accessible"
+      ],
+      "description": "Framework defining how to ensure every AI decision has a causal trace, faithful rationale, renderable explanation, and an accessible contestation pathway for affected parties."
+    },
+    {
+      "section_id": "S-ETHCORE-5",
+      "was": "K-ETHCORE-5",
+      "section_name": "Proportionality & Harm Minimisation Framework",
+      "theoretical_basis": "Proportionality Principle (EU Charter Art. 52; ECHR case law) + Privacy by Design (Cavoukian, 2009) + Data Minimisation Principle (GDPR Art. 5(1)(c))",
+      "what_to_measure": [
+        "Action impact magnitude on learner/data subject",
+        "Means-ends proportionality (is the action justified by its goal?)",
+        "Reversibility factor (can the action be undone?)",
+        "Irreversible harm potential (permanent consequences)"
+      ],
+      "measurement_principles": {
+        "least_intrusive": "Always choose the least privacy-intrusive means to achieve the educational goal",
+        "reversibility_preference": "Reversible actions are always preferred over irreversible ones",
+        "harm_asymmetry": "Potential harms weigh more heavily than potential benefits in borderline cases",
+        "progressive_disclosure": "Collect minimum data first, request more only if pedagogically necessary"
+      },
+      "decision_rules": {
+        "disproportionate_action": "If impact exceeds educational benefit → DENY",
+        "irreversible_harm": "If action has irreversible consequences → DENY unless pedagogically critical AND consented",
+        "privacy_violation": "If less intrusive alternative exists → require justification for more intrusive choice",
+        "harm_threshold": "If harm risk level exceeds threshold → QUARANTINE for human review"
+      },
+      "validation_criteria": [
+        "Impact magnitude assessed for all affected parties",
+        "Means-ends proportionality justified",
+        "Reversibility factor calculated",
+        "No irreversible harm without explicit justification",
+        "Privacy minimisation principles applied"
+      ],
+      "description": "Framework defining how to ensure system actions are proportionate to their educational goals, minimize data exposure, and prevent irreversible harm."
+    },
+    {
+      "section_id": "S-ETHCORE-6",
+      "was": "K-ETHCORE-6",
+      "section_name": "Epistemic Integrity Framework",
+      "theoretical_basis": "Epistemic Justice (Fricker, 2007) + Evidence-Based Practice (Sackett et al., 1996) + Epistemic Injustice (Testimonial & Hermeneutical)",
+      "what_to_measure": [
+        "Excluded knowledge detection (systematic blind spots)",
+        "Evidence existence for all claims and decisions",
+        "Evidence sufficiency for conclusions drawn",
+        "Knowledge execution soundness (valid inference)"
+      ],
+      "measurement_principles": {
+        "no_blind_spots": "Actively check for knowledge that may have been systematically excluded",
+        "evidence_grounding": "Every claim must have traceable evidence",
+        "sufficiency_threshold": "Evidence must meet minimum threshold before conclusions are drawn",
+        "epistemic_humility": "Acknowledge uncertainty rather than fabricating confidence"
+      },
+      "decision_rules": {
+        "no_evidence": "If no evidence exists for a critical claim → DENY the decision",
+        "insufficient_evidence": "If evidence is below sufficiency threshold → QUARANTINE for more data",
+        "excluded_knowledge": "If systematic knowledge exclusion detected → flag for review and correction",
+        "unsound_inference": "If knowledge execution is logically invalid → DENY and require re-analysis",
+        "uncertainty_disclosure": "If significant uncertainty exists → it must be disclosed in the decision rationale"
+      },
+      "validation_criteria": [
+        "No systematically excluded knowledge detected",
+        "Evidence exists for all critical claims",
+        "Evidence meets sufficiency threshold",
+        "Inference chain is logically sound",
+        "Uncertainties are disclosed"
+      ],
+      "description": "Framework defining how to ensure decisions are grounded in valid, sufficient evidence and that no relevant knowledge is systematically excluded from the reasoning process."
+    },
+    {
+      "section_id": "S-ETHCORE-7",
+      "was": "K-ETHCORE-7",
+      "section_name": "Accountability & Audit Trail Framework",
+      "theoretical_basis": "Accountability Principle (GDPR Art. 5(2), Art. 24) + Principal-Agent Theory (accountability chains) + Algorithmic Accountability Act concepts",
+      "what_to_measure": [
+        "Decision trace schema completeness",
+        "Mandatory audit field presence",
+        "Responsible authority identification",
+        "Governing policy applied correctly",
+        "Trace archival readiness"
+      ],
+      "measurement_principles": {
+        "traceability": "Every decision must be traceable from input to output",
+        "responsibility_assignment": "Every decision must have a clearly identified responsible authority",
+        "policy_linkage": "Every decision must reference the governing policy that authorised it",
+        "immutability": "Audit trail must be tamper-evident and archival-grade"
+      },
+      "decision_rules": {
+        "incomplete_trace": "If decision trace is missing mandatory fields → QUARANTINE until completed",
+        "no_authority": "If no responsible authority can be identified → DENY",
+        "no_policy": "If no governing policy is referenced → QUARANTINE",
+        "tampered_trace": "If trace integrity is compromised → DENY and escalate to human review",
+        "archival_failure": "If trace cannot be archived → flag for remediation"
+      },
+      "validation_criteria": [
+        "Decision trace schema is complete with all mandatory fields",
+        "Responsible authority is identified and recorded",
+        "Governing policy is referenced and applicable",
+        "Trace is archival-ready and tamper-evident",
+        "Accountability chain from decision to human authority is complete"
+      ],
+      "description": "Framework defining how to guarantee a complete, tamper-evident audit trail with clear accountability assignment for every automated decision."
+    },
+    {
+      "section_id": "S-ETHCORE-8",
+      "was": "K-ETHCORE-8",
+      "section_name": "Ethical Veto Aggregation Framework",
+      "theoretical_basis": "Non-Compensatory Decision Theory + Deontological Ethics (Kant) — some violations are absolute prohibitions + Lexicographic Ordering (ethics cannot be traded off against utility)",
+      "what_to_measure": [
+        "All upstream ethical signal statuses",
+        "Veto threshold compliance",
+        "Aggregate risk score",
+        "Constraint violation inventory",
+        "Remediation requirement catalogue"
+      ],
+      "measurement_principles": {
+        "non_compensatory": "A PASS on fairness cannot compensate for a FAIL on consent",
+        "any_fail_veto": "Any Hard Veto FAIL from any pillar triggers veto for the entire action",
+        "aggregate_risk": "Even if no single pillar fails, high aggregate risk may trigger quarantine",
+        "remediation_first": "Before denying outright, check if remediation is possible"
+      },
+      "decision_rules": {
+        "hard_veto_fail": "If ANY upstream Hard Veto (HV) pillar returns FAIL → VETO (absolute)",
+        "soft_veto_accumulation": "If 3+ Soft Veto (SV) pillars return FAIL → QUARANTINE",
+        "aggregate_risk_threshold": "If aggregate risk score exceeds 0.70 → QUARANTINE even without individual failures",
+        "remediation_available": "If remediation options exist → issue QUARANTINE with remediation directives",
+        "no_remediation": "If no remediation possible → issue DENY",
+        "iterate_until_stable": "Re-evaluate after remediation until all signals stabilise"
+      },
+      "validation_criteria": [
+        "All upstream ethical signals received and evaluated",
+        "Non-compensatory veto logic correctly applied",
+        "Aggregate risk score calculated",
+        "All constraint violations identified",
+        "Remediation requirements catalogued where applicable"
+      ],
+      "description": "Framework defining how to aggregate ethical signals from all upstream assessments (legal, purpose, consent, fairness, explainability, proportionality, epistemic, accountability) and enforce veto power over non-compliant actions."
+    },
+    {
+      "section_id": "S-ETHCORE-9",
+      "was": "K-ETHCORE-9",
+      "section_name": "Ethical Clearance Handoff Framework",
+      "theoretical_basis": "Ethical Governance by Design + Value Sensitive Design (Friedman & Hendry, 2019) + Interoperability Standards (ethical constraint propagation)",
+      "what_to_measure": [
+        "Completeness of ethical assessment compilation",
+        "Constraint summary accuracy and coverage",
+        "Permitted action boundary clarity",
+        "Downstream agent-specific packaging quality"
+      ],
+      "measurement_principles": {
+        "constraint_propagation": "Ethical constraints must be faithfully propagated to all downstream agents",
+        "agent_specific_packaging": "Each downstream agent receives constraints in its native format",
+        "no_constraint_loss": "No ethical constraint may be dropped during handoff",
+        "actionability": "Downstream agents must be able to act on the constraints provided"
+      },
+      "decision_rules": {
+        "incomplete_compilation": "If any upstream assessment is missing → handoff BLOCKED until complete",
+        "constraint_coverage": "All downstream agents must have their required constraints covered",
+        "hard_gate_passthrough": "All veto decisions must be explicitly communicated in handoff",
+        "remediation_passthrough": "Active remediation directives must be included in handoff"
+      },
+      "validation_criteria": [
+        "All upstream ethical assessments compiled",
+        "Constraint summary covers all ethical pillars",
+        "Permitted action boundaries clearly defined",
+        "Each downstream agent has agent-specific constraint package",
+        "No ethical constraints lost in handoff packaging"
+      ],
+      "description": "Framework defining how to package all ethical assessments into a clearance specification for downstream agent consumption, including constraint summaries and permitted action boundaries."
+    }
+  ],
+  "output_schema": {
+    "primary": "ethcore_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-ETHCORE-0",
+      "K-ETHCORE-1",
+      "K-ETHCORE-2",
+      "K-ETHCORE-3",
+      "K-ETHCORE-4",
+      "K-ETHCORE-5",
+      "K-ETHCORE-6",
+      "K-ETHCORE-7",
+      "K-ETHCORE-8",
+      "K-ETHCORE-9"
+    ],
+    "original_count": 10,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

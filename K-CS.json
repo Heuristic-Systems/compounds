@@ -1,0 +1,126 @@
+{
+  "construct_id": "K-CS",
+  "construct_name": "CogniStruct Agent Master Construct",
+  "layer": "L01",
+  "agent": "CS",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-CS",
+  "theoretical_foundation": {
+    "primary_theory": "Cognitive Structure Theory Mapping",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-CS-0",
+      "was": "K-CS-0",
+      "section_name": "Profile Ingestion Framework",
+      "validation_criteria": {
+        "completeness": "Minimum 70% of features must be present",
+        "consistency": "Cross-validate FFM against behavioral indicators",
+        "recency": "Profile data must be < 30 days old for dynamic features"
+      },
+      "description": "Framework governing transformation of raw learner profiles into normalized feature vectors suitable for theory matching."
+    },
+    {
+      "section_id": "S-CS-1",
+      "was": "K-CS-1",
+      "section_name": "Theory Matching Framework",
+      "validation_criteria": {
+        "coverage": "At least one theory from each major cluster when applicable",
+        "coherence": "Selected theories must not fundamentally contradict",
+        "personality_alignment": "Consider Openness for constructivist, Conscientiousness for behaviorist"
+      },
+      "description": "Framework governing alignment of normalized learner profiles to pedagogical learning theories from a 64-theory database."
+    },
+    {
+      "section_id": "S-CS-2",
+      "was": "K-CS-2",
+      "section_name": "Cognitive Dimension Synthesis Framework",
+      "validation_criteria": {
+        "internal_consistency": "Dimensions should correlate with profile features",
+        "face_validity": "Dimension profile should match pedagogical intuition",
+        "predictive_validity": "Dimensions should predict learning outcomes"
+      },
+      "description": "Framework governing generation of multi-dimensional cognitive footprints that guide scaffold architecture."
+    },
+    {
+      "section_id": "S-CS-3",
+      "was": "K-CS-3",
+      "section_name": "Theory Cluster Analysis Framework",
+      "validation_criteria": {
+        "minimum_clusters": "At least 2 clusters must be represented",
+        "maximum_clusters": "No more than 5 clusters to avoid cognitive overload",
+        "balance": "No single cluster should exceed 60% of total weight"
+      },
+      "description": "Framework governing grouping of matched theories into coherent scaffold clusters with appropriate layering."
+    },
+    {
+      "section_id": "S-CS-4",
+      "was": "K-CS-4",
+      "section_name": "Scaffold Architecture Generation Framework",
+      "validation_criteria": {
+        "completeness": "Each layer must have theory basis and implementation notes",
+        "alignment": "Scaffold intensity must match learner's structure need",
+        "coherence": "Layers must build logically upon each other"
+      },
+      "description": "Framework governing production of actionable pedagogical scaffolds from theory clusters and cognitive dimensions."
+    },
+    {
+      "section_id": "S-CS-5",
+      "was": "K-CS-5",
+      "section_name": "Theory-Profile Alignment Validation Framework",
+      "validation_criteria": {
+        "pass_condition": "No hard conflicts, evidence ≥ threshold, context appropriate",
+        "warning_condition": "Soft conflicts present OR marginal evidence",
+        "conflict_condition": "Hard conflicts detected OR no evidence support"
+      },
+      "description": "Framework governing validation of pedagogical alignment between selected theories and learner profile evidence."
+    },
+    {
+      "section_id": "S-CS-6",
+      "was": "K-CS-6",
+      "section_name": "Scaffold Parameter Calibration Framework",
+      "validation_criteria": {
+        "parameter_bounds": "All parameters within valid ranges",
+        "consistency": "Parameters must be internally consistent",
+        "context_fit": "Parameters must respect ecological constraints from CLEA"
+      },
+      "description": "Framework governing fine-tuning of scaffold parameters based on learner capacity, context, and multimodal preferences."
+    },
+    {
+      "section_id": "S-CS-7",
+      "was": "K-CS-7",
+      "section_name": "Pedagogical Design Handoff Framework",
+      "validation_criteria": {
+        "completeness": "All downstream agents must have valid instruction sets",
+        "traceability": "100% of decisions have causal links",
+        "consistency": "Instruction sets must not contradict each other"
+      },
+      "description": "Framework governing packaging of pedagogical design specifications for downstream agent consumption with full traceability."
+    }
+  ],
+  "output_schema": {
+    "primary": "cs_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-CS-0",
+      "K-CS-1",
+      "K-CS-2",
+      "K-CS-3",
+      "K-CS-4",
+      "K-CS-5",
+      "K-CS-6",
+      "K-CS-7"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

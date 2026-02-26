@@ -1,0 +1,170 @@
+{
+  "construct_id": "K-HOA",
+  "construct_name": "Holistic Outcomes Assessment Master Construct",
+  "layer": "L06",
+  "agent": "HOA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-HOA",
+  "theoretical_foundation": {
+    "primary_theory": "Holistic Outcomes Assessment Framework",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-HOA-0",
+      "was": "K-HOA-0",
+      "section_name": "Bloom's Taxonomy Classification Framework",
+      "validation_criteria": {
+        "level_coverage": "All six Bloom's levels (Remember, Understand, Apply, Analyze, Evaluate, Create) must be assessable",
+        "classification_consistency": "Repeated assessment of equivalent evidence must yield the same cognitive level",
+        "boundary_discrimination": "Adjacent levels must be distinguishable by defined verb/evidence markers",
+        "dok_alignment": "Depth of Knowledge ratings must correlate positively with Bloom's level assignments"
+      },
+      "description": "Framework defining how to classify learning outcomes according to Bloom's Revised Taxonomy cognitive levels, from Remember through Create."
+    },
+    {
+      "section_id": "S-HOA-1",
+      "was": "K-HOA-1",
+      "section_name": "SOLO Taxonomy Structure Framework",
+      "validation_criteria": {
+        "structural_coverage": "All five SOLO levels (Pre-structural, Unistructural, Multistructural, Relational, Extended Abstract) must be distinguishable",
+        "response_mapping": "Learner evidence must map to exactly one SOLO level per assessment instance",
+        "progression_coherence": "Detected structural level must be consistent with observed relational integration",
+        "inter_rater_reliability": "Structural classification must achieve acceptable agreement across repeated evaluations"
+      },
+      "description": "Framework defining how to analyze learner response structure using Biggs' SOLO (Structure of Observed Learning Outcomes) taxonomy, from pre-structural through extended abstract."
+    },
+    {
+      "section_id": "S-HOA-2",
+      "was": "K-HOA-2",
+      "section_name": "Fink's Significant Learning Framework",
+      "validation_criteria": {
+        "dimension_coverage": "All six Fink dimensions must be assessable independently",
+        "significance_scoring": "Each dimension must yield a quantifiable significance score",
+        "synergy_detection": "Cross-dimensional synergies must be identifiable when multiple dimensions co-activate",
+        "holistic_integration": "The combined profile must produce a coherent significance narrative beyond individual scores"
+      },
+      "description": "Framework defining how to evaluate learning significance across Fink's six dimensions: Foundational Knowledge, Application, Integration, Human Dimension, Caring, and Learning How to Learn."
+    },
+    {
+      "section_id": "S-HOA-3",
+      "was": "K-HOA-3",
+      "section_name": "Gagné's Events of Instruction Alignment Framework",
+      "validation_criteria": {
+        "event_coverage": "All nine instructional events must be evaluable for alignment",
+        "sequence_integrity": "Event activation must follow the prescribed sequential order",
+        "processing_verification": "Learner evidence must confirm internal processing at each event stage",
+        "gap_identification": "Missing or weak event activations must be flagged with remediation signals"
+      },
+      "description": "Framework defining how to evaluate whether learning outcomes align with Gagné's Nine Events of Instruction, assessing whether instructional processing conditions were met during the learning episode."
+    },
+    {
+      "section_id": "S-HOA-4",
+      "was": "K-HOA-4",
+      "section_name": "Kolb's Experiential Learning Cycle Framework",
+      "validation_criteria": {
+        "phase_identification": "All four Kolb phases must be identifiable from learner evidence",
+        "cycle_completeness": "Assessment must detect whether a full cycle has been traversed",
+        "phase_balance": "Over-reliance on a single phase must be flagged as a learning style imbalance",
+        "progression_tracking": "Movement between phases must be temporally sequenced and verifiable"
+      },
+      "description": "Framework defining how to identify and assess a learner's position within Kolb's four-phase experiential learning cycle: Concrete Experience, Reflective Observation, Abstract Conceptualisation, and Active Experimentation."
+    },
+    {
+      "section_id": "S-HOA-5",
+      "was": "K-HOA-5",
+      "section_name": "Dreyfus Skill Acquisition Framework",
+      "validation_criteria": {
+        "stage_discrimination": "All five Dreyfus stages must be distinguishable through observable indicators",
+        "indicator_alignment": "Observed performance must match the defining characteristics of the assigned stage",
+        "progression_validity": "Stage progression must be monotonic within a skill domain over sufficient time",
+        "contextual_sensitivity": "Higher stages must demonstrate increasing context-dependent (non-rule-based) behaviour"
+      },
+      "description": "Framework defining how to assess a learner's proficiency stage within the Dreyfus model: Novice, Advanced Beginner, Competent, Proficient, and Expert."
+    },
+    {
+      "section_id": "S-HOA-6",
+      "was": "K-HOA-6",
+      "section_name": "Simpson's Psychomotor Domain Framework",
+      "validation_criteria": {
+        "level_coverage": "All seven Simpson levels must be assessable",
+        "motor_evidence_mapping": "Performance evidence must map to specific psychomotor indicators at each level",
+        "progression_sequence": "Higher levels must demonstrate fluency, automaticity, and creative adaptation beyond mechanical accuracy",
+        "embodied_assessment": "Evaluation must accommodate non-verbal, performance-based evidence modalities"
+      },
+      "description": "Framework defining how to assess psychomotor skill development across Simpson's seven levels: Perception, Set, Guided Response, Mechanism, Complex Overt Response, Adaptation, and Origination."
+    },
+    {
+      "section_id": "S-HOA-7",
+      "was": "K-HOA-7",
+      "section_name": "Multi-Taxonomy Synthesis Framework",
+      "validation_criteria": {
+        "taxonomy_coverage": "Synthesis must incorporate outputs from all seven preceding constructs",
+        "conflict_resolution": "Contradictory signals across taxonomies must be detected and reconciled with documented rationale",
+        "dimensional_weighting": "Weighting scheme must be context-sensitive and justifiable based on learning objectives",
+        "profile_coherence": "Final synthesis profile must be internally consistent and actionable",
+        "metacognitive_integration": "Metacognitive reflection signals must inform the overall synthesis"
+      },
+      "description": "Framework defining how to synthesise assessment results from all preceding single-taxonomy constructs (K-HOA-0 through K-HOA-6) into a unified, multi-dimensional learner outcome profile."
+    },
+    {
+      "section_id": "S-HOA-8",
+      "was": "K-HOA-8",
+      "section_name": "Outcomes Feedback Routing Framework",
+      "validation_criteria": {
+        "evidence_grounding": "Every feedback statement must be traceable to specific assessment evidence",
+        "actionability": "Feedback must contain concrete next-step recommendations, not just evaluative labels",
+        "routing_correctness": "Feedback signals must reach the correct target agent or learner channel",
+        "feedback_level_coverage": "Feedback must address task, process, and self-regulation levels where evidence supports it",
+        "longitudinal_tracking": "Feedback routing must support longitudinal evidence accumulation"
+      },
+      "description": "Framework defining how to generate targeted feedback based on the synthesised outcome profile and route it to the appropriate downstream agents and learner-facing channels."
+    },
+    {
+      "section_id": "S-HOA-9",
+      "was": "K-HOA-9",
+      "section_name": "Assessment Handoff Compilation Framework",
+      "validation_criteria": {
+        "completeness_check": "Handoff bundle must contain all required fields per the L06→L07/L08/MP data contracts",
+        "provenance_integrity": "Every assessment claim must have a traceable evidence chain back to source atoms",
+        "multimodal_packaging": "All modality-specific artefacts (text, visual, performance) must be correctly encoded and referenced",
+        "contract_compliance": "Output schema must pass validation against downstream consumer expectations",
+        "audit_readiness": "Bundle must be MP06-auditable without additional transformation"
+      },
+      "description": "Framework defining how to compile the complete assessment artefact package for handoff to downstream layers (L07 HICE, L08 SFE) and governance metaprocesses (MP01-MP06), ensuring all required data contracts are satisfied."
+    },
+    {
+      "section_id": "S-HOA-10",
+      "was": "L06-OBJECTIVE-VALIDITY-GUARDRAILS",
+      "section_name": "Objective Setting Validity Guardrails",
+      "description": "This construct provides guardrails for L06 agents (LAA, MRA, OFR) when processing student-set objectives. It validates whether a stated objective type is appropriate for the learner's temporal context and provides guidance on classification, reclassification, and assessment validity."
+    }
+  ],
+  "output_schema": {
+    "primary": "hoa_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-HOA-0",
+      "K-HOA-1",
+      "K-HOA-2",
+      "K-HOA-3",
+      "K-HOA-4",
+      "K-HOA-5",
+      "K-HOA-6",
+      "K-HOA-7",
+      "K-HOA-8",
+      "K-HOA-9",
+      "L06-OBJECTIVE-VALIDITY-GUARDRAILS"
+    ],
+    "original_count": 11,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

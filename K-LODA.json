@@ -1,0 +1,153 @@
+{
+  "construct_id": "K-LODA",
+  "construct_name": "Learning Objectives Agent Master Construct",
+  "layer": "L01",
+  "agent": "LODA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-LODA",
+  "theoretical_foundation": {
+    "primary_theory": "Learning Objective Extraction and Classification",
+    "supporting_theories": [
+      "ARCS Model (Keller)",
+      "Affective Load in Learning",
+      "Assessment FOR Learning (Wiliam)",
+      "Authentic Assessment",
+      "Bloom's Revised Taxonomy (Anderson & Krathwohl)",
+      "Cognitive Load Theory (Sweller)",
+      "Cognitive Task Analysis",
+      "Constructive Alignment (Biggs)"
+    ]
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-LODA-0",
+      "was": "K-LD-0",
+      "section_name": "Goal Decomposition Framework",
+      "theoretical_basis": "Task Analysis (Jonassen); Hierarchical Task Analysis; Cognitive Task Analysis",
+      "validation_criteria": [
+        "Each atomic objective is independently measurable",
+        "Dependencies are explicit and non-circular",
+        "Hierarchy covers all aspects of original goal",
+        "Time estimates are attached to leaf objectives"
+      ],
+      "description": "Framework defining how complex learning goals are decomposed into atomic, measurable objectives with clear dependency relationships."
+    },
+    {
+      "section_id": "S-LODA-1",
+      "was": "K-LD-1",
+      "section_name": "Taxonomic Classification Framework",
+      "theoretical_basis": "Bloom's Revised Taxonomy (Anderson & Krathwohl); SOLO Taxonomy (Biggs & Collis); Fink's Taxonomy of Significant Learning",
+      "validation_criteria": [
+        "Bloom level is unambiguous (single level)",
+        "SOLO level is consistent with Bloom",
+        "Knowledge dimension matches objective verbs",
+        "Fink categories support holistic learning"
+      ],
+      "description": "Framework defining how learning objectives are classified using established taxonomies to guide assessment and instruction design."
+    },
+    {
+      "section_id": "S-LODA-2",
+      "was": "K-LD-2",
+      "section_name": "Complexity Analysis Framework",
+      "theoretical_basis": "Cognitive Load Theory (Sweller); Element Interactivity; Affective Load in Learning",
+      "validation_criteria": [
+        "Complexity score accounts for learner baseline",
+        "Time estimate is realistic for context",
+        "Affective demand considers personality (N threshold)",
+        "Supervision level matches institutional constraints"
+      ],
+      "description": "Framework defining how objective difficulty is quantified considering cognitive demand, affective load, and learner context."
+    },
+    {
+      "section_id": "S-LODA-3",
+      "was": "K-LD-3",
+      "section_name": "Success Criteria Framework",
+      "theoretical_basis": "Mastery Learning (Bloom); Criterion-Referenced Assessment; Observable Behavior Objectives (Mager)",
+      "validation_criteria": [
+        "Uses observable action verbs (not 'understand', 'know')",
+        "Specifies conditions under which performance occurs",
+        "Defines minimum acceptable performance level",
+        "Evidence requirements are feasible to collect"
+      ],
+      "description": "Framework defining how measurable success criteria and mastery thresholds are established for each learning objective."
+    },
+    {
+      "section_id": "S-LODA-4",
+      "was": "K-LD-4",
+      "section_name": "Prerequisite Mapping Framework",
+      "theoretical_basis": "Learning Hierarchies (Gagné); Prerequisite Relationships; Knowledge Space Theory",
+      "validation_criteria": [
+        "All dependencies are explicit in prerequisite graph",
+        "No circular dependencies exist",
+        "Readiness checks are feasible to administer",
+        "Sequence respects all prerequisite constraints"
+      ],
+      "description": "Framework defining how prerequisite knowledge and skills are identified, mapped, and validated before new learning proceeds."
+    },
+    {
+      "section_id": "S-LODA-5",
+      "was": "K-LD-5",
+      "section_name": "Motivation Alignment Framework",
+      "theoretical_basis": "Self-Determination Theory (Deci & Ryan); Expectancy-Value Theory (Wigfield & Eccles); Interest Theory (Hidi & Renninger)",
+      "validation_criteria": [
+        "Connection to learner goals is explicit",
+        "RIASEC alignment considered for career relevance",
+        "Personality preferences (E, O) inform modality selection",
+        "Autonomy is preserved where possible"
+      ],
+      "description": "Framework defining how learning objectives are connected to learner values, interests, and intrinsic motivation sources."
+    },
+    {
+      "section_id": "S-LODA-6",
+      "was": "K-LD-6",
+      "section_name": "Assessment Strategy Framework",
+      "theoretical_basis": "Constructive Alignment (Biggs); Assessment FOR Learning (Wiliam); Authentic Assessment",
+      "validation_criteria": [
+        "Assessment type matches Bloom/SOLO level",
+        "Formative checkpoints occur at key learning moments",
+        "Feedback is actionable and timely",
+        "Stakes are appropriate for learning context",
+        "Personality preferences inform assessment modality"
+      ],
+      "description": "Framework defining how valid, reliable assessment strategies are designed to measure objective achievement."
+    },
+    {
+      "section_id": "S-LODA-7",
+      "was": "K-LD-7",
+      "section_name": "Downstream Handoff Framework",
+      "theoretical_basis": "System Integration Principles; Interface Contract Design; Pedagogical Agent Coordination",
+      "validation_criteria": [
+        "CogniStruct spec includes theory alignment requirements",
+        "CSA spec includes sequencing constraints and content requirements",
+        "MSA spec includes modality preferences and context constraints",
+        "Assessment intent includes L06 handoff metadata",
+        "Personality context is included for downstream personalization"
+      ],
+      "description": "Framework defining how complete objective specifications are packaged for downstream pedagogical agents (CogniStruct, CSA, MSA, L06)."
+    }
+  ],
+  "output_schema": {
+    "primary": "loda_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-LD-0",
+      "K-LD-1",
+      "K-LD-2",
+      "K-LD-3",
+      "K-LD-4",
+      "K-LD-5",
+      "K-LD-6",
+      "K-LD-7"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

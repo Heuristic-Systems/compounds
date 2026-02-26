@@ -1,0 +1,78 @@
+{
+  "construct_id": "K-MP5",
+  "construct_name": "MP5 Synthesis-Integration Gate Master Construct",
+  "layer": "MP05",
+  "agent": "MP5",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MP5",
+  "theoretical_foundation": {
+    "primary_theory": "IRP Synthesis and Quality Gates",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-MP5-0",
+      "was": "K-MP5-0_Compendium_Intake_Validation",
+      "section_name": "Compendium Intake & Validation"
+    },
+    {
+      "section_id": "S-MP5-1",
+      "was": "K-MP5-1_IRP_Synthesis",
+      "section_name": "Integration Release Plan Synthesis"
+    },
+    {
+      "section_id": "S-MP5-2",
+      "was": "K-MP5-2_Gate_Evaluation",
+      "section_name": "Gate Evaluation"
+    },
+    {
+      "section_id": "S-MP5-3",
+      "was": "K-MP5-3_Compendium_Assembly",
+      "section_name": "Integration Compendium Assembly"
+    },
+    {
+      "section_id": "S-MP5-4",
+      "was": "K-MP5-4_Governance_Output",
+      "section_name": "Governance Output & Routing"
+    },
+    {
+      "section_id": "S-MP5-5",
+      "was": "K-MP5-5_Evidence_Intake",
+      "section_name": "Evidence Intake & Validation"
+    },
+    {
+      "section_id": "S-MP5-6",
+      "was": "K-MP5-6_Evaluation_Matrix",
+      "section_name": "Evaluation Matrix"
+    },
+    {
+      "section_id": "S-MP5-7",
+      "was": "K-MP5-7_Knowledge_Loop_Synthesis",
+      "section_name": "Knowledge Loop Synthesis"
+    }
+  ],
+  "output_schema": {
+    "primary": "mp5_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-MP5-0_Compendium_Intake_Validation",
+      "K-MP5-1_IRP_Synthesis",
+      "K-MP5-2_Gate_Evaluation",
+      "K-MP5-3_Compendium_Assembly",
+      "K-MP5-4_Governance_Output",
+      "K-MP5-5_Evidence_Intake",
+      "K-MP5-6_Evaluation_Matrix",
+      "K-MP5-7_Knowledge_Loop_Synthesis"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "construct_id": "K-MP4",
+  "construct_name": "MP4 Grounding Crucible Gate Master Construct",
+  "layer": "MP04",
+  "agent": "MP4",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "guides_compound": "CP-MP4",
+  "theoretical_foundation": {
+    "primary_theory": "Regional Context Grounding",
+    "supporting_theories": []
+  },
+  "global_governance": {
+    "escalation_policy": "Failure at any section -> escalate to supervisor",
+    "iteration_policy": "Re-assess when input data changes"
+  },
+  "sections": [
+    {
+      "section_id": "S-MP4-0",
+      "was": "K-MP4-0_Compendium_Intake_Validation",
+      "section_name": "Compendium Intake & Validation",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP4-0.1",
+          "compound_name": "Layer Output Presence Check",
+          "execution_order": 1
+        },
+        {
+          "compound_id": "CP-MP4-0.2",
+          "compound_name": "MP1-3 Approval Chain Validation",
+          "execution_order": 2
+        },
+        {
+          "compound_id": "CP-MP4-0.3",
+          "compound_name": "Vision Artifact Extraction",
+          "execution_order": 3
+        },
+        {
+          "compound_id": "CP-MP4-0.4",
+          "compound_name": "Schema Conformance Check",
+          "execution_order": 4
+        }
+      ]
+    },
+    {
+      "section_id": "S-MP4-1",
+      "was": "K-MP4-1_Regional_Context_Binding",
+      "section_name": "Regional Context Binding",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP4-1.1",
+          "compound_name": "Regional Profile Loader",
+          "execution_order": 1
+        },
+        {
+          "compound_id": "CP-MP4-1.2",
+          "compound_name": "Regulatory Framework Extraction",
+          "execution_order": 2
+        },
+        {
+          "compound_id": "CP-MP4-1.3",
+          "compound_name": "Infrastructure Baseline Binding",
+          "execution_order": 3
+        },
+        {
+          "compound_id": "CP-MP4-1.4",
+          "compound_name": "Cultural-Linguistic Context Binding",
+          "execution_order": 4
+        }
+      ]
+    },
+    {
+      "section_id": "S-MP4-2",
+      "was": "K-MP4-2_Ecological_Factor_Validation",
+      "section_name": "Ecological Factor Validation",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP4-2.1",
+          "compound_name": "Microsystem Validation",
+          "execution_order": 1
+        },
+        {
+          "compound_id": "CP-MP4-2.2",
+          "compound_name": "Mesosystem Connection Check",
+          "execution_order": 2
+        },
+        {
+          "compound_id": "CP-MP4-2.3",
+          "compound_name": "Exosystem Constraint Validation",
+          "execution_order": 3
+        },
+        {
+          "compound_id": "CP-MP4-2.4",
+          "compound_name": "Macrosystem-Chronosystem Alignment",
+          "execution_order": 4
+        }
+      ]
+    },
+    {
+      "section_id": "S-MP4-3",
+      "was": "K-MP4-3_Drift_Detection",
+      "section_name": "Drift Detection & Analysis",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP4-3.1",
+          "compound_name": "Charter Intent Extraction",
+          "execution_order": 1
+        },
+        {
+          "compound_id": "CP-MP4-3.2",
+          "compound_name": "Semantic Drift Analysis",
+          "execution_order": 2
+        },
+        {
+          "compound_id": "CP-MP4-3.3",
+          "compound_name": "Priority-Scope Drift Detection",
+          "execution_order": 3
+        },
+        {
+          "compound_id": "CP-MP4-3.4",
+          "compound_name": "Equity Drift Assessment",
+          "execution_order": 4
+        }
+      ]
+    },
+    {
+      "section_id": "S-MP4-4",
+      "was": "K-MP4-4_Grounding_Synthesis",
+      "section_name": "Grounding Synthesis",
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP4-4.1",
+          "compound_name": "Layer Adaptation Generator",
+          "execution_order": 1
+        },
+        {
+          "compound_id": "CP-MP4-4.2",
+          "compound_name": "Implementation Constraint Mapper",
+          "execution_order": 2
+        },
+        {
+          "compound_id": "CP-MP4-4.3",
+          "compound_name": "Feasibility Assessment Engine",
+          "execution_order": 3
+        },
+        {
+          "compound_id": "CP-MP4-4.4",
+          "compound_name": "Grounded Compendium Assembly",
+          "execution_order": 4
+        }
+      ]
+    },
+    {
+      "section_id": "S-MP4-5",
+      "was": "K-MP4-5_Governance_Output",
+      "section_name": "Governance Output & Routing",
+      "decision_rules": {
+        "forward_to_mp5": [
+          "intake_status = VALID",
+          "regional_binding >= PARTIAL",
+          "ecological_coverage >= PARTIAL",
+          "drift_severity <= MINOR",
+          "synthesis_quality >= PARTIAL"
+        ],
+        "emit_directive_bundle": [
+          "drift_severity >= MODERATE",
+          "ecological_coverage = INSUFFICIENT",
+          "synthesis_quality = INCOMPLETE",
+          "charter_hash_mismatch = true",
+          "equity_drift_detected = true"
+        ]
+      },
+      "orchestration_steps": [
+        {
+          "compound_id": "CP-MP4-5.1",
+          "compound_name": "Grounding Score Calculation",
+          "execution_order": 1
+        },
+        {
+          "compound_id": "CP-MP4-5.2",
+          "compound_name": "Routing Decision Engine",
+          "execution_order": 2
+        },
+        {
+          "compound_id": "CP-MP4-5.3",
+          "compound_name": "Forward Package Assembly",
+          "execution_order": 3
+        },
+        {
+          "compound_id": "CP-MP4-5.4",
+          "compound_name": "Escalation Package Assembly",
+          "execution_order": 4
+        }
+      ]
+    }
+  ],
+  "output_schema": {
+    "primary": "mp4_output"
+  },
+  "metadata": {
+    "consolidated_from": [
+      "K-MP4-0_Compendium_Intake_Validation",
+      "K-MP4-1_Regional_Context_Binding",
+      "K-MP4-2_Ecological_Factor_Validation",
+      "K-MP4-3_Drift_Detection",
+      "K-MP4-4_Grounding_Synthesis",
+      "K-MP4-5_Governance_Output"
+    ],
+    "original_count": 6,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-construct-sections"
+  }
+}
