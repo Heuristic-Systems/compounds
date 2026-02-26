@@ -1,0 +1,1276 @@
+{
+  "compound_id": "CP-MP3",
+  "compound_name": "MP3 Vision Council Gate Master Compound",
+  "layer": "MP03",
+  "agent": "MP3",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MP3",
+  "theoretical_foundation": {
+    "primary_theory": "North Star Vision Generation",
+    "application": "46-phase pipeline"
+  },
+  "calls_elements": [
+    "MP03-E-COH-001",
+    "MP03-E-COH-002",
+    "MP03-E-EMI-001",
+    "MP03-E-GPS-001",
+    "MP03-E-GPS-002",
+    "MP03-E-HCL-001",
+    "MP03-E-HCL-002",
+    "MP03-E-INT-001",
+    "MP03-E-NST-001",
+    "MP03-E-NST-002",
+    "MP03-E-SBT-001",
+    "MP03-E-SBT-002",
+    "MP03-E-STR-001",
+    "MP03-E-STR-002"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-MP3-1",
+      "was": "CP-MP3-0.1_ADR_Presence_Validation",
+      "phase_name": "ADR Presence Validation",
+      "outputs": [
+        {
+          "name": "adr_valid",
+          "type": "boolean",
+          "description": "Whether ADR passes validation"
+        },
+        {
+          "name": "adr_errors",
+          "type": "string[]",
+          "description": "List of ADR validation errors if any"
+        }
+      ],
+      "validation_rules": [
+        "ADR record must be present",
+        "layer_configuration_snapshot must contain L01-L08 configurations",
+        "decision_rationale must be non-empty",
+        "timestamp must be valid ISO format"
+      ],
+      "upstream": [],
+      "downstream": [
+        "PH-MP3-3"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-2",
+      "was": "CP-MP3-0.2_Gate_Presence_Validation",
+      "phase_name": "Gate Presence Validation",
+      "outputs": [
+        {
+          "name": "gates_valid",
+          "type": "boolean",
+          "description": "Whether all gates pass validation"
+        },
+        {
+          "name": "gate_errors",
+          "type": "string[]",
+          "description": "List of gate validation errors if any"
+        }
+      ],
+      "validation_rules": [
+        "Exactly 4 gates must be present",
+        "Each gate must have gate_id, gate_name, status, evaluator",
+        "All gates must have status 'passed'",
+        "Evaluator must reference valid layer component"
+      ],
+      "upstream": [
+        "PH-MP3-2"
+      ],
+      "downstream": [
+        "PH-MP3-4"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-3",
+      "was": "CP-MP3-0.3_Layer_Stack_Extraction",
+      "phase_name": "Layer Stack Extraction",
+      "outputs": [
+        {
+          "name": "extracted_layers",
+          "type": "LayerOutputs",
+          "description": "Validated and extracted layer outputs"
+        },
+        {
+          "name": "layer_errors",
+          "type": "string[]",
+          "description": "List of missing or invalid layers"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-3"
+      ],
+      "downstream": [
+        "PH-MP3-5"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-4",
+      "was": "CP-MP3-0.4_MP1_Validation_Carryover",
+      "phase_name": "MP1 Validation Carryover",
+      "outputs": [
+        {
+          "name": "mp1_valid",
+          "type": "boolean",
+          "description": "Whether MP1 validation is confirmed"
+        },
+        {
+          "name": "charter_hash",
+          "type": "string",
+          "description": "Extracted charter hash for traceability"
+        }
+      ],
+      "validation_rules": [
+        "mp1_validation.passed must be true",
+        "charter_hash must be present and non-empty",
+        "critical_inquiry_complete must be true",
+        "timestamp must be valid"
+      ],
+      "upstream": [
+        "PH-MP3-4"
+      ],
+      "downstream": [
+        "PH-MP3-6"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-5",
+      "was": "CP-MP3-1.1_Foresight_Ingestion",
+      "phase_name": "Foresight Ingestion",
+      "outputs": [
+        {
+          "name": "foresight_context",
+          "type": "ForesightContext",
+          "description": "Structured foresight data for synthesis"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-5"
+      ],
+      "downstream": [
+        "PH-MP3-7"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-6",
+      "was": "CP-MP3-1.2_Ethics_Binding",
+      "phase_name": "Ethics Binding",
+      "outputs": [
+        {
+          "name": "ethics_constraints",
+          "type": "EthicsConstraints",
+          "description": "Bound ethical constraints for synthesis"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-6"
+      ],
+      "downstream": [
+        "PH-MP3-8"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-7",
+      "was": "CP-MP3-1.3_Outcomes_Grounding",
+      "phase_name": "Outcomes Grounding",
+      "outputs": [
+        {
+          "name": "outcome_signals",
+          "type": "OutcomeSignals",
+          "description": "Extracted outcome metrics for synthesis"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-7"
+      ],
+      "downstream": [
+        "PH-MP3-9"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-8",
+      "was": "CP-MP3-1.4_Charter_Anchoring",
+      "phase_name": "Charter Anchoring",
+      "outputs": [
+        {
+          "name": "charter_goals",
+          "type": "CharterGoals",
+          "description": "Extracted charter goals for synthesis"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-8"
+      ],
+      "downstream": [
+        "PH-MP3-10"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-9",
+      "was": "CP-MP3-2.1_SESOI_Definition_Anchoring",
+      "phase_name": "SESOI Definition Anchoring",
+      "outputs": [
+        {
+          "name": "sesoi_anchor",
+          "type": "SESOIAnchor",
+          "description": "Validated SESOI populations for North Star"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-9"
+      ],
+      "downstream": [
+        "PH-MP3-11"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-10",
+      "was": "CP-MP3-2.2_Core_Statement_Synthesis",
+      "phase_name": "Core Statement Synthesis",
+      "outputs": [
+        {
+          "name": "north_star_statement",
+          "type": "string",
+          "description": "Core aspirational North Star statement"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-10"
+      ],
+      "downstream": [
+        "PH-MP3-12"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-11",
+      "was": "CP-MP3-2.3_Justice_Stance_Articulation",
+      "phase_name": "Justice Stance Articulation",
+      "outputs": [
+        {
+          "name": "justice_stance",
+          "type": "JusticeStance",
+          "description": "Articulated justice positioning"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-11"
+      ],
+      "downstream": [
+        "PH-MP3-13"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-12",
+      "was": "CP-MP3-2.4_Calculus_Application",
+      "phase_name": "Calculus Application",
+      "outputs": [
+        {
+          "name": "calculus_result",
+          "type": "LexicographicResult",
+          "description": "Validated and ordered priority structure"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-12"
+      ],
+      "downstream": [
+        "PH-MP3-14"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-13",
+      "was": "CP-MP3-3.1_Temporal_Horizon_Definition",
+      "phase_name": "Temporal Horizon Definition",
+      "outputs": [
+        {
+          "name": "temporal_horizons",
+          "type": "TemporalHorizons",
+          "description": "Defined horizon structure"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-13"
+      ],
+      "downstream": [
+        "PH-MP3-15"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-14",
+      "was": "CP-MP3-3.2_Competency_Level_Mapping",
+      "phase_name": "Competency Level Mapping",
+      "outputs": [
+        {
+          "name": "competency_levels",
+          "type": "CompetencyLevels",
+          "description": "Mapped competency levels per horizon"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-14"
+      ],
+      "downstream": [
+        "PH-MP3-16"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-15",
+      "was": "CP-MP3-3.3_Lattice_Structure_Generation",
+      "phase_name": "Lattice Structure Generation",
+      "outputs": [
+        {
+          "name": "lattice",
+          "type": "HorizonCompetencyLattice",
+          "description": "Complete lattice structure"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-15"
+      ],
+      "downstream": [
+        "PH-MP3-17"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-16",
+      "was": "CP-MP3-3.4_Lattice_Equity_Overlay",
+      "phase_name": "Lattice Equity Overlay",
+      "outputs": [
+        {
+          "name": "equity_lattice",
+          "type": "EquityEnhancedLattice",
+          "description": "Lattice with equity checkpoints"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-16"
+      ],
+      "downstream": [
+        "PH-MP3-18"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-17",
+      "was": "CP-MP3-4.1_Theme_Identification",
+      "phase_name": "Theme Identification",
+      "outputs": [
+        {
+          "name": "strategic_themes",
+          "type": "StrategicTheme[]",
+          "description": "Identified strategic themes"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-17"
+      ],
+      "downstream": [
+        "PH-MP3-19"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-18",
+      "was": "CP-MP3-4.2_Strategic_Bet_Formulation",
+      "phase_name": "Strategic Bet Formulation",
+      "outputs": [
+        {
+          "name": "strategic_bets",
+          "type": "StrategicBet[]",
+          "description": "Formulated strategic bets"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-18"
+      ],
+      "downstream": [
+        "PH-MP3-20"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-19",
+      "was": "CP-MP3-4.3_Counterfactual_Trigger_Design",
+      "phase_name": "Counterfactual Trigger Design",
+      "outputs": [
+        {
+          "name": "counterfactual_triggers",
+          "type": "CounterfactualTrigger[]",
+          "description": "Defined triggers per bet"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-19"
+      ],
+      "downstream": [
+        "PH-MP3-21"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-20",
+      "was": "CP-MP3-4.4_Bet_Theme_Coherence_Validation",
+      "phase_name": "Bet-Theme Coherence Validation",
+      "outputs": [
+        {
+          "name": "coherence_result",
+          "type": "BetThemeCoherence",
+          "description": "Coherence validation result"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-20"
+      ],
+      "downstream": [
+        "PH-MP3-22"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-21",
+      "was": "CP-MP3-5.1_Guiding_Principle_Derivation",
+      "phase_name": "Guiding Principle Derivation",
+      "outputs": [
+        {
+          "name": "guiding_principles",
+          "type": "GuidingPrinciple[]",
+          "description": "Derived principles"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-21"
+      ],
+      "downstream": [
+        "PH-MP3-23"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-22",
+      "was": "CP-MP3-5.2_Sunset_Clause_Generation",
+      "phase_name": "Sunset Clause Generation",
+      "outputs": [
+        {
+          "name": "sunset_clauses",
+          "type": "SunsetClause[]",
+          "description": "Generated sunset clauses"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-22"
+      ],
+      "downstream": [
+        "PH-MP3-24"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-23",
+      "was": "CP-MP3-5.3_Time_Consistency_Validation",
+      "phase_name": "Time Consistency Validation",
+      "outputs": [
+        {
+          "name": "time_consistency_result",
+          "type": "TimeConsistencyResult",
+          "description": "Validation result"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-23"
+      ],
+      "downstream": [
+        "PH-MP3-25"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-24",
+      "was": "CP-MP3-5.4_No_Myopia_Guard_Application",
+      "phase_name": "No Myopia Guard Application",
+      "outputs": [
+        {
+          "name": "myopia_guard_result",
+          "type": "MyopiaGuardResult",
+          "description": "Guard check result"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-24"
+      ],
+      "downstream": [
+        "PH-MP3-26"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-25",
+      "was": "CP-MP3-6.1_Layer_Binding_Verification",
+      "phase_name": "Layer Binding Verification",
+      "outputs": [
+        {
+          "name": "binding_result",
+          "type": "LayerBindingResult",
+          "description": "Binding verification result"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-25"
+      ],
+      "downstream": [
+        "PH-MP3-27"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-26",
+      "was": "CP-MP3-6.2_Gate_Consistency_Check",
+      "phase_name": "Gate Consistency Check",
+      "outputs": [
+        {
+          "name": "gate_consistency",
+          "type": "GateConsistencyResult",
+          "description": "Gate check results"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-26"
+      ],
+      "downstream": [
+        "PH-MP3-28"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-27",
+      "was": "CP-MP3-6.3_Drift_Detection_Analysis",
+      "phase_name": "Drift Detection Analysis",
+      "outputs": [
+        {
+          "name": "drift_analysis",
+          "type": "DriftAnalysisResult",
+          "description": "Drift detection results"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-27"
+      ],
+      "downstream": [
+        "PH-MP3-29"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-28",
+      "was": "CP-MP3-6.4_Coherence_Score_Calculation",
+      "phase_name": "Coherence Score Calculation",
+      "outputs": [
+        {
+          "name": "coherence_score",
+          "type": "CoherenceScore",
+          "description": "Overall coherence score (0-1)"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-28"
+      ],
+      "downstream": [
+        "PH-MP3-30"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-29",
+      "was": "CP-MP3-7.1_Vision_Package_Assembly",
+      "phase_name": "Vision Package Assembly",
+      "outputs": [
+        {
+          "name": "vision_package",
+          "type": "VisionPackage",
+          "description": "Complete assembled vision"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-29"
+      ],
+      "downstream": [
+        "PH-MP3-31"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-30",
+      "was": "CP-MP3-7.2_Vision_Tag_Generation",
+      "phase_name": "Vision Tag Generation",
+      "outputs": [
+        {
+          "name": "vision_tags",
+          "type": "VisionTag[]",
+          "description": "Generated vision tags"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-30"
+      ],
+      "downstream": [
+        "PH-MP3-32"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-31",
+      "was": "CP-MP3-7.3_Decision_Determination",
+      "phase_name": "Decision Determination",
+      "outputs": [
+        {
+          "name": "decision",
+          "type": "MP3Decision",
+          "description": "FORWARD_TO_MP4 or ESCALATE_TO_MP2"
+        },
+        {
+          "name": "decision_rationale",
+          "type": "string",
+          "description": "Explanation for decision"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-31"
+      ],
+      "downstream": [
+        "PH-MP3-33"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-32",
+      "was": "CP-MP3-7.4_Forward_Package_Emission",
+      "phase_name": "Forward Package Emission",
+      "outputs": [
+        {
+          "name": "mp3_output",
+          "type": "Mp3ForwardPackage | Mp3EscalationPackage",
+          "description": "Final MP3 output"
+        }
+      ],
+      "upstream": [
+        "PH-MP3-32"
+      ],
+      "downstream": [
+        "PH-MP3-34"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-33",
+      "was": "MP03-C-COH-001_Time-Consistency_Rule_Enforcer",
+      "phase_name": "Time-Consistency Rule Enforcer",
+      "calls_elements": [
+        "MP03-E-COH-001"
+      ],
+      "element_instructions": {
+        "MP03-E-COH-001": {
+          "instruction": "assess_coh_evidence",
+          "purpose": "Time-Consistency Evidence Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-33"
+      ],
+      "downstream": [
+        "PH-MP3-35"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-34",
+      "was": "MP03-C-COH-002_No-Myopia_Guard_Enforcer",
+      "phase_name": "No-Myopia Guard Enforcer",
+      "calls_elements": [
+        "MP03-E-COH-002"
+      ],
+      "element_instructions": {
+        "MP03-E-COH-002": {
+          "instruction": "assess_coh_evidence",
+          "purpose": "Myopia Detection Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-34"
+      ],
+      "downstream": [
+        "PH-MP3-36"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-35",
+      "was": "MP03-C-EMI-001_Vision_Package_Assembler_&_Router",
+      "phase_name": "Vision Package Assembler & Router",
+      "calls_elements": [
+        "MP03-E-EMI-001"
+      ],
+      "element_instructions": {
+        "MP03-E-EMI-001": {
+          "instruction": "assess_emi_evidence",
+          "purpose": "Package Readiness Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-35"
+      ],
+      "downstream": [
+        "PH-MP3-37"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-36",
+      "was": "MP03-C-GPS-001_Principle_Derivation_Verifier",
+      "phase_name": "Principle Derivation Verifier",
+      "calls_elements": [
+        "MP03-E-GPS-001"
+      ],
+      "element_instructions": {
+        "MP03-E-GPS-001": {
+          "instruction": "assess_gps_evidence",
+          "purpose": "Principle Quality Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-36"
+      ],
+      "downstream": [
+        "PH-MP3-38"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-37",
+      "was": "MP03-C-GPS-002_Time-Consistency_Validator",
+      "phase_name": "Time-Consistency Validator",
+      "calls_elements": [
+        "MP03-E-GPS-002"
+      ],
+      "element_instructions": {
+        "MP03-E-GPS-002": {
+          "instruction": "assess_gps_evidence",
+          "purpose": "Temporal Consistency Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-37"
+      ],
+      "downstream": [
+        "PH-MP3-39"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-38",
+      "was": "MP03-C-HCL-001_Temporal_Horizon_Mapper",
+      "phase_name": "Temporal Horizon Mapper",
+      "calls_elements": [
+        "MP03-E-HCL-001"
+      ],
+      "element_instructions": {
+        "MP03-E-HCL-001": {
+          "instruction": "assess_hcl_evidence",
+          "purpose": "Horizon Coverage Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-38"
+      ],
+      "downstream": [
+        "PH-MP3-40"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-39",
+      "was": "MP03-C-HCL-002_Lattice_Equity_Auditor",
+      "phase_name": "Lattice Equity Auditor",
+      "calls_elements": [
+        "MP03-E-HCL-002"
+      ],
+      "element_instructions": {
+        "MP03-E-HCL-002": {
+          "instruction": "assess_hcl_evidence",
+          "purpose": "Lattice Equity Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-39"
+      ],
+      "downstream": [
+        "PH-MP3-41"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-40",
+      "was": "MP03-C-INT-001_MP2_Package_Integrity_Verifier",
+      "phase_name": "MP2 Package Integrity Verifier",
+      "calls_elements": [
+        "MP03-E-INT-001"
+      ],
+      "element_instructions": {
+        "MP03-E-INT-001": {
+          "instruction": "assess_int_evidence",
+          "purpose": "Package Completeness Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-40"
+      ],
+      "downstream": [
+        "PH-MP3-42"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-41",
+      "was": "MP03-C-NST-001_Lexicographic_Calculus_Engine",
+      "phase_name": "Lexicographic Calculus Engine",
+      "calls_elements": [
+        "MP03-E-NST-001"
+      ],
+      "element_instructions": {
+        "MP03-E-NST-001": {
+          "instruction": "assess_nst_evidence",
+          "purpose": "Lexicographic Priority Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-41"
+      ],
+      "downstream": [
+        "PH-MP3-43"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-42",
+      "was": "MP03-C-NST-002_North_Star_Articulation_Verifier",
+      "phase_name": "North Star Articulation Verifier",
+      "calls_elements": [
+        "MP03-E-NST-002"
+      ],
+      "element_instructions": {
+        "MP03-E-NST-002": {
+          "instruction": "assess_nst_evidence",
+          "purpose": "North Star Quality Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-42"
+      ],
+      "downstream": [
+        "PH-MP3-44"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-43",
+      "was": "MP03-C-SBT-001_Strategic_Bet_Formulator",
+      "phase_name": "Strategic Bet Formulator",
+      "calls_elements": [
+        "MP03-E-SBT-001"
+      ],
+      "element_instructions": {
+        "MP03-E-SBT-001": {
+          "instruction": "assess_sbt_evidence",
+          "purpose": "Bet Quality Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-43"
+      ],
+      "downstream": [
+        "PH-MP3-45"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-44",
+      "was": "MP03-C-SBT-002_Counterfactual_Accountability_Verifier",
+      "phase_name": "Counterfactual Accountability Verifier",
+      "calls_elements": [
+        "MP03-E-SBT-002"
+      ],
+      "element_instructions": {
+        "MP03-E-SBT-002": {
+          "instruction": "assess_sbt_evidence",
+          "purpose": "Counterfactual Evidence Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-44"
+      ],
+      "downstream": [
+        "PH-MP3-46"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-45",
+      "was": "MP03-C-STR-001_Foresight-Ethics_Stream_Synthesiser",
+      "phase_name": "Foresight-Ethics Stream Synthesiser",
+      "calls_elements": [
+        "MP03-E-STR-001"
+      ],
+      "element_instructions": {
+        "MP03-E-STR-001": {
+          "instruction": "assess_str_evidence",
+          "purpose": "Foresight-Ethics Evidence Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-45"
+      ],
+      "downstream": [
+        "PH-MP3-47"
+      ]
+    },
+    {
+      "phase_id": "PH-MP3-46",
+      "was": "MP03-C-STR-002_Outcomes-Charter_Stream_Synthesiser",
+      "phase_name": "Outcomes-Charter Stream Synthesiser",
+      "calls_elements": [
+        "MP03-E-STR-002"
+      ],
+      "element_instructions": {
+        "MP03-E-STR-002": {
+          "instruction": "assess_str_evidence",
+          "purpose": "Outcomes-Charter Evidence Assessor"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "aggregated_score >= 60",
+          "action": "proceed"
+        },
+        "WARN": {
+          "condition": "aggregated_score >= 40 and < 60",
+          "action": "flag_for_review"
+        },
+        "FAIL": {
+          "condition": "aggregated_score < 40",
+          "action": "escalate"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_result",
+        "secondary": [
+          "evidence_bundle",
+          "recommendations"
+        ]
+      },
+      "upstream": [
+        "PH-MP3-46"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-MP3-0.1_ADR_Presence_Validation",
+      "CP-MP3-0.2_Gate_Presence_Validation",
+      "CP-MP3-0.3_Layer_Stack_Extraction",
+      "CP-MP3-0.4_MP1_Validation_Carryover",
+      "CP-MP3-1.1_Foresight_Ingestion",
+      "CP-MP3-1.2_Ethics_Binding",
+      "CP-MP3-1.3_Outcomes_Grounding",
+      "CP-MP3-1.4_Charter_Anchoring",
+      "CP-MP3-2.1_SESOI_Definition_Anchoring",
+      "CP-MP3-2.2_Core_Statement_Synthesis",
+      "CP-MP3-2.3_Justice_Stance_Articulation",
+      "CP-MP3-2.4_Calculus_Application",
+      "CP-MP3-3.1_Temporal_Horizon_Definition",
+      "CP-MP3-3.2_Competency_Level_Mapping",
+      "CP-MP3-3.3_Lattice_Structure_Generation",
+      "CP-MP3-3.4_Lattice_Equity_Overlay",
+      "CP-MP3-4.1_Theme_Identification",
+      "CP-MP3-4.2_Strategic_Bet_Formulation",
+      "CP-MP3-4.3_Counterfactual_Trigger_Design",
+      "CP-MP3-4.4_Bet_Theme_Coherence_Validation",
+      "CP-MP3-5.1_Guiding_Principle_Derivation",
+      "CP-MP3-5.2_Sunset_Clause_Generation",
+      "CP-MP3-5.3_Time_Consistency_Validation",
+      "CP-MP3-5.4_No_Myopia_Guard_Application",
+      "CP-MP3-6.1_Layer_Binding_Verification",
+      "CP-MP3-6.2_Gate_Consistency_Check",
+      "CP-MP3-6.3_Drift_Detection_Analysis",
+      "CP-MP3-6.4_Coherence_Score_Calculation",
+      "CP-MP3-7.1_Vision_Package_Assembly",
+      "CP-MP3-7.2_Vision_Tag_Generation",
+      "CP-MP3-7.3_Decision_Determination",
+      "CP-MP3-7.4_Forward_Package_Emission",
+      "MP03-C-COH-001_Time-Consistency_Rule_Enforcer",
+      "MP03-C-COH-002_No-Myopia_Guard_Enforcer",
+      "MP03-C-EMI-001_Vision_Package_Assembler_&_Router",
+      "MP03-C-GPS-001_Principle_Derivation_Verifier",
+      "MP03-C-GPS-002_Time-Consistency_Validator",
+      "MP03-C-HCL-001_Temporal_Horizon_Mapper",
+      "MP03-C-HCL-002_Lattice_Equity_Auditor",
+      "MP03-C-INT-001_MP2_Package_Integrity_Verifier",
+      "MP03-C-NST-001_Lexicographic_Calculus_Engine",
+      "MP03-C-NST-002_North_Star_Articulation_Verifier",
+      "MP03-C-SBT-001_Strategic_Bet_Formulator",
+      "MP03-C-SBT-002_Counterfactual_Accountability_Verifier",
+      "MP03-C-STR-001_Foresight-Ethics_Stream_Synthesiser",
+      "MP03-C-STR-002_Outcomes-Charter_Stream_Synthesiser"
+    ],
+    "original_count": 46,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "compound_id": "CP-ETHCORE",
+  "compound_name": "Ethical Core Agent Master Compound",
+  "layer": "L04",
+  "agent": "ETHCORE",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-ETHCORE",
+  "theoretical_foundation": {
+    "primary_theory": "Educational Ethics and Privacy Governance",
+    "application": "10-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L04-ACG-BUNDLE",
+    "E-L04-CON-BUNDLE",
+    "E-L04-EPI-BUNDLE",
+    "E-L04-EXP-BUNDLE",
+    "E-L04-FAE-BUNDLE",
+    "E-L04-LNP-BUNDLE",
+    "E-L04-MML-BUNDLE",
+    "E-L04-PDL-BUNDLE",
+    "E-L04-PRV-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-ETHCORE-1",
+      "was": "CP-ETHCORE-1",
+      "phase_name": "Legal Regime Validator",
+      "calls_elements": [
+        "E-L04-LNP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "legal_regime_status",
+        "secondary": [
+          "jurisdiction_code",
+          "legal_constraints",
+          "mandatory_requirements"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [],
+      "downstream": [
+        "PH-ETHCORE-3"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-2",
+      "was": "CP-ETHCORE-10",
+      "phase_name": "Ethical Handoff Compiler",
+      "calls_elements": [
+        "E-L04-LNP-BUNDLE",
+        "E-L04-CON-BUNDLE",
+        "E-L04-FAE-BUNDLE",
+        "E-L04-EXP-BUNDLE",
+        "E-L04-PRV-BUNDLE",
+        "E-L04-ACG-BUNDLE",
+        "E-L04-PDL-BUNDLE",
+        "E-L04-EPI-BUNDLE",
+        "E-L04-MML-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "ethical_clearance_spec",
+        "secondary": [
+          "constraint_summary",
+          "permitted_actions",
+          "downstream_handoff"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-2"
+      ],
+      "downstream": [
+        "PH-ETHCORE-4"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-3",
+      "was": "CP-ETHCORE-2",
+      "phase_name": "Purpose Alignment Checker",
+      "calls_elements": [
+        "E-L04-PDL-BUNDLE",
+        "E-L04-LNP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "purpose_alignment_status",
+        "secondary": [
+          "declared_purpose",
+          "action_purpose_match",
+          "scope_compliance"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-3"
+      ],
+      "downstream": [
+        "PH-ETHCORE-5"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-4",
+      "was": "CP-ETHCORE-3",
+      "phase_name": "Consent Validation Gate",
+      "calls_elements": [
+        "E-L04-CON-BUNDLE",
+        "E-L04-PDL-BUNDLE",
+        "E-L04-LNP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "consent_status",
+        "secondary": [
+          "consent_scope",
+          "temporal_validity",
+          "refusal_status",
+          "contextual_pressure"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-4"
+      ],
+      "downstream": [
+        "PH-ETHCORE-6"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-5",
+      "was": "CP-ETHCORE-4",
+      "phase_name": "Fairness Assessor",
+      "calls_elements": [
+        "E-L04-FAE-BUNDLE",
+        "E-L04-EPI-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "fairness_status",
+        "secondary": [
+          "protected_attributes_detected",
+          "differential_treatment_risk",
+          "disparity_score"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-5"
+      ],
+      "downstream": [
+        "PH-ETHCORE-7"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-6",
+      "was": "CP-ETHCORE-5",
+      "phase_name": "Explainability Validator",
+      "calls_elements": [
+        "E-L04-EXP-BUNDLE",
+        "E-L04-ACG-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "explainability_status",
+        "secondary": [
+          "causal_trace_exists",
+          "rationale_fidelity",
+          "contestation_available"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-6"
+      ],
+      "downstream": [
+        "PH-ETHCORE-8"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-7",
+      "was": "CP-ETHCORE-6",
+      "phase_name": "Proportionality Checker",
+      "calls_elements": [
+        "E-L04-PRV-BUNDLE",
+        "E-L04-FAE-BUNDLE",
+        "E-L04-EPI-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "proportionality_status",
+        "secondary": [
+          "impact_magnitude",
+          "reversibility_score",
+          "harm_risk_level"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-7"
+      ],
+      "downstream": [
+        "PH-ETHCORE-9"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-8",
+      "was": "CP-ETHCORE-7",
+      "phase_name": "Epistemic Validator",
+      "calls_elements": [
+        "E-L04-EPI-BUNDLE",
+        "E-L04-EXP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "epistemic_status",
+        "secondary": [
+          "evidence_exists",
+          "evidence_sufficient",
+          "knowledge_valid"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-8"
+      ],
+      "downstream": [
+        "PH-ETHCORE-10"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-9",
+      "was": "CP-ETHCORE-8",
+      "phase_name": "Accountability Tracer",
+      "calls_elements": [
+        "E-L04-ACG-BUNDLE",
+        "E-L04-EXP-BUNDLE",
+        "E-L04-LNP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "accountability_status",
+        "secondary": [
+          "trace_complete",
+          "responsible_authority",
+          "policy_applied"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-ETHCORE-9"
+      ],
+      "downstream": [
+        "PH-ETHCORE-11"
+      ]
+    },
+    {
+      "phase_id": "PH-ETHCORE-10",
+      "was": "CP-ETHCORE-9",
+      "phase_name": "Ethical Veto Gate",
+      "calls_elements": [
+        "E-L04-LNP-BUNDLE",
+        "E-L04-CON-BUNDLE",
+        "E-L04-FAE-BUNDLE",
+        "E-L04-PRV-BUNDLE",
+        "E-L04-ACG-BUNDLE",
+        "E-L04-PDL-BUNDLE",
+        "E-L04-EXP-BUNDLE",
+        "E-L04-EPI-BUNDLE",
+        "E-L04-MML-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "ethical_verdict",
+        "secondary": [
+          "veto_issued",
+          "constraint_violations",
+          "remediation_required"
+        ]
+      },
+      "loop_policy": "iterate_until_stable",
+      "upstream": [
+        "PH-ETHCORE-10"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-ETHCORE-1",
+      "CP-ETHCORE-10",
+      "CP-ETHCORE-2",
+      "CP-ETHCORE-3",
+      "CP-ETHCORE-4",
+      "CP-ETHCORE-5",
+      "CP-ETHCORE-6",
+      "CP-ETHCORE-7",
+      "CP-ETHCORE-8",
+      "CP-ETHCORE-9"
+    ],
+    "original_count": 10,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

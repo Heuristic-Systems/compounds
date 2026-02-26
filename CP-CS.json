@@ -1,0 +1,968 @@
+{
+  "compound_id": "CP-CS",
+  "compound_name": "CogniStruct Agent Master Compound",
+  "layer": "L01",
+  "agent": "CS",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-CS",
+  "theoretical_foundation": {
+    "primary_theory": "Cognitive Structure Theory Mapping",
+    "application": "8-phase pipeline"
+  },
+  "calls_elements": [
+    "E-CS-CS-BUNDLE",
+    "E-CS-EF-BUNDLE",
+    "E-CS-GEN-BUNDLE",
+    "E-CS-MAI-BUNDLE",
+    "E-CS-MC-BUNDLE",
+    "E-CS-MML-BUNDLE",
+    "E-CS-PRC-BUNDLE",
+    "E-CS-REP-BUNDLE",
+    "E-CS-TLD-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-CS-1",
+      "was": "CP-CS-1",
+      "phase_name": "Profile Normalizer",
+      "calls_elements": [
+        "E-CS-MAI-BUNDLE",
+        "E-CS-MC-BUNDLE",
+        "E-CS-PRC-BUNDLE",
+        "E-CS-REP-BUNDLE",
+        "E-CS-TLD-BUNDLE",
+        "E-CS-CS-BUNDLE",
+        "E-CS-MML-BUNDLE",
+        "E-CS-EF-BUNDLE",
+        "E-CS-GEN-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-MAI-BUNDLE": {
+          "instruction": "full_mai_assessment",
+          "purpose": "Extract motivation and affect baselines"
+        },
+        "E-CS-MC-BUNDLE": {
+          "instruction": "full_metacognitive_assessment",
+          "purpose": "Assess metacognitive and self-regulation capacity"
+        },
+        "E-CS-PRC-BUNDLE": {
+          "instruction": "full_processing_assessment",
+          "purpose": "Measure cognitive processing capacity"
+        },
+        "E-CS-REP-BUNDLE": {
+          "instruction": "full_representation_assessment",
+          "purpose": "Evaluate prior knowledge and schema structure"
+        },
+        "E-CS-TLD-BUNDLE": {
+          "instruction": "full_temporal_assessment",
+          "purpose": "Capture temporal learning dynamics"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "full_context_assessment",
+          "purpose": "Assess contextual and structural preferences"
+        },
+        "E-CS-MML-BUNDLE": {
+          "instruction": "full_modality_assessment",
+          "purpose": "Get multimodal channel preferences"
+        },
+        "E-CS-EF-BUNDLE": {
+          "instruction": "full_feedback_assessment",
+          "purpose": "Assess error and feedback preferences"
+        },
+        "E-CS-GEN-BUNDLE": {
+          "instruction": "full_general_assessment",
+          "purpose": "Collect general system-level attributes"
+        }
+      },
+      "execution_flow": [
+        "1. Receive lopa_learner_profile from LOPA",
+        "2. Load personality_state_modifiers if available",
+        "3. Instruct all Elements with full_assessment",
+        "4. Receive aggregated evidence from each Element",
+        "5. Normalize all values to 0-100 scale",
+        "6. Apply personality adjustments to features",
+        "7. Calculate feature_vector with confidence weights",
+        "8. Compute completeness_score",
+        "9. Validate per K-CS-0 criteria",
+        "10. Emit normalized_profile to CP-CS-2"
+      ],
+      "interpretation_logic": {
+        "feature_extraction": {
+          "description": "Extract numerical features from Element evidence",
+          "rules": [
+            "All values normalized to 0-100 scale",
+            "Missing values imputed with population median",
+            "Outliers winsorized at 3 standard deviations"
+          ]
+        },
+        "confidence_weighting": {
+          "description": "Weight features by measurement confidence",
+          "formula": "feature_weight = raw_value × confidence"
+        },
+        "personality_integration": {
+          "description": "Integrate personality state modifiers into feature vector",
+          "mappings": {
+            "stress_sensitivity": "adjust anxiety baseline",
+            "exploration_propensity": "boost openness features",
+            "self_regulation_baseline": "calibrate metacognitive estimates"
+          }
+        }
+      },
+      "outputs": {
+        "primary": "normalized_profile",
+        "secondary": [
+          "feature_vector",
+          "completeness_score",
+          "normalization_log"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 3,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot achieve 70% completeness within bounded loops"
+      },
+      "upstream": [],
+      "downstream": [
+        "PH-CS-3"
+      ]
+    },
+    {
+      "phase_id": "PH-CS-2",
+      "was": "CP-CS-2",
+      "phase_name": "Theory Matcher",
+      "calls_elements": [
+        "E-CS-MAI-BUNDLE",
+        "E-CS-MC-BUNDLE",
+        "E-CS-REP-BUNDLE",
+        "E-CS-TLD-BUNDLE",
+        "E-CS-CS-BUNDLE",
+        "E-CS-PRC-BUNDLE",
+        "E-CS-MML-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-MAI-BUNDLE": {
+          "instruction": "motivation_type_query",
+          "purpose": "Get motivation orientation for theory alignment"
+        },
+        "E-CS-MC-BUNDLE": {
+          "instruction": "self_regulation_query",
+          "purpose": "Assess metacognitive capacity for theory selection"
+        },
+        "E-CS-REP-BUNDLE": {
+          "instruction": "prior_knowledge_query",
+          "purpose": "Determine knowledge depth for theory applicability"
+        },
+        "E-CS-TLD-BUNDLE": {
+          "instruction": "pacing_preference_query",
+          "purpose": "Match temporal preferences to theory requirements"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "structure_need_query",
+          "purpose": "Align structure preference with theory demands"
+        },
+        "E-CS-PRC-BUNDLE": {
+          "instruction": "cognitive_load_query",
+          "purpose": "Ensure theory complexity matches capacity"
+        },
+        "E-CS-MML-BUNDLE": {
+          "instruction": "channel_preference_query",
+          "purpose": "Consider modality fit in theory selection"
+        }
+      },
+      "execution_flow": [
+        "1. Receive normalized_profile from CP-CS-1",
+        "2. Load 64-theory database",
+        "3. Instruct Elements for targeted queries",
+        "4. Extract matching keywords from feature_vector",
+        "5. Score each theory by match algorithm",
+        "6. Apply personality alignment multipliers",
+        "7. Rank and filter top 5-10 theories",
+        "8. Group matches by theory cluster",
+        "9. Generate match_justifications for traceability",
+        "10. Emit theory_matches to CP-CS-3, CP-CS-4, CP-CS-6"
+      ],
+      "interpretation_logic": {
+        "matching_algorithm": {
+          "description": "Weighted keyword matching with semantic expansion",
+          "steps": [
+            "Extract keywords from normalized_profile",
+            "Match against theory signatures in 64-theory database",
+            "Score by keyword overlap × context appropriateness",
+            "Apply personality fit multipliers"
+          ]
+        },
+        "scoring_criteria": {
+          "relevance_score": "Keyword match strength (0.0-1.0)",
+          "applicability_score": "Context and capacity fit (0.0-1.0)",
+          "personality_fit": "Alignment with personality state modifiers (0.0-1.0)"
+        },
+        "personality_theory_alignment": {
+          "O_high": [
+            "Constructivism",
+            "Experiential Learning",
+            "Discovery Learning"
+          ],
+          "C_high": [
+            "Behaviorism",
+            "Direct Instruction",
+            "Mastery Learning"
+          ],
+          "E_high": [
+            "Social Learning",
+            "Collaborative Learning",
+            "Peer Instruction"
+          ],
+          "A_high": [
+            "Cooperative Learning",
+            "Social Constructivism"
+          ],
+          "N_high": [
+            "Supportive Scaffolding",
+            "Low-Stakes Practice"
+          ]
+        }
+      },
+      "outputs": {
+        "primary": "theory_matches",
+        "secondary": [
+          "relevance_scores",
+          "theory_clusters",
+          "match_justifications"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 3,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot find ≥3 theories with relevance ≥0.30"
+      },
+      "upstream": [
+        "PH-CS-2"
+      ],
+      "downstream": [
+        "PH-CS-4"
+      ]
+    },
+    {
+      "phase_id": "PH-CS-3",
+      "was": "CP-CS-3",
+      "phase_name": "Dimension Calculator",
+      "calls_elements": [
+        "E-CS-MAI-BUNDLE",
+        "E-CS-MC-BUNDLE",
+        "E-CS-PRC-BUNDLE",
+        "E-CS-REP-BUNDLE",
+        "E-CS-MML-BUNDLE",
+        "E-CS-CS-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-MAI-BUNDLE": {
+          "instruction": "goal_orientation_query",
+          "purpose": "Determine motivation type dimension"
+        },
+        "E-CS-MC-BUNDLE": {
+          "instruction": "monitoring_capability_query",
+          "purpose": "Assess metacognitive awareness dimension"
+        },
+        "E-CS-PRC-BUNDLE": {
+          "instruction": "working_memory_query",
+          "purpose": "Calibrate processing depth capacity"
+        },
+        "E-CS-REP-BUNDLE": {
+          "instruction": "schema_structure_query",
+          "purpose": "Evaluate knowledge integration level"
+        },
+        "E-CS-MML-BUNDLE": {
+          "instruction": "accessibility_query",
+          "purpose": "Consider modality constraints"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "structure_need_query",
+          "purpose": "Measure structure dependency dimension"
+        }
+      },
+      "execution_flow": [
+        "1. Receive normalized_profile and theory_matches",
+        "2. Instruct Elements for dimension-specific queries",
+        "3. Initialize 6 dimension scores at baseline",
+        "4. Calculate each dimension per formula",
+        "5. Apply theory-based boosting",
+        "6. Clamp all scores to 0-100 range",
+        "7. Generate radar_data structure",
+        "8. Interpret dimension profile shape",
+        "9. Calculate dimension_confidence",
+        "10. Emit dimension_scores to CP-CS-5"
+      ],
+      "interpretation_logic": {
+        "dimensions": [
+          {
+            "name": "processing_depth",
+            "sources": [
+              "PRC evidence",
+              "O personality"
+            ],
+            "range": "0=surface, 100=deep",
+            "calculation": "0.6×PRC + 0.4×O_exploration"
+          },
+          {
+            "name": "social_orientation",
+            "sources": [
+              "E personality",
+              "collaboration atoms"
+            ],
+            "range": "0=individual, 100=collaborative",
+            "calculation": "0.7×E_social + 0.3×collaboration_evidence"
+          },
+          {
+            "name": "structure_need",
+            "sources": [
+              "CS evidence",
+              "C personality"
+            ],
+            "range": "0=ambiguity-tolerant, 100=structure-dependent",
+            "calculation": "0.5×structure_evidence + 0.5×(100-C_flexibility)"
+          },
+          {
+            "name": "metacognitive_awareness",
+            "sources": [
+              "MC evidence",
+              "C personality"
+            ],
+            "range": "0=low, 100=high",
+            "calculation": "0.7×MC_evidence + 0.3×C_self_regulation"
+          },
+          {
+            "name": "motivation_type",
+            "sources": [
+              "MAI evidence",
+              "Enneagram"
+            ],
+            "range": "0=extrinsic, 100=intrinsic",
+            "calculation": "0.8×MAI_intrinsic + 0.2×enneagram_growth"
+          },
+          {
+            "name": "feedback_preference",
+            "sources": [
+              "EF evidence",
+              "N personality"
+            ],
+            "range": "0=immediate, 100=delayed-reflective",
+            "calculation": "0.6×EF_timing + 0.4×(100-N_anxiety)"
+          }
+        ],
+        "theory_boosting": {
+          "description": "Boost dimensions based on matched theory types",
+          "rules": {
+            "Cognitive theories": "+10 processing_depth",
+            "Social theories": "+10 social_orientation",
+            "Self-regulation theories": "+10 metacognitive_awareness"
+          }
+        }
+      },
+      "outputs": {
+        "primary": "dimension_scores",
+        "secondary": [
+          "radar_data",
+          "dimension_interpretation",
+          "dimension_confidence"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Dimension confidence below 0.50"
+      },
+      "upstream": [
+        "PH-CS-3"
+      ],
+      "downstream": [
+        "PH-CS-5"
+      ]
+    },
+    {
+      "phase_id": "PH-CS-4",
+      "was": "CP-CS-4",
+      "phase_name": "Cluster Analyzer",
+      "calls_elements": [
+        "E-CS-REP-BUNDLE",
+        "E-CS-MC-BUNDLE",
+        "E-CS-CS-BUNDLE",
+        "E-CS-TLD-BUNDLE",
+        "E-CS-MAI-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-REP-BUNDLE": {
+          "instruction": "schema_structure_query",
+          "purpose": "Determine foundational knowledge for clustering"
+        },
+        "E-CS-MC-BUNDLE": {
+          "instruction": "self_regulation_query",
+          "purpose": "Assess capacity for complex multi-layer scaffolds"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "structure_need_query",
+          "purpose": "Inform cluster count decision"
+        },
+        "E-CS-TLD-BUNDLE": {
+          "instruction": "pacing_preference_query",
+          "purpose": "Consider temporal constraints in layering"
+        },
+        "E-CS-MAI-BUNDLE": {
+          "instruction": "goal_orientation_query",
+          "purpose": "Align clusters with motivation type"
+        }
+      },
+      "execution_flow": [
+        "1. Receive theory_matches with relevance_scores",
+        "2. Instruct Elements for cluster-relevant queries",
+        "3. Group theories by cluster type",
+        "4. Calculate cluster_weight per group",
+        "5. Validate cluster coherence (no contradictions)",
+        "6. Determine layer_count based on metacognition + structure need",
+        "7. Apply personality-based adjustments",
+        "8. Rank clusters by dominance (weight × coverage)",
+        "9. Select top 2-5 clusters for scaffolding",
+        "10. Emit cluster_map to CP-CS-5"
+      ],
+      "interpretation_logic": {
+        "clustering_algorithm": {
+          "description": "Group theories by type with coherence validation",
+          "theory_clusters": [
+            "Cognitive Processing (Piaget, Bruner, Ausubel)",
+            "Social Learning (Vygotsky, Bandura)",
+            "Experiential (Kolb, Dewey)",
+            "Motivational (Deci & Ryan, Dweck)",
+            "Self-Regulation (Zimmerman, Schunk)",
+            "Metacognitive (Flavell, Brown)"
+          ]
+        },
+        "weighting": {
+          "formula": "cluster_weight = Σ(theory_relevance × theory_applicability)",
+          "normalization": "Weights sum to 1.0"
+        },
+        "layer_count_rules": {
+          "low_metacognition": "2-3 layers (simpler structure)",
+          "high_metacognition": "3-5 layers (richer architecture)",
+          "high_structure_need": "More distinct layers",
+          "low_structure_need": "Integrated/blended layers"
+        }
+      },
+      "outputs": {
+        "primary": "cluster_map",
+        "secondary": [
+          "cluster_weights",
+          "layer_count",
+          "cluster_justifications"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot form ≥2 coherent clusters"
+      },
+      "upstream": [
+        "PH-CS-4"
+      ],
+      "downstream": [
+        "PH-CS-6"
+      ]
+    },
+    {
+      "phase_id": "PH-CS-5",
+      "was": "CP-CS-5",
+      "phase_name": "Scaffold Generator",
+      "calls_elements": [
+        "E-CS-MAI-BUNDLE",
+        "E-CS-MC-BUNDLE",
+        "E-CS-PRC-BUNDLE",
+        "E-CS-REP-BUNDLE",
+        "E-CS-TLD-BUNDLE",
+        "E-CS-CS-BUNDLE",
+        "E-CS-MML-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-MAI-BUNDLE": {
+          "instruction": "motivation_type_query",
+          "purpose": "Calibrate scaffold intensity per motivation"
+        },
+        "E-CS-MC-BUNDLE": {
+          "instruction": "self_regulation_query",
+          "purpose": "Determine fading schedule"
+        },
+        "E-CS-PRC-BUNDLE": {
+          "instruction": "cognitive_load_query",
+          "purpose": "Ensure scaffold doesn't exceed capacity"
+        },
+        "E-CS-REP-BUNDLE": {
+          "instruction": "prior_knowledge_query",
+          "purpose": "Set foundation layer depth"
+        },
+        "E-CS-TLD-BUNDLE": {
+          "instruction": "spacing_effect_query",
+          "purpose": "Inform scaffold timing"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "structure_need_query",
+          "purpose": "Determine scaffold explicitness"
+        },
+        "E-CS-MML-BUNDLE": {
+          "instruction": "channel_preference_query",
+          "purpose": "Guide modality recommendations per layer"
+        }
+      },
+      "execution_flow": [
+        "1. Receive cluster_map and dimension_scores",
+        "2. Load learning_objectives from LODA",
+        "3. Instruct Elements for scaffold-relevant queries",
+        "4. Create one layer per dominant cluster",
+        "5. Order layers (Foundation → Application)",
+        "6. Calculate scaffolding_intensity per formula",
+        "7. Determine fading_schedule based on metacognition",
+        "8. Populate each layer with theorist citations",
+        "9. Add modality hints and strategy recommendations",
+        "10. Validate scaffold fits capacity constraints",
+        "11. Apply personality adjustments",
+        "12. Emit scaffold_layers to CP-CS-7, CP-CS-8"
+      ],
+      "interpretation_logic": {
+        "layer_creation": {
+          "description": "One layer per dominant cluster",
+          "ordering": [
+            "Foundation",
+            "Core",
+            "Expansion",
+            "Integration",
+            "Application"
+          ],
+          "minimum_layers": 2,
+          "maximum_layers": 5
+        },
+        "intensity_calculation": {
+          "formula": "intensity = 0.3×structure_need + 0.3×(100-metacognition) + 0.2×anxiety + 0.2×knowledge_gap",
+          "range": "0.0 (minimal support) to 1.0 (maximum support)"
+        },
+        "fading_schedule": {
+          "low_metacognition": "gradual",
+          "moderate_metacognition": "stepped",
+          "high_metacognition": "performance-based"
+        },
+        "layer_specification_template": {
+          "layer_name": "string",
+          "layer_purpose": "string",
+          "theory_basis": [
+            "theory1",
+            "theory2"
+          ],
+          "theorist_citations": [
+            "Theorist (Year)"
+          ],
+          "recommended_strategies": [
+            "strategy1",
+            "strategy2"
+          ],
+          "modality_hints": [
+            "visual",
+            "interactive"
+          ],
+          "duration_estimate": "string"
+        }
+      },
+      "outputs": {
+        "primary": "scaffold_layers",
+        "secondary": [
+          "layer_specifications",
+          "scaffolding_intensity",
+          "fading_schedule",
+          "theorist_citations"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot generate coherent scaffold within capacity limits"
+      },
+      "upstream": [
+        "PH-CS-5"
+      ],
+      "downstream": [
+        "PH-CS-7"
+      ]
+    },
+    {
+      "phase_id": "PH-CS-6",
+      "was": "CP-CS-6",
+      "phase_name": "Alignment Validator",
+      "calls_elements": [
+        "E-CS-REP-BUNDLE",
+        "E-CS-EF-BUNDLE",
+        "E-CS-MC-BUNDLE",
+        "E-CS-CS-BUNDLE",
+        "E-CS-MAI-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-REP-BUNDLE": {
+          "instruction": "prior_knowledge_query",
+          "purpose": "Verify theories match knowledge level"
+        },
+        "E-CS-EF-BUNDLE": {
+          "instruction": "feedback_preference_query",
+          "purpose": "Check feedback style alignment"
+        },
+        "E-CS-MC-BUNDLE": {
+          "instruction": "self_regulation_query",
+          "purpose": "Validate metacognitive assumptions"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "structure_need_query",
+          "purpose": "Check structure compatibility"
+        },
+        "E-CS-MAI-BUNDLE": {
+          "instruction": "goal_orientation_query",
+          "purpose": "Verify motivation alignment"
+        }
+      },
+      "execution_flow": [
+        "1. Receive theory_matches and normalized_profile",
+        "2. Load personality_state_modifiers if available",
+        "3. Instruct Elements for alignment-relevant queries",
+        "4. For each matched theory:",
+        "   4a. Check evidence support (≥2 features)",
+        "   4b. Check for contradictions with other theories",
+        "   4c. Check context appropriateness (CLEA)",
+        "   4d. Check personality compatibility",
+        "5. Aggregate conflict_list",
+        "6. Calculate alignment_scores per theory",
+        "7. Generate remediation_suggestions for conflicts",
+        "8. Determine alignment_decision (PASS/WARNING/CONFLICT)",
+        "9. If CONFLICT, loop back to CP-CS-2 for adjustment",
+        "10. Emit alignment_decision to CP-CS-5"
+      ],
+      "interpretation_logic": {
+        "validation_checks": [
+          {
+            "name": "evidence_support",
+            "rule": "Theory must have ≥2 supporting profile features",
+            "severity": "CONFLICT if violated"
+          },
+          {
+            "name": "contradiction_detection",
+            "rule": "Check for fundamentally opposing theories",
+            "severity": "CONFLICT for hard conflicts"
+          },
+          {
+            "name": "context_appropriateness",
+            "rule": "Theory must fit ecological context from CLEA",
+            "severity": "WARNING if misaligned"
+          },
+          {
+            "name": "personality_compatibility",
+            "rule": "Theory approach must not conflict with personality",
+            "severity": "WARNING if incompatible"
+          }
+        ],
+        "hard_conflicts": [
+          "Radical Behaviorist + Radical Constructivist",
+          "Mandatory collaboration for high-N introvert",
+          "Discovery learning for high-C low-O learner"
+        ],
+        "decision_rules": {
+          "PASS": "No hard conflicts, evidence ≥ threshold, context appropriate",
+          "WARNING": "Soft conflicts OR marginal evidence; proceed with caution",
+          "CONFLICT": "Hard conflicts detected OR no evidence support; requires resolution"
+        }
+      },
+      "outputs": {
+        "primary": "alignment_decision",
+        "secondary": [
+          "conflict_list",
+          "alignment_scores",
+          "remediation_suggestions"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Unresolvable conflicts after remediation attempts",
+        "on_conflict": "Request CP-CS-2 to adjust theory selection"
+      },
+      "upstream": [
+        "PH-CS-6"
+      ],
+      "downstream": [
+        "PH-CS-8"
+      ]
+    },
+    {
+      "phase_id": "PH-CS-7",
+      "was": "CP-CS-7",
+      "phase_name": "Parameter Calibrator",
+      "calls_elements": [
+        "E-CS-MAI-BUNDLE",
+        "E-CS-PRC-BUNDLE",
+        "E-CS-TLD-BUNDLE",
+        "E-CS-CS-BUNDLE",
+        "E-CS-MML-BUNDLE",
+        "E-CS-MC-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-MAI-BUNDLE": {
+          "instruction": "affect_baseline_query",
+          "purpose": "Calibrate emotional support level"
+        },
+        "E-CS-PRC-BUNDLE": {
+          "instruction": "cognitive_load_query",
+          "purpose": "Set difficulty ceiling"
+        },
+        "E-CS-TLD-BUNDLE": {
+          "instruction": "spacing_effect_query",
+          "purpose": "Configure practice spacing"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "structure_need_query",
+          "purpose": "Set guidance explicitness"
+        },
+        "E-CS-MML-BUNDLE": {
+          "instruction": "full_modality_assessment",
+          "purpose": "Configure modality weights"
+        },
+        "E-CS-MC-BUNDLE": {
+          "instruction": "self_regulation_query",
+          "purpose": "Determine checkpoint frequency"
+        }
+      },
+      "execution_flow": [
+        "1. Receive scaffold_layers and normalized_profile",
+        "2. Load CLEA context_vector for constraints",
+        "3. Load personality_state_modifiers",
+        "4. Instruct Elements for calibration queries",
+        "5. Calculate scaffolding_intensity per formula",
+        "6. Select difficulty_sequence based on profile",
+        "7. Configure practice_spacing per C + retention",
+        "8. Set collaboration_depth per E + social_orientation",
+        "9. Calibrate modality_weights per preferences + constraints",
+        "10. Validate all parameters within bounds",
+        "11. Check total cognitive load feasibility",
+        "12. Emit calibrated_parameters to CP-CS-8"
+      ],
+      "interpretation_logic": {
+        "parameter_calibration": {
+          "scaffolding_intensity": {
+            "formula": "base_intensity × (1 + N_stress × 0.2) × (1 - metacognition × 0.3)",
+            "range": "0.0-1.0"
+          },
+          "difficulty_sequence": {
+            "options": [
+              "linear",
+              "stepped",
+              "spiral",
+              "adaptive"
+            ],
+            "selection_rule": "Based on metacognition + structure_need"
+          },
+          "practice_spacing": {
+            "options": [
+              "massed",
+              "distributed",
+              "expanding"
+            ],
+            "selection_rule": "Based on C personality + retention patterns"
+          },
+          "collaboration_depth": {
+            "options": [
+              "none",
+              "minimal",
+              "moderate",
+              "intensive"
+            ],
+            "selection_rule": "Based on E personality + social_orientation"
+          }
+        },
+        "modality_calibration": {
+          "description": "Distribute content across channels based on preferences and constraints",
+          "channel_weights": {
+            "visual": "0-100 based on preferences + CLEA constraints",
+            "auditory": "0-100 based on preferences + CLEA constraints",
+            "kinesthetic": "0-100 based on preferences + CLEA constraints",
+            "text": "0-100 based on preferences + CLEA constraints"
+          },
+          "constraint_application": "Reduce channel weight if CLEA indicates barrier"
+        },
+        "personality_based_defaults": {
+          "C_high": {
+            "practice_spacing": "distributed",
+            "collaboration_depth": "minimal"
+          },
+          "C_low": {
+            "practice_spacing": "massed with reminders",
+            "checkpoint_frequency": "high"
+          },
+          "E_high": {
+            "collaboration_depth": "moderate to intensive"
+          },
+          "E_low": {
+            "collaboration_depth": "none to minimal"
+          },
+          "N_high": {
+            "scaffolding_intensity": "+0.2",
+            "feedback_warmth": "high"
+          }
+        }
+      },
+      "outputs": {
+        "primary": "calibrated_parameters",
+        "secondary": [
+          "modality_calibration",
+          "scaffolding_intensity",
+          "difficulty_sequence",
+          "practice_spacing",
+          "collaboration_depth"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot calibrate within constraints"
+      },
+      "upstream": [
+        "PH-CS-7"
+      ],
+      "downstream": [
+        "PH-CS-9"
+      ]
+    },
+    {
+      "phase_id": "PH-CS-8",
+      "was": "CP-CS-8",
+      "phase_name": "Pedagogical Design Compiler",
+      "calls_elements": [
+        "E-CS-GEN-BUNDLE",
+        "E-CS-CS-BUNDLE",
+        "E-CS-EF-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-CS-GEN-BUNDLE": {
+          "instruction": "system_status_query",
+          "purpose": "Validate system readiness for handoff"
+        },
+        "E-CS-CS-BUNDLE": {
+          "instruction": "full_context_assessment",
+          "purpose": "Include context summary in handoff"
+        },
+        "E-CS-EF-BUNDLE": {
+          "instruction": "feedback_preference_query",
+          "purpose": "Include feedback preferences for LAA"
+        }
+      },
+      "execution_flow": [
+        "1. Receive all upstream outputs (scaffold_layers, calibrated_parameters, theory_matches)",
+        "2. Instruct Elements for final validation queries",
+        "3. Package CSA instruction set",
+        "4. Package MSA instruction set with modality weights",
+        "5. Package LODA assessment specification",
+        "6. Package LAA feedback specification",
+        "7. Build causal_links for every decision",
+        "8. Generate justification_chain for audit",
+        "9. Validate all instruction sets for completeness",
+        "10. Check cross-specification consistency",
+        "11. Stamp version and timestamp",
+        "12. Compile audit_report",
+        "13. Emit pedagogical_design_spec to CSA, MSA, LODA, LAA"
+      ],
+      "interpretation_logic": {
+        "handoff_packaging": {
+          "CSA": {
+            "contents": [
+              "scaffold_layers",
+              "sequencing_parameters",
+              "pacing_guidance",
+              "difficulty_sequence",
+              "content_ordering_rules"
+            ],
+            "purpose": "Enable content sequencing agent to order learning materials"
+          },
+          "MSA": {
+            "contents": [
+              "modality_calibration",
+              "channel_weights",
+              "accessibility_constraints",
+              "interaction_preferences"
+            ],
+            "purpose": "Enable modality selection agent to configure presentation"
+          },
+          "LODA": {
+            "contents": [
+              "learning_objectives_alignment",
+              "scaffold_checkpoints",
+              "mastery_thresholds",
+              "progress_indicators"
+            ],
+            "purpose": "Enable learning objectives agent to track mastery"
+          },
+          "LAA": {
+            "contents": [
+              "assessment_format_recommendations",
+              "difficulty_calibration",
+              "feedback_timing",
+              "feedback_style"
+            ],
+            "purpose": "Enable learning assessment agent to evaluate progress"
+          }
+        },
+        "traceability_generation": {
+          "causal_links": {
+            "description": "Every scaffold decision linked to theory and evidence",
+            "structure": {
+              "decision": "What was decided",
+              "theory_basis": "Which theories support this",
+              "profile_evidence": "What profile features justify this",
+              "confidence": "How confident is this decision"
+            }
+          },
+          "justification_chain": {
+            "description": "Human-readable rationale for audit",
+            "format": "Because [evidence], and based on [theory], we recommend [decision]"
+          }
+        }
+      },
+      "outputs": {
+        "primary": "pedagogical_design_spec",
+        "secondary": [
+          "csa_instruction_set",
+          "msa_instruction_set",
+          "loda_assessment_spec",
+          "laa_feedback_spec",
+          "audit_report",
+          "causal_links",
+          "justification_chain"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 1,
+        "more_data_max": 0,
+        "escalation_condition": "Missing required inputs for any downstream agent"
+      },
+      "upstream": [
+        "PH-CS-8"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-CS-1",
+      "CP-CS-2",
+      "CP-CS-3",
+      "CP-CS-4",
+      "CP-CS-5",
+      "CP-CS-6",
+      "CP-CS-7",
+      "CP-CS-8"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "compound_id": "CP-PER",
+  "compound_name": "Personality Agent Master Compound",
+  "layer": "L01",
+  "agent": "Personality",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-PER",
+  "theoretical_foundation": {
+    "primary_theory": "Integrative Personality Assessment",
+    "supporting_theories": [
+      "Five-Factor Model (Costa & McCrae)",
+      "Jung/Myers-Briggs Type Theory",
+      "Enneagram of Personality (Riso-Hudson)",
+      "Holland's RIASEC Vocational Theory"
+    ],
+    "application": "Hub-spoke pipeline: 4 framework-specific phases execute in parallel, then Synthesis phase cross-validates and unifies"
+  },
+  "input_schema": {
+    "required": ["personality_assessment_data"],
+    "optional": ["prior_personality_profile", "learner_context_metadata"]
+  },
+  "calls_elements": [
+    "E-L01-PER-FFM-N-BUNDLE",
+    "E-L01-PER-FFM-E-BUNDLE",
+    "E-L01-PER-FFM-O-BUNDLE",
+    "E-L01-PER-FFM-A-BUNDLE",
+    "E-L01-PER-FFM-C-BUNDLE",
+    "E-L01-PER-MBTI-BUNDLE",
+    "E-L01-PER-ENNEA-BUNDLE",
+    "E-L01-PER-RIASEC-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-PER-FFM",
+      "was": "CP-PER-FFM",
+      "phase_name": "Five-Factor Model Profile Generator",
+      "calls_elements": [
+        "E-L01-PER-FFM-N-BUNDLE",
+        "E-L01-PER-FFM-E-BUNDLE",
+        "E-L01-PER-FFM-O-BUNDLE",
+        "E-L01-PER-FFM-A-BUNDLE",
+        "E-L01-PER-FFM-C-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-FFM-N-BUNDLE": "Gather Neuroticism domain and 6 facet scores",
+        "E-L01-PER-FFM-E-BUNDLE": "Gather Extraversion domain and 6 facet scores",
+        "E-L01-PER-FFM-O-BUNDLE": "Gather Openness domain and 6 facet scores",
+        "E-L01-PER-FFM-A-BUNDLE": "Gather Agreeableness domain and 6 facet scores",
+        "E-L01-PER-FFM-C-BUNDLE": "Gather Conscientiousness domain and 6 facet scores"
+      },
+      "execution_flow": [
+        "1. Read S-PER-FFM section for measurement and interpretation rules",
+        "2. Validate incoming ffm_assessment_data format and completeness",
+        "3. Check validity scales if available (inconsistency, acquiescence)",
+        "4. Instruct all 5 domain Elements in parallel",
+        "5. Receive evidence bundles from all Elements",
+        "6. Validate domain score ranges and distributions",
+        "7. Calculate aggregate confidence from element confidences",
+        "8. Apply interpretation bands (Very Low to Very High)",
+        "9. Determine profile validity (VALID/PARTIAL/INVALID)",
+        "10. Emit ffm_profile to PH-PER-SYN"
+      ],
+      "interpretation_logic": {
+        "VALID_FFM_PROFILE": {
+          "condition": "all_five_domains_scored AND validity_checks_passed AND confidence >= 0.7",
+          "action": "emit_full_ffm_profile"
+        },
+        "PARTIAL_FFM_PROFILE": {
+          "condition": "at_least_three_domains_scored AND confidence >= 0.5",
+          "action": "emit_partial_ffm_profile_with_missing_flags"
+        },
+        "INVALID_FFM_DATA": {
+          "condition": "validity_checks_failed OR confidence < 0.5",
+          "action": "reject_and_request_reassessment"
+        }
+      },
+      "outputs": {
+        "primary": "ffm_profile",
+        "secondary": ["domain_scores", "facet_profiles", "interpretation_bands", "confidence_scores"]
+      },
+      "loop_policy": "reinterpretation_max: 2, more_data_max: 1",
+      "upstream": [],
+      "downstream": ["PH-PER-SYN"]
+    },
+    {
+      "phase_id": "PH-PER-MBTI",
+      "was": "CP-PER-MBTI",
+      "phase_name": "MBTI Type Derivation Agent",
+      "calls_elements": ["E-L01-PER-MBTI-BUNDLE"],
+      "element_instructions": {
+        "E-L01-PER-MBTI-BUNDLE": "Gather all 4 preference dimensions and clarity scores"
+      },
+      "execution_flow": [
+        "1. Read S-PER-MBTI section for interpretation rules",
+        "2. Validate incoming mbti_assessment_data",
+        "3. Instruct E-L01-PER-MBTI-BUNDLE: measure_full_mbti_profile",
+        "4. Receive preference and clarity evidence",
+        "5. Derive 4-letter type code from preferences",
+        "6. Identify midzone preferences (clarity < 15)",
+        "7. Derive dominant and auxiliary cognitive functions",
+        "8. Assess confidence (CLEAR/MIDZONE/UNCLEAR)",
+        "9. If UNCLEAR, request self_verification_response",
+        "10. Emit mbti_type to PH-PER-SYN"
+      ],
+      "interpretation_logic": {
+        "CLEAR_TYPE": {
+          "condition": "all_clarities >= 15 AND no_midzone_preferences",
+          "action": "emit_confident_type_code"
+        },
+        "MIDZONE_TYPE": {
+          "condition": "any_clarity < 15 AND at_least_two_clear",
+          "action": "emit_type_with_midzone_flags"
+        },
+        "UNCLEAR_TYPE": {
+          "condition": "multiple_midzones OR all_clarities < 10",
+          "action": "flag_for_self_verification"
+        }
+      },
+      "outputs": {
+        "primary": "mbti_type",
+        "secondary": ["type_code", "preference_scores", "clarity_scores", "dominant_function", "auxiliary_function", "confidence"]
+      },
+      "loop_policy": "reinterpretation_max: 2, more_data_max: 1",
+      "upstream": [],
+      "downstream": ["PH-PER-SYN"]
+    },
+    {
+      "phase_id": "PH-PER-ENNEA",
+      "was": "CP-PER-ENNEA",
+      "phase_name": "Enneagram Type Derivation Agent",
+      "calls_elements": ["E-L01-PER-ENNEA-BUNDLE"],
+      "element_instructions": {
+        "E-L01-PER-ENNEA-BUNDLE": "Gather all 9 type resonances, instincts, centers, and integration level"
+      },
+      "execution_flow": [
+        "1. Read S-PER-ENNEA section for interpretation rules",
+        "2. Validate incoming enneagram_assessment_data",
+        "3. Instruct E-L01-PER-ENNEA-BUNDLE: measure_full_enneagram_profile",
+        "4. Receive type resonances, instincts, centers, integration",
+        "5. Identify core type from highest resonance",
+        "6. Determine wing from adjacent type resonances",
+        "7. Derive tritype if sufficient data",
+        "8. Order instinctual stack (SP/SX/SO)",
+        "9. Identify dominant center (Head/Heart/Body)",
+        "10. Assess confidence (CLEAR/AMBIGUOUS/UNCLEAR)",
+        "11. Emit enneagram_type to PH-PER-SYN"
+      ],
+      "interpretation_logic": {
+        "CLEAR_TYPE": {
+          "condition": "top_type_gap >= 10 AND instincts_differentiated",
+          "action": "emit_confident_enneagram_profile"
+        },
+        "AMBIGUOUS_TYPE": {
+          "condition": "top_type_gap < 10 OR flat_resonance_profile",
+          "action": "emit_type_with_alternatives"
+        },
+        "UNCLEAR_TYPE": {
+          "condition": "no_clear_peak OR contradictory_patterns",
+          "action": "flag_for_deeper_assessment"
+        }
+      },
+      "outputs": {
+        "primary": "enneagram_type",
+        "secondary": ["core_type", "wing", "tritype", "instinctual_stack", "dominant_center", "integration_level", "type_resonances", "confidence"]
+      },
+      "loop_policy": "reinterpretation_max: 2, more_data_max: 1",
+      "upstream": [],
+      "downstream": ["PH-PER-SYN"]
+    },
+    {
+      "phase_id": "PH-PER-RIASEC",
+      "was": "CP-PER-RIASEC",
+      "phase_name": "RIASEC Interest Profile Generator",
+      "calls_elements": ["E-L01-PER-RIASEC-BUNDLE"],
+      "element_instructions": {
+        "E-L01-PER-RIASEC-BUNDLE": "Gather all 6 interest dimension scores"
+      },
+      "execution_flow": [
+        "1. Read S-PER-RIASEC section for interpretation rules",
+        "2. Validate incoming riasec_assessment_data",
+        "3. Instruct E-L01-PER-RIASEC-BUNDLE: measure_full_riasec_profile",
+        "4. Receive all 6 dimension scores",
+        "5. Rank dimensions to derive 3-letter Holland code",
+        "6. Calculate differentiation (profile variance)",
+        "7. Calculate consistency (hexagonal adjacency of top codes)",
+        "8. If occupational_context provided, calculate congruence",
+        "9. Assess profile quality (DIFFERENTIATED/FLAT/INCONSISTENT)",
+        "10. Emit riasec_profile to PH-PER-SYN"
+      ],
+      "interpretation_logic": {
+        "DIFFERENTIATED_PROFILE": {
+          "condition": "differentiation >= 0.6 AND consistency >= 0.7",
+          "action": "emit_confident_holland_code"
+        },
+        "FLAT_PROFILE": {
+          "condition": "differentiation < 0.4",
+          "action": "emit_holland_code_with_flat_warning"
+        },
+        "INCONSISTENT_PROFILE": {
+          "condition": "consistency < 0.5",
+          "action": "emit_holland_code_with_inconsistency_flag"
+        }
+      },
+      "outputs": {
+        "primary": "riasec_profile",
+        "secondary": ["holland_code", "dimension_scores", "differentiation", "consistency", "congruence", "confidence"]
+      },
+      "loop_policy": "reinterpretation_max: 2, more_data_max: 1",
+      "upstream": [],
+      "downstream": ["PH-PER-SYN"]
+    },
+    {
+      "phase_id": "PH-PER-SYN",
+      "was": "CP-PER-1",
+      "phase_name": "Personality Profile Synthesiser",
+      "calls_elements": [
+        "E-L01-PER-FFM-N-BUNDLE", "E-L01-PER-FFM-E-BUNDLE", "E-L01-PER-FFM-O-BUNDLE",
+        "E-L01-PER-FFM-A-BUNDLE", "E-L01-PER-FFM-C-BUNDLE",
+        "E-L01-PER-MBTI-BUNDLE", "E-L01-PER-ENNEA-BUNDLE", "E-L01-PER-RIASEC-BUNDLE"
+      ],
+      "element_instructions": {
+        "note": "This phase receives results from PH-PER-FFM/MBTI/ENNEA/RIASEC. It consumes their outputs, does NOT re-call atoms directly."
+      },
+      "execution_flow": [
+        "1. Read S-PER-SYN section for integration and cross-validation rules",
+        "2. Validate and normalise incoming personality_assessment_data",
+        "3. Dispatch FFM data to PH-PER-FFM (parallel)",
+        "4. Dispatch MBTI data to PH-PER-MBTI (parallel)",
+        "5. Dispatch Enneagram data to PH-PER-ENNEA (parallel)",
+        "6. Dispatch RIASEC data to PH-PER-RIASEC (parallel)",
+        "7. Receive framework profiles from all 4 phases",
+        "8. Cross-validate FFM-MBTI consistency (known correlations)",
+        "9. Cross-validate FFM-Enneagram alignment",
+        "10. Calculate aggregate confidence",
+        "11. Apply interpretation_logic to determine profile status",
+        "12. Synthesise personality_profile_signature",
+        "13. Generate adaptation_recommendations for downstream agents"
+      ],
+      "interpretation_logic": {
+        "VALID_PROFILE": {
+          "condition": "ffm_complete AND cross_validation_passed AND confidence >= 0.6",
+          "action": "emit_full_personality_signature"
+        },
+        "PARTIAL_PROFILE": {
+          "condition": "(ffm_complete OR mbti_complete) AND confidence >= 0.4",
+          "action": "emit_partial_signature_with_caveats"
+        },
+        "INVALID_PROFILE": {
+          "condition": "confidence < 0.4 OR critical_inconsistencies_detected",
+          "action": "request_reassessment"
+        }
+      },
+      "outputs": {
+        "primary": "personality_profile_signature",
+        "secondary": ["ffm_profile", "mbti_type", "enneagram_type", "holland_code", "adaptation_recommendations", "cross_validation_flags", "confidence_scores"]
+      },
+      "loop_policy": "iterate_until_valid: reinterpretation_max 3, more_data_max 2",
+      "upstream": ["PH-PER-FFM", "PH-PER-MBTI", "PH-PER-ENNEA", "PH-PER-RIASEC"],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {
+    "receives_from": {
+      "Assessment_Data_Ingestion": "personality_assessment_data"
+    },
+    "emits_to": {
+      "LOPA": {
+        "via": "E-L01-PER-BRIDGE",
+        "data": "personality_profile_signature",
+        "transforms_to": "personality_state_modifiers",
+        "purpose": "Modulate state interpretation with trait baselines"
+      },
+      "LODA": {
+        "via": "E-L01-PER-BRIDGE",
+        "data": "personality_profile_signature",
+        "used_for": ["Goal decomposition depth (C trait)", "Pathway flexibility (O trait)", "Prerequisite thoroughness (C trait)", "Value alignment approach (all traits)"]
+      },
+      "CLEA": {
+        "via": "direct_consumption",
+        "data": "personality_state_modifiers",
+        "used_for": ["Barrier weighting (N for emotional safety)", "Social support importance (E trait)", "Routine predictability needs (C trait)"]
+      },
+      "CogniStruct": "personality_profile_signature (theory fit)",
+      "CSA": "personality_profile_signature (pacing)",
+      "MSA": "personality_profile_signature (modality preferences)",
+      "MIA": "personality_profile_signature",
+      "LAA": "personality_profile_signature"
+    }
+  },
+  "failure_modes": [
+    {
+      "mode": "insufficient_data",
+      "trigger": "Neither FFM nor MBTI data available",
+      "action": "Cannot create valid profile — request assessment data"
+    },
+    {
+      "mode": "critical_inconsistencies",
+      "trigger": "FFM-MBTI contradictions beyond expected variation",
+      "action": "Flag for human review, emit PARTIAL_PROFILE with caveats"
+    },
+    {
+      "mode": "response_set_detected",
+      "trigger": "Pattern responses detected in assessment data",
+      "action": "Invalidate data, request reassessment"
+    }
+  ],
+  "metadata": {
+    "consolidated_from": ["CP-PER-1", "CP-PER-FFM", "CP-PER-MBTI", "CP-PER-ENNEA", "CP-PER-RIASEC"],
+    "original_count": 5,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

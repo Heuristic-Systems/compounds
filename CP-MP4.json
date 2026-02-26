@@ -1,0 +1,712 @@
+{
+  "compound_id": "CP-MP4",
+  "compound_name": "MP4 Grounding Crucible Gate Master Compound",
+  "layer": "MP04",
+  "agent": "MP4",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MP4",
+  "theoretical_foundation": {
+    "primary_theory": "Regional Context Grounding",
+    "application": "34-phase pipeline"
+  },
+  "calls_elements": [
+    "MP04-E-DFT-001",
+    "MP04-E-DFT-002",
+    "MP04-E-ECO-001",
+    "MP04-E-ECO-002",
+    "MP04-E-GOV-001",
+    "MP04-E-GRD-001",
+    "MP04-E-GRD-002",
+    "MP04-E-INV-001",
+    "MP04-E-RCB-001",
+    "MP04-E-RCB-002"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-MP4-1",
+      "was": "CP-MP4-0.1_Layer_Output_Presence_Check",
+      "phase_name": "Layer Output Presence Check",
+      "outputs": [
+        {
+          "name": "layer_presence_result",
+          "type": "LayerPresenceResult",
+          "description": "Presence check results for each layer"
+        }
+      ],
+      "validation_rules": [
+        "L01 - Pedagogical Core output must be present",
+        "L02 - Adaptive Technology output must be present",
+        "L03 - Ecological Context output must be present",
+        "L04 - Ethical Governance output must be present",
+        "L05 - Multimodal Interaction output must be present",
+        "L06 - Holistic Outcomes output must be present",
+        "L07 - Co-Evolution output must be present",
+        "L08 - Strategic Foresight output must be present"
+      ],
+      "upstream": [],
+      "downstream": [
+        "PH-MP4-3"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-2",
+      "was": "CP-MP4-0.2_MP1_3_Approval_Chain_Validation",
+      "phase_name": "MP1-3 Approval Chain Validation",
+      "outputs": [
+        {
+          "name": "approval_chain_result",
+          "type": "ApprovalChainResult",
+          "description": "Validation result for MP1-3 approvals"
+        }
+      ],
+      "validation_rules": [
+        "MP1: charter_hash must be present and valid (64-char hex)",
+        "MP1: grounding_score >= 0.6",
+        "MP2: ADR must be present with status APPROVED",
+        "MP2: All 4 gates must be passed",
+        "MP3: coherence_score >= 0.6",
+        "MP3: decision = FORWARD_TO_MP4"
+      ],
+      "upstream": [
+        "PH-MP4-2"
+      ],
+      "downstream": [
+        "PH-MP4-4"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-3",
+      "was": "CP-MP4-0.3_Vision_Artifact_Extraction",
+      "phase_name": "Vision Artifact Extraction",
+      "outputs": [
+        {
+          "name": "extracted_vision",
+          "type": "ExtractedVision",
+          "description": "Extracted and validated vision artifacts"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-3"
+      ],
+      "downstream": [
+        "PH-MP4-5"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-4",
+      "was": "CP-MP4-0.4_Schema_Conformance_Check",
+      "phase_name": "Schema Conformance Check",
+      "outputs": [
+        {
+          "name": "intake_result",
+          "type": "IntakeResult",
+          "description": "Final intake validation result"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-4"
+      ],
+      "downstream": [
+        "PH-MP4-6"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-5",
+      "was": "CP-MP4-1.1_Regional_Profile_Detection",
+      "phase_name": "Regional Profile Detection",
+      "outputs": [
+        {
+          "name": "detected_region",
+          "type": "DetectedRegion",
+          "description": "Detected or selected regional profile"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-5"
+      ],
+      "downstream": [
+        "PH-MP4-7"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-6",
+      "was": "CP-MP4-1.2_Regional_Constraint_Loader",
+      "phase_name": "Regional Constraint Loader",
+      "outputs": [
+        {
+          "name": "regional_constraints",
+          "type": "RegionalConstraints",
+          "description": "Loaded constraint matrix for the region"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-6"
+      ],
+      "downstream": [
+        "PH-MP4-8"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-7",
+      "was": "CP-MP4-1.3_Constraint_Vision_Mapping",
+      "phase_name": "Constraint-Vision Mapping",
+      "outputs": [
+        {
+          "name": "constraint_vision_map",
+          "type": "ConstraintVisionMap",
+          "description": "Mapping of constraints to vision artifacts"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-7"
+      ],
+      "downstream": [
+        "PH-MP4-9"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-8",
+      "was": "CP-MP4-1.4_Regional_Binding_Result",
+      "phase_name": "Regional Binding Result",
+      "outputs": [
+        {
+          "name": "regional_binding_result",
+          "type": "RegionalBindingResult",
+          "description": "Final regional binding assessment"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-8"
+      ],
+      "downstream": [
+        "PH-MP4-10"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-9",
+      "was": "CP-MP4-2.1_Microsystem_Factor_Validation",
+      "phase_name": "Microsystem Factor Validation",
+      "outputs": [
+        {
+          "name": "microsystem_validation",
+          "type": "EcologicalValidation",
+          "description": "Microsystem factor validation result"
+        }
+      ],
+      "validation_rules": [
+        "All critical microsystem factors must be addressed in L03 output",
+        "Missing factors must be flagged for grounding synthesis",
+        "Region-specific microsystem variations must be considered"
+      ],
+      "upstream": [
+        "PH-MP4-9"
+      ],
+      "downstream": [
+        "PH-MP4-11"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-10",
+      "was": "CP-MP4-2.2_Mesosystem_Factor_Validation",
+      "phase_name": "Mesosystem Factor Validation",
+      "outputs": [
+        {
+          "name": "mesosystem_validation",
+          "type": "EcologicalValidation",
+          "description": "Mesosystem factor validation result"
+        }
+      ],
+      "validation_rules": [
+        "At least 3 mesosystem factors must be addressed",
+        "SCHOOL_HOME_LINK is mandatory for K-12 contexts",
+        "Missing connections must be flagged with severity"
+      ],
+      "upstream": [
+        "PH-MP4-10"
+      ],
+      "downstream": [
+        "PH-MP4-12"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-11",
+      "was": "CP-MP4-2.3_Exo_Macro_Chrono_System_Validation",
+      "phase_name": "Exo-Macro-Chrono System Validation",
+      "outputs": [
+        {
+          "name": "broader_systems_validation",
+          "type": "EcologicalValidation",
+          "description": "Exo/Macro/Chrono system validation result"
+        }
+      ],
+      "validation_rules": [
+        "At least 2 exosystem factors must be addressed",
+        "CULTURAL_VALUES and LEGAL_FRAMEWORK are mandatory macrosystem factors",
+        "At least 1 chronosystem factor must be addressed for longitudinal plans"
+      ],
+      "upstream": [
+        "PH-MP4-11"
+      ],
+      "downstream": [
+        "PH-MP4-13"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-12",
+      "was": "CP-MP4-2.4_Ecological_Coverage_Result",
+      "phase_name": "Ecological Coverage Result",
+      "outputs": [
+        {
+          "name": "ecological_result",
+          "type": "EcologicalResult",
+          "description": "Final ecological factor validation result"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-12"
+      ],
+      "downstream": [
+        "PH-MP4-14"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-13",
+      "was": "CP-MP4-3.1_Semantic_Drift_Detection",
+      "phase_name": "Semantic Drift Detection",
+      "outputs": [
+        {
+          "name": "semantic_drift_result",
+          "type": "DriftResult",
+          "description": "Semantic drift analysis result"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-13"
+      ],
+      "downstream": [
+        "PH-MP4-15"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-14",
+      "was": "CP-MP4-3.2_Priority_Drift_Detection",
+      "phase_name": "Priority Drift Detection",
+      "outputs": [
+        {
+          "name": "priority_drift_result",
+          "type": "DriftResult",
+          "description": "Priority drift analysis result"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-14"
+      ],
+      "downstream": [
+        "PH-MP4-16"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-15",
+      "was": "CP-MP4-3.3_Scope_SESOI_Drift_Detection",
+      "phase_name": "Scope and SESOI Drift Detection",
+      "outputs": [
+        {
+          "name": "scope_sesoi_drift_result",
+          "type": "DriftResult",
+          "description": "Scope and SESOI drift analysis result"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-15"
+      ],
+      "downstream": [
+        "PH-MP4-17"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-16",
+      "was": "CP-MP4-3.4_Drift_Analysis_Aggregation",
+      "phase_name": "Drift Analysis Aggregation",
+      "outputs": [
+        {
+          "name": "drift_analysis",
+          "type": "DriftAnalysis",
+          "description": "Comprehensive drift analysis result"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-16"
+      ],
+      "downstream": [
+        "PH-MP4-18"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-17",
+      "was": "CP-MP4-4.1_Pedagogical_Grounding",
+      "phase_name": "Pedagogical Grounding",
+      "outputs": [
+        {
+          "name": "pedagogical_grounding",
+          "type": "GroundingSpec",
+          "description": "Pedagogically grounded specifications"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-17"
+      ],
+      "downstream": [
+        "PH-MP4-19"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-18",
+      "was": "CP-MP4-4.2_Ecological_Grounding",
+      "phase_name": "Ecological Grounding",
+      "outputs": [
+        {
+          "name": "ecological_grounding",
+          "type": "GroundingSpec",
+          "description": "Ecologically grounded specifications"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-18"
+      ],
+      "downstream": [
+        "PH-MP4-20"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-19",
+      "was": "CP-MP4-4.3_Experiential_Grounding",
+      "phase_name": "Experiential Grounding",
+      "outputs": [
+        {
+          "name": "experiential_grounding",
+          "type": "GroundingSpec",
+          "description": "Experientially grounded specifications"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-19"
+      ],
+      "downstream": [
+        "PH-MP4-21"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-20",
+      "was": "CP-MP4-4.4_Strategic_Grounding_Synthesis",
+      "phase_name": "Strategic Grounding Synthesis",
+      "outputs": [
+        {
+          "name": "grounding_synthesis",
+          "type": "GroundingSynthesis",
+          "description": "Unified grounding synthesis"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-20"
+      ],
+      "downstream": [
+        "PH-MP4-22"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-21",
+      "was": "CP-MP4-5.1_Governance_Decision_Assembly",
+      "phase_name": "Governance Decision Assembly",
+      "outputs": [
+        {
+          "name": "governance_decision",
+          "type": "GovernanceDecision",
+          "description": "Assembled governance decision"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-21"
+      ],
+      "downstream": [
+        "PH-MP4-23"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-22",
+      "was": "CP-MP4-5.2_Escalation_Package_Builder",
+      "phase_name": "Escalation Package Builder",
+      "outputs": [
+        {
+          "name": "escalation_package",
+          "type": "EscalationPackage",
+          "description": "Structured escalation package"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-22"
+      ],
+      "downstream": [
+        "PH-MP4-24"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-23",
+      "was": "CP-MP4-5.3_Forward_Package_Builder",
+      "phase_name": "Forward Package Builder",
+      "outputs": [
+        {
+          "name": "mp4_forward_package",
+          "type": "Mp4ForwardPackage",
+          "description": "Grounded compendium for MP5"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-23"
+      ],
+      "downstream": [
+        "PH-MP4-25"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-24",
+      "was": "CP-MP4-5.4_Governance_Output_Emission",
+      "phase_name": "Governance Output Emission",
+      "outputs": [
+        {
+          "name": "mp4_output",
+          "type": "Mp4Output",
+          "description": "Final MP4 output package"
+        }
+      ],
+      "upstream": [
+        "PH-MP4-24"
+      ],
+      "downstream": [
+        "PH-MP4-26"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-25",
+      "was": "MP04-C-DFT-001_Semantic_and_Priority_Drift_Detector",
+      "phase_name": "Semantic & Priority Drift Detector",
+      "calls_elements": [
+        "MP04-E-DFT-001"
+      ],
+      "outputs": {
+        "primary": "Semantic & Priority Drift Detector result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-25"
+      ],
+      "downstream": [
+        "PH-MP4-27"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-26",
+      "was": "MP04-C-DFT-002_Scope_and_SESOI_Drift_Auditor",
+      "phase_name": "Scope & SESOI Drift Auditor",
+      "calls_elements": [
+        "MP04-E-DFT-002"
+      ],
+      "outputs": {
+        "primary": "Scope & SESOI Drift Auditor result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-26"
+      ],
+      "downstream": [
+        "PH-MP4-28"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-27",
+      "was": "MP04-C-ECO-001_EST_Factor_Validator",
+      "phase_name": "EST Factor Validator",
+      "calls_elements": [
+        "MP04-E-ECO-001"
+      ],
+      "outputs": {
+        "primary": "EST Factor Validator result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-27"
+      ],
+      "downstream": [
+        "PH-MP4-29"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-28",
+      "was": "MP04-C-ECO-002_Ecological_Risk_Assessor",
+      "phase_name": "Ecological Risk Assessor",
+      "calls_elements": [
+        "MP04-E-ECO-002"
+      ],
+      "outputs": {
+        "primary": "Ecological Risk Assessor result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-28"
+      ],
+      "downstream": [
+        "PH-MP4-30"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-29",
+      "was": "MP04-C-GOV-001_Governance_Decision_Assembler_and_Router",
+      "phase_name": "Governance Decision Assembler & Router",
+      "calls_elements": [
+        "MP04-E-GOV-001"
+      ],
+      "outputs": {
+        "primary": "Governance Decision Assembler & Router result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-29"
+      ],
+      "downstream": [
+        "PH-MP4-31"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-30",
+      "was": "MP04-C-GRD-001_Multi-Domain_Grounding_Synthesiser",
+      "phase_name": "Multi-Domain Grounding Synthesiser",
+      "calls_elements": [
+        "MP04-E-GRD-001"
+      ],
+      "outputs": {
+        "primary": "Multi-Domain Grounding Synthesiser result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-30"
+      ],
+      "downstream": [
+        "PH-MP4-32"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-31",
+      "was": "MP04-C-GRD-002_Strategic_Grounding_Verifier",
+      "phase_name": "Strategic Grounding Verifier",
+      "calls_elements": [
+        "MP04-E-GRD-002"
+      ],
+      "outputs": {
+        "primary": "Strategic Grounding Verifier result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-31"
+      ],
+      "downstream": [
+        "PH-MP4-33"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-32",
+      "was": "MP04-C-INV-001_Compendium_Integrity_Verifier",
+      "phase_name": "Compendium Integrity Verifier",
+      "calls_elements": [
+        "MP04-E-INV-001"
+      ],
+      "outputs": {
+        "primary": "Compendium Integrity Verifier result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-32"
+      ],
+      "downstream": [
+        "PH-MP4-34"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-33",
+      "was": "MP04-C-RCB-001_Regional_Profile_Detector_and_Constraint_Loader",
+      "phase_name": "Regional Profile Detector & Constraint Loader",
+      "calls_elements": [
+        "MP04-E-RCB-001"
+      ],
+      "outputs": {
+        "primary": "Regional Profile Detector & Constraint Loader result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-33"
+      ],
+      "downstream": [
+        "PH-MP4-35"
+      ]
+    },
+    {
+      "phase_id": "PH-MP4-34",
+      "was": "MP04-C-RCB-002_Constraint-Vision_Mapping_Verifier",
+      "phase_name": "Constraint-Vision Mapping Verifier",
+      "calls_elements": [
+        "MP04-E-RCB-002"
+      ],
+      "outputs": {
+        "primary": "Constraint-Vision Mapping Verifier result",
+        "secondary": "Evidence bundle for construct aggregation"
+      },
+      "upstream": [
+        "PH-MP4-34"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-MP4-0.1_Layer_Output_Presence_Check",
+      "CP-MP4-0.2_MP1_3_Approval_Chain_Validation",
+      "CP-MP4-0.3_Vision_Artifact_Extraction",
+      "CP-MP4-0.4_Schema_Conformance_Check",
+      "CP-MP4-1.1_Regional_Profile_Detection",
+      "CP-MP4-1.2_Regional_Constraint_Loader",
+      "CP-MP4-1.3_Constraint_Vision_Mapping",
+      "CP-MP4-1.4_Regional_Binding_Result",
+      "CP-MP4-2.1_Microsystem_Factor_Validation",
+      "CP-MP4-2.2_Mesosystem_Factor_Validation",
+      "CP-MP4-2.3_Exo_Macro_Chrono_System_Validation",
+      "CP-MP4-2.4_Ecological_Coverage_Result",
+      "CP-MP4-3.1_Semantic_Drift_Detection",
+      "CP-MP4-3.2_Priority_Drift_Detection",
+      "CP-MP4-3.3_Scope_SESOI_Drift_Detection",
+      "CP-MP4-3.4_Drift_Analysis_Aggregation",
+      "CP-MP4-4.1_Pedagogical_Grounding",
+      "CP-MP4-4.2_Ecological_Grounding",
+      "CP-MP4-4.3_Experiential_Grounding",
+      "CP-MP4-4.4_Strategic_Grounding_Synthesis",
+      "CP-MP4-5.1_Governance_Decision_Assembly",
+      "CP-MP4-5.2_Escalation_Package_Builder",
+      "CP-MP4-5.3_Forward_Package_Builder",
+      "CP-MP4-5.4_Governance_Output_Emission",
+      "MP04-C-DFT-001_Semantic_and_Priority_Drift_Detector",
+      "MP04-C-DFT-002_Scope_and_SESOI_Drift_Auditor",
+      "MP04-C-ECO-001_EST_Factor_Validator",
+      "MP04-C-ECO-002_Ecological_Risk_Assessor",
+      "MP04-C-GOV-001_Governance_Decision_Assembler_and_Router",
+      "MP04-C-GRD-001_Multi-Domain_Grounding_Synthesiser",
+      "MP04-C-GRD-002_Strategic_Grounding_Verifier",
+      "MP04-C-INV-001_Compendium_Integrity_Verifier",
+      "MP04-C-RCB-001_Regional_Profile_Detector_and_Constraint_Loader",
+      "MP04-C-RCB-002_Constraint-Vision_Mapping_Verifier"
+    ],
+    "original_count": 34,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

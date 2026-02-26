@@ -1,0 +1,442 @@
+{
+  "compound_id": "CP-MSA",
+  "compound_name": "Modality Selection Agent Master Compound",
+  "layer": "L05",
+  "agent": "MSA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MSA",
+  "theoretical_foundation": {
+    "primary_theory": "Multimodal Learning Theory",
+    "application": "9-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L05-MCO-CHANNEL",
+    "E-L05-MMA-ADAPT",
+    "E-L05-MMC-CONTEXT",
+    "E-L05-MME-ETHICS",
+    "E-L05-MML-AGENCY",
+    "E-L05-MMO-OBJECTIV",
+    "E-L05-MMS-SEQUENCE",
+    "E-L05-MMT-CONTENT"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-MSA-1",
+      "was": "CP-MSA-1",
+      "phase_name": "Sensory Channel Orchestrator",
+      "calls_elements": [
+        "E-L05-MCO-CHANNEL",
+        "E-L05-MMO-OBJECTIV",
+        "E-L05-MMC-CONTEXT",
+        "E-L05-MMT-CONTENT"
+      ],
+      "element_instructions": {
+        "E-L05-MCO-CHANNEL": "Evaluate sensory channel capacity and balance for the learner profile",
+        "E-L05-MMO-OBJECTIV": "Check alignment between learning objectives and available modalities",
+        "E-L05-MMC-CONTEXT": "Assess contextual constraints affecting channel selection",
+        "E-L05-MMT-CONTENT": "Evaluate content type requirements for sensory channels"
+      },
+      "interpretation_logic": {
+        "decision_mode": "weighted_mean",
+        "weights": {
+          "channel_balance": 0.35,
+          "objective_alignment": 0.25,
+          "context_fit": 0.2,
+          "content_match": 0.2
+        },
+        "thresholds": {
+          "balanced": 80,
+          "needs_review": 50
+        },
+        "output_decision": "sensory_channel_allocation"
+      },
+      "outputs": {
+        "primary": "channel_allocation",
+        "secondary": [
+          "sensory_balance_score",
+          "bottleneck_alerts"
+        ]
+      },
+      "upstream": [],
+      "downstream": [
+        "PH-MSA-3"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-2",
+      "was": "CP-MSA-2",
+      "phase_name": "Objective-Modality Aligner",
+      "calls_elements": [
+        "E-L05-MMO-OBJECTIV",
+        "E-L05-MML-AGENCY",
+        "E-L05-MMT-CONTENT",
+        "E-L05-MMS-SEQUENCE"
+      ],
+      "element_instructions": {
+        "E-L05-MMO-OBJECTIV": "Map learning objectives to optimal modality representations",
+        "E-L05-MML-AGENCY": "Incorporate learner preferences that align with objectives",
+        "E-L05-MMT-CONTENT": "Match content typology to modality affordances",
+        "E-L05-MMS-SEQUENCE": "Order modalities for progressive objective achievement"
+      },
+      "interpretation_logic": {
+        "decision_mode": "weighted_mean",
+        "weights": {
+          "objective_fit": 0.4,
+          "learner_preference": 0.2,
+          "content_match": 0.25,
+          "sequence_quality": 0.15
+        },
+        "thresholds": {
+          "aligned": 80,
+          "partial": 50
+        },
+        "output_decision": "objective_modality_mapping"
+      },
+      "outputs": {
+        "primary": "modality_alignment_map",
+        "secondary": [
+          "objective_coverage",
+          "domain_fit_score"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-2"
+      ],
+      "downstream": [
+        "PH-MSA-4"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-3",
+      "was": "CP-MSA-3",
+      "phase_name": "Preference Integrator",
+      "calls_elements": [
+        "E-L05-MML-AGENCY"
+      ],
+      "element_instructions": {
+        "E-L05-MML-AGENCY": "Evaluate learner preference data quality and pedagogical validity"
+      },
+      "interpretation_logic": {
+        "decision_mode": "gate_check",
+        "gates": [
+          "preference_available",
+          "no_meshing_violation",
+          "no_objective_conflict"
+        ],
+        "thresholds": {
+          "apply_preference": 75,
+          "override_with_rationale": 40
+        },
+        "output_decision": "preference_integration_decision"
+      },
+      "outputs": {
+        "primary": "preference_applied",
+        "secondary": [
+          "preference_override_log",
+          "metacognitive_signals"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-3"
+      ],
+      "downstream": [
+        "PH-MSA-5"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-4",
+      "was": "CP-MSA-4",
+      "phase_name": "Context Constraint Resolver",
+      "calls_elements": [
+        "E-L05-MMC-CONTEXT"
+      ],
+      "element_instructions": {
+        "E-L05-MMC-CONTEXT": "Evaluate all contextual constraints against selected modalities"
+      },
+      "interpretation_logic": {
+        "decision_mode": "minimum",
+        "constraint_types": [
+          "device_capability",
+          "bandwidth",
+          "accessibility",
+          "environment"
+        ],
+        "thresholds": {
+          "compliant": 70,
+          "fallback_required": 40,
+          "blocked": 0
+        },
+        "output_decision": "constraint_resolution"
+      },
+      "outputs": {
+        "primary": "context_compliance",
+        "secondary": [
+          "constraint_violations",
+          "fallback_modalities"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-4"
+      ],
+      "downstream": [
+        "PH-MSA-6"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-5",
+      "was": "CP-MSA-5",
+      "phase_name": "Ethical Governance Enforcer",
+      "calls_elements": [
+        "E-L05-MME-ETHICS",
+        "E-L05-MMC-CONTEXT"
+      ],
+      "element_instructions": {
+        "E-L05-MME-ETHICS": "Verify ethical compliance for personalization and data usage",
+        "E-L05-MMC-CONTEXT": "Check for equity of access across institutional constraints"
+      },
+      "interpretation_logic": {
+        "decision_mode": "all_must_pass",
+        "ethical_gates": [
+          "consent_valid",
+          "bias_checked",
+          "equity_verified"
+        ],
+        "thresholds": {
+          "proceed": 90,
+          "fallback": 50,
+          "block": 0
+        },
+        "output_decision": "ethical_clearance"
+      },
+      "outputs": {
+        "primary": "ethics_compliance",
+        "secondary": [
+          "bias_audit_log",
+          "equity_score"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-5"
+      ],
+      "downstream": [
+        "PH-MSA-7"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-6",
+      "was": "CP-MSA-6",
+      "phase_name": "Content Typology Matcher",
+      "calls_elements": [
+        "E-L05-MMT-CONTENT",
+        "E-L05-MMO-OBJECTIV"
+      ],
+      "element_instructions": {
+        "E-L05-MMT-CONTENT": "Classify content typology and match to modality affordances",
+        "E-L05-MMO-OBJECTIV": "Verify content-modality pairing supports learning objectives"
+      },
+      "interpretation_logic": {
+        "decision_mode": "weighted_mean",
+        "weights": {
+          "typology_match": 0.6,
+          "objective_support": 0.4
+        },
+        "thresholds": {
+          "matched": 80,
+          "supplement_needed": 50
+        },
+        "output_decision": "content_modality_pairing"
+      },
+      "outputs": {
+        "primary": "typology_match_score",
+        "secondary": [
+          "affordance_map",
+          "complexity_rating"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-6"
+      ],
+      "downstream": [
+        "PH-MSA-8"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-7",
+      "was": "CP-MSA-7",
+      "phase_name": "Scaffolded Sequencer",
+      "calls_elements": [
+        "E-L05-MMS-SEQUENCE",
+        "E-L05-MML-AGENCY"
+      ],
+      "element_instructions": {
+        "E-L05-MMS-SEQUENCE": "Define modality sequence with scaffolding progression",
+        "E-L05-MML-AGENCY": "Incorporate learner mastery level for scaffolding calibration"
+      },
+      "interpretation_logic": {
+        "decision_mode": "weighted_mean",
+        "weights": {
+          "sequence_quality": 0.5,
+          "scaffolding_plan": 0.3,
+          "remediation_available": 0.2
+        },
+        "thresholds": {
+          "ready": 75,
+          "needs_scaffolding": 50
+        },
+        "output_decision": "sequenced_modality_plan"
+      },
+      "outputs": {
+        "primary": "modality_sequence",
+        "secondary": [
+          "scaffolding_plan",
+          "remediation_branches"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-7"
+      ],
+      "downstream": [
+        "PH-MSA-9"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-8",
+      "was": "CP-MSA-8",
+      "phase_name": "Adaptive Switch Controller",
+      "calls_elements": [
+        "E-L05-MMA-ADAPT",
+        "E-L05-MMS-SEQUENCE"
+      ],
+      "element_instructions": {
+        "E-L05-MMA-ADAPT": "Define adaptation triggers and validate stability constraints",
+        "E-L05-MMS-SEQUENCE": "Provide sequence context for adaptation decisions"
+      },
+      "interpretation_logic": {
+        "decision_mode": "gate_check",
+        "gates": [
+          "trigger_defined",
+          "stability_window_passed",
+          "switch_cost_acceptable"
+        ],
+        "thresholds": {
+          "adapt": 80,
+          "suppress": 50,
+          "audit_flag": 30
+        },
+        "output_decision": "adaptation_control"
+      },
+      "outputs": {
+        "primary": "adaptation_triggers",
+        "secondary": [
+          "switch_decisions",
+          "stability_status"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-8"
+      ],
+      "downstream": [
+        "PH-MSA-10"
+      ]
+    },
+    {
+      "phase_id": "PH-MSA-9",
+      "was": "CP-MSA-9",
+      "phase_name": "Multimodal Output Compiler",
+      "calls_elements": [
+        "E-L05-MCO-CHANNEL",
+        "E-L05-MMO-OBJECTIV",
+        "E-L05-MML-AGENCY",
+        "E-L05-MMC-CONTEXT",
+        "E-L05-MME-ETHICS",
+        "E-L05-MMT-CONTENT",
+        "E-L05-MMS-SEQUENCE",
+        "E-L05-MMA-ADAPT"
+      ],
+      "element_instructions": {
+        "E-L05-MCO-CHANNEL": "Provide final sensory channel allocation",
+        "E-L05-MMO-OBJECTIV": "Confirm objective coverage",
+        "E-L05-MML-AGENCY": "Confirm preference handling",
+        "E-L05-MMC-CONTEXT": "Confirm constraint satisfaction",
+        "E-L05-MME-ETHICS": "Confirm ethical clearance",
+        "E-L05-MMT-CONTENT": "Confirm content-modality alignment",
+        "E-L05-MMS-SEQUENCE": "Provide delivery sequence",
+        "E-L05-MMA-ADAPT": "Provide adaptation rules"
+      },
+      "execution_flow": [
+        "1. Receive CSA discovery_result and modality decisions from CP-MSA-1 through CP-MSA-8",
+        "2. Evaluate discovery_result.status:",
+        "   - IF status = FOUND AND quality_score >= quality_threshold:",
+        "       content_source_decision = CURATE_EXISTING",
+        "   - ELSE IF status = PARTIAL_MATCH:",
+        "       content_source_decision = AUGMENT (use existing + generate supplements)",
+        "   - ELSE (status = NOT_FOUND OR quality below threshold):",
+        "       content_source_decision = GENERATE_NEW",
+        "3. Synthesize all Element outputs into delivery manifest",
+        "4. Include content_source_decision and discovered_content (if any) in manifest",
+        "5. Pass to MIA with clear instruction: CURATE, AUGMENT, or GENERATE"
+      ],
+      "interpretation_logic": {
+        "decision_mode": "synthesis_with_routing",
+        "content_source_logic": {
+          "CURATE_EXISTING": {
+            "condition": "discovery_status = FOUND AND quality >= 70",
+            "mia_instruction": "Wrap existing content with accessibility overlays only"
+          },
+          "AUGMENT": {
+            "condition": "discovery_status = PARTIAL_MATCH OR quality 50-69",
+            "mia_instruction": "Use existing as base, generate supplementary content"
+          },
+          "GENERATE_NEW": {
+            "condition": "discovery_status = NOT_FOUND OR quality < 50",
+            "mia_instruction": "Generate all content from scratch"
+          }
+        },
+        "required_inputs": [
+          "all_8_compounds",
+          "csa_discovery_result"
+        ],
+        "thresholds": {
+          "complete": 100,
+          "incomplete": 0
+        },
+        "output_decision": "multimodal_delivery_manifest_with_source"
+      },
+      "outputs": {
+        "primary": "multimodal_spec",
+        "secondary": [
+          "content_source_decision",
+          "discovered_content",
+          "delivery_manifest",
+          "rendering_instructions",
+          "accessibility_overlays",
+          "mia_instruction"
+        ]
+      },
+      "upstream": [
+        "PH-MSA-9"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-MSA-1",
+      "CP-MSA-2",
+      "CP-MSA-3",
+      "CP-MSA-4",
+      "CP-MSA-5",
+      "CP-MSA-6",
+      "CP-MSA-7",
+      "CP-MSA-8",
+      "CP-MSA-9"
+    ],
+    "original_count": 9,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

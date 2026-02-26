@@ -1,0 +1,319 @@
+{
+  "compound_id": "CP-MP2",
+  "compound_name": "MP2 Coherence Dimensions Gate Master Compound",
+  "layer": "MP02",
+  "agent": "MP2",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MP2",
+  "theoretical_foundation": {
+    "primary_theory": "Cross-Layer Coherence Validation",
+    "application": "15-phase pipeline"
+  },
+  "calls_elements": [],
+  "phases": [
+    {
+      "phase_id": "PH-MP2-1",
+      "was": "MP02-C-ADR-COHERENCESUMM",
+      "phase_name": "Coherence Summary Generator",
+      "outputs": {
+        "primary": "complete_adr (all 5 sections: Decision Summary, Configuration, Context Snapshot, Ethical Compliance, Coherence Confirmation)",
+        "secondary": [
+          "adr_id",
+          "adr_status",
+          "coherence_score",
+          "timestamp"
+        ]
+      },
+      "upstream": [],
+      "downstream": [
+        "PH-MP2-3"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-2",
+      "was": "MP02-C-ADR-COMPLIANCELOG",
+      "phase_name": "Compliance Logger",
+      "outputs": {
+        "primary": "partial_adr (+ Ethical Compliance section)",
+        "secondary": [
+          "compliance_summary",
+          "frameworks_satisfied",
+          "restrictions_applied"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-2"
+      ],
+      "downstream": [
+        "PH-MP2-4"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-3",
+      "was": "MP02-C-ADR-CONFIGRECORD",
+      "phase_name": "Configuration Recorder",
+      "outputs": {
+        "primary": "partial_adr (Decision Summary + Configuration sections)",
+        "secondary": [
+          "layer_versions",
+          "configuration_hash"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-3"
+      ],
+      "downstream": [
+        "PH-MP2-5"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-4",
+      "was": "MP02-C-ADR-CONTEXTSNAP",
+      "phase_name": "Context Snapshot Generator",
+      "outputs": {
+        "primary": "partial_adr (+ Context Snapshot section)",
+        "secondary": [
+          "snapshot_timestamp",
+          "context_hash"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-4"
+      ],
+      "downstream": [
+        "PH-MP2-6"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-5",
+      "was": "MP02-C-COH-ETHICALCOMPLI",
+      "phase_name": "Ethical Compliance Checker",
+      "outputs": {
+        "primary": "PASS | FAIL",
+        "secondary": [
+          "ethical_violations",
+          "requires_hitl",
+          "severity",
+          "affected_layers"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-5"
+      ],
+      "downstream": [
+        "PH-MP2-7"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-6",
+      "was": "MP02-C-COH-MODALITYCOMPAT",
+      "phase_name": "Modality Compatibility Checker",
+      "outputs": {
+        "primary": "PASS | FAIL",
+        "secondary": [
+          "modality_conflicts",
+          "has_viable_fallback",
+          "severity",
+          "affected_layers"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-6"
+      ],
+      "downstream": [
+        "PH-MP2-8"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-7",
+      "was": "MP02-C-COH-PROFILEALIGN",
+      "phase_name": "Profile Alignment Checker",
+      "outputs": {
+        "primary": "PASS | FAIL",
+        "secondary": [
+          "alignment_gaps",
+          "zpd_analysis",
+          "severity",
+          "affected_layers"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-7"
+      ],
+      "downstream": [
+        "PH-MP2-9"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-8",
+      "was": "MP02-C-COH-SEQACHIEVABIL",
+      "phase_name": "Sequence Achievability Checker",
+      "outputs": {
+        "primary": "PASS | FAIL",
+        "secondary": [
+          "constraint_violations",
+          "severity",
+          "affected_layers",
+          "correction_hint"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-8"
+      ],
+      "downstream": [
+        "PH-MP2-10"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-9",
+      "was": "MP02-C-EMT-OUTPUTPACKAGER",
+      "phase_name": "Output Packager Compound",
+      "outputs": {
+        "primary": "FORWARD_PACKAGE | DIRECTIVE_BUNDLE",
+        "secondary": [
+          "emission_report",
+          "destination",
+          "compliance_status"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-9"
+      ],
+      "downstream": [
+        "PH-MP2-11"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-10",
+      "was": "MP02-C-GAT-DELIVERYGATE",
+      "phase_name": "Delivery Gate Configurer",
+      "outputs": {
+        "primary": "delivery_gate_config {conditions, thresholds, enforcement_mode, fallback_actions}",
+        "secondary": [
+          "gate_type: DELIVERY"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-10"
+      ],
+      "downstream": [
+        "PH-MP2-12"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-11",
+      "was": "MP02-C-GAT-ETHICALGATE",
+      "phase_name": "Ethical Gate Configurer",
+      "outputs": {
+        "primary": "complete_gate_config (all 4 gate types: delivery, response, time, ethical)",
+        "secondary": [
+          "gate_type: ETHICAL",
+          "hitl_triggers",
+          "monitoring_cadence"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-11"
+      ],
+      "downstream": [
+        "PH-MP2-13"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-12",
+      "was": "MP02-C-GAT-RESPONSEGATE",
+      "phase_name": "Learner Response Gate Configurer",
+      "outputs": {
+        "primary": "response_gate_config {triggers, adaptation_actions, thresholds, enforcement_mode}",
+        "secondary": [
+          "gate_type: LEARNER_RESPONSE"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-12"
+      ],
+      "downstream": [
+        "PH-MP2-14"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-13",
+      "was": "MP02-C-GAT-TIMEGATE",
+      "phase_name": "Time Gate Configurer",
+      "outputs": {
+        "primary": "time_gate_config {checkpoints, hard_stop, graceful_degradation, time_buffer}",
+        "secondary": [
+          "gate_type: TIME"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-13"
+      ],
+      "downstream": [
+        "PH-MP2-15"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-14",
+      "was": "MP02-C-INT-CHAINVALIDATION",
+      "phase_name": "Chain Validation Compound",
+      "outputs": {
+        "primary": "PASS | REJECT",
+        "secondary": [
+          "decoded_chain",
+          "layers_dict",
+          "validation_report"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-14"
+      ],
+      "downstream": [
+        "PH-MP2-16"
+      ]
+    },
+    {
+      "phase_id": "PH-MP2-15",
+      "was": "MP02-C-INT-LAYERPRESENCE",
+      "phase_name": "Layer Presence Compound",
+      "outputs": {
+        "primary": "PASS | REJECT",
+        "secondary": [
+          "layers_present_count",
+          "missing_layers",
+          "layer_presence_report"
+        ]
+      },
+      "upstream": [
+        "PH-MP2-15"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "MP02-C-ADR-COHERENCESUMM",
+      "MP02-C-ADR-COMPLIANCELOG",
+      "MP02-C-ADR-CONFIGRECORD",
+      "MP02-C-ADR-CONTEXTSNAP",
+      "MP02-C-COH-ETHICALCOMPLI",
+      "MP02-C-COH-MODALITYCOMPAT",
+      "MP02-C-COH-PROFILEALIGN",
+      "MP02-C-COH-SEQACHIEVABIL",
+      "MP02-C-EMT-OUTPUTPACKAGER",
+      "MP02-C-GAT-DELIVERYGATE",
+      "MP02-C-GAT-ETHICALGATE",
+      "MP02-C-GAT-RESPONSEGATE",
+      "MP02-C-GAT-TIMEGATE",
+      "MP02-C-INT-CHAINVALIDATION",
+      "MP02-C-INT-LAYERPRESENCE"
+    ],
+    "original_count": 15,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

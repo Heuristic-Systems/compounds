@@ -1,0 +1,881 @@
+{
+  "compound_id": "CP-LODA",
+  "compound_name": "Learning Objectives Agent Master Compound",
+  "layer": "L01",
+  "agent": "LODA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-LODA",
+  "theoretical_foundation": {
+    "primary_theory": "Learning Objective Extraction and Classification",
+    "application": "8-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L01-CS-BUNDLE",
+    "E-L01-EF-BUNDLE",
+    "E-L01-GEN-BUNDLE",
+    "E-L01-MAI-BUNDLE",
+    "E-L01-MC-BUNDLE",
+    "E-L01-MML-BUNDLE",
+    "E-L01-PER-BRIDGE",
+    "E-L01-REP-BUNDLE",
+    "E-L01-TLD-BUNDLE",
+    "E-L06-COG-BUNDLE",
+    "E-L06-EXP-BUNDLE",
+    "E-L06-HUM-BUNDLE",
+    "E-L06-PRC-BUNDLE",
+    "E-L06-PRF-BUNDLE",
+    "E-L06-PSY-BUNDLE",
+    "E-L06-STR-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-LODA-1",
+      "was": "CP-LD-1",
+      "phase_name": "Goal Decomposition Engine",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-GEN-BUNDLE",
+        "E-L01-MAI-BUNDLE",
+        "E-L06-COG-BUNDLE",
+        "E-L06-HUM-BUNDLE",
+        "E-L06-PRC-BUNDLE",
+        "E-L06-EXP-BUNDLE",
+        "E-L06-PRF-BUNDLE",
+        "E-L06-STR-BUNDLE",
+        "E-L06-PSY-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed goal structuring preferences (C for detail level, O for flexibility)"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_goal_clarity",
+          "purpose": "Evaluate learner's goal clarity and planning capacity"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_domain_constraints",
+          "purpose": "Identify domain-specific structuring constraints"
+        },
+        "E-L01-GEN-BUNDLE": {
+          "instruction": "gather_system_context",
+          "purpose": "Collect institutional and curriculum context"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "assess_goal_commitment",
+          "purpose": "Evaluate motivational commitment to goal"
+        },
+        "E-L06-COG-BUNDLE": {
+          "instruction": "extract_bloom_objectives",
+          "purpose": "Use Bloom atoms to ask: What should learners Remember/Understand/Apply/Analyze/Evaluate/Create?"
+        },
+        "E-L06-HUM-BUNDLE": {
+          "instruction": "extract_fink_objectives",
+          "purpose": "Use Fink atoms to ask: What objectives for Foundational Knowledge/Application/Integration/Human Dimension/Caring/Learning How to Learn?"
+        },
+        "E-L06-PRC-BUNDLE": {
+          "instruction": "extract_gagne_prerequisites",
+          "purpose": "Use Gagné atoms to identify prerequisite skills that must become their own objectives"
+        },
+        "E-L06-EXP-BUNDLE": {
+          "instruction": "extract_kolb_modes",
+          "purpose": "Use Kolb atoms to ensure objectives span all 4 experiential modes (CE/RO/AC/AE)"
+        },
+        "E-L06-PRF-BUNDLE": {
+          "instruction": "extract_dreyfus_stages",
+          "purpose": "Use Dreyfus atoms to create stage-appropriate objectives (Novice→Expert)"
+        },
+        "E-L06-STR-BUNDLE": {
+          "instruction": "extract_solo_structure",
+          "purpose": "Use SOLO atoms to define structural complexity requirements"
+        },
+        "E-L06-PSY-BUNDLE": {
+          "instruction": "extract_psychomotor_objectives",
+          "purpose": "Use Simpson atoms to identify psychomotor skill objectives if applicable"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-0 framework for decomposition rules",
+        "2. Determine intake_mode (curriculum/teacher/student) and intake_method",
+        "3. BRANCH by intake_mode:",
+        "   3a. CURRICULUM: Parse API/JSON input, validate structure",
+        "   3b. TEACHER: Parse API/JSON/upload or conduct conversation",
+        "   3c. STUDENT: Conduct conversation, infer SSOT type, confirm with learner",
+        "4. Instruct E-L01-PER-BRIDGE: get_personality_context (if student/teacher)",
+        "5. Instruct L01 elements for learner context (MC, CS, GEN, MAI bundles)",
+        "6. Instruct L06 elements for framework-guided extraction:",
+        "   6a. E-L06-COG-BUNDLE: What should learners Remember/Understand/Apply/Analyze/Evaluate/Create?",
+        "   6b. E-L06-HUM-BUNDLE: Coverage across Fink's 6 dimensions?",
+        "   6c. E-L06-PRC-BUNDLE: What prerequisites must become objectives?",
+        "   6d. E-L06-EXP-BUNDLE: Objectives for all Kolb experiential modes?",
+        "   6e. E-L06-PRF-BUNDLE: Stage-appropriate objectives for current→target Dreyfus level?",
+        "   6f. E-L06-STR-BUNDLE: Required structural complexity?",
+        "   6g. E-L06-PSY-BUNDLE: Psychomotor objectives if applicable?",
+        "7. Synthesize extracted objectives into objective_tree",
+        "8. Build dependency_graph using Gagné learning hierarchies",
+        "9. Adjust hierarchy depth based on personality (C score) and intake_mode",
+        "10. Apply interpretation_logic to validate decomposition",
+        "11. Attach ssot_type (for student intake) or null (for curriculum/teacher)",
+        "12. Emit objective_tree with dependency_graph and intake_mode_used"
+      ],
+      "interpretation_logic": {
+        "WELL_DECOMPOSED": {
+          "condition": "all_objectives_atomic AND all_objectives_measurable AND dependency_graph_complete",
+          "action": "emit_objective_tree_for_classification"
+        },
+        "PARTIAL_DECOMPOSITION": {
+          "condition": "some_objectives_measurable AND dependency_graph_partial",
+          "action": "iterate_decomposition_with_guidance"
+        },
+        "POOR_DECOMPOSITION": {
+          "condition": "objectives_vague OR dependency_graph_missing",
+          "action": "request_domain_expert_input"
+        },
+        "personality_adjustments": {
+          "high_conscientiousness": "generate more detailed hierarchy with explicit milestones",
+          "low_conscientiousness": "generate simpler hierarchy with fewer levels",
+          "high_openness": "allow flexible pathways between objectives",
+          "low_openness": "enforce linear, structured pathways"
+        }
+      },
+      "outputs": {
+        "primary": "objective_tree",
+        "secondary": [
+          "goal_hierarchy",
+          "dependency_graph",
+          "decomposition_confidence",
+          "ssot_type",
+          "intake_mode_used"
+        ]
+      },
+      "loop_policy": {
+        "strategy": "iterate_until_complete",
+        "reinterpretation_max": 3,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot decompose goal into measurable objectives within bounded loops."
+      },
+      "upstream": [],
+      "downstream": [
+        "PH-LODA-3"
+      ]
+    },
+    {
+      "phase_id": "PH-LODA-2",
+      "was": "CP-LD-2",
+      "phase_name": "Taxonomic Classifier",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-EF-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-GEN-BUNDLE",
+        "E-L06-COG-BUNDLE",
+        "E-L06-STR-BUNDLE",
+        "E-L06-HUM-BUNDLE",
+        "E-L06-PRC-BUNDLE",
+        "E-L06-EXP-BUNDLE",
+        "E-L06-PRF-BUNDLE",
+        "E-L06-PSY-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed taxonomy interpretation (O for abstraction comfort)"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_cognitive_level_readiness",
+          "purpose": "Evaluate learner's readiness for different cognitive levels"
+        },
+        "E-L01-EF-BUNDLE": {
+          "instruction": "analyse_feedback_requirements",
+          "purpose": "Determine feedback needs for each taxonomy level"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_task_constraints",
+          "purpose": "Identify constraints affecting taxonomy classification"
+        },
+        "E-L01-GEN-BUNDLE": {
+          "instruction": "gather_curriculum_standards",
+          "purpose": "Collect curriculum-level taxonomy requirements"
+        },
+        "E-L06-COG-BUNDLE": {
+          "instruction": "classify_bloom_and_webb",
+          "purpose": "Classify cognitive level (BT1-BT6) and depth of knowledge (DK1-DK4)"
+        },
+        "E-L06-STR-BUNDLE": {
+          "instruction": "classify_solo_structure",
+          "purpose": "Classify structural complexity (R1-R5: Prestructural to Extended Abstract)"
+        },
+        "E-L06-HUM-BUNDLE": {
+          "instruction": "classify_fink_significance",
+          "purpose": "Identify Fink's Significant Learning categories present"
+        },
+        "E-L06-PRC-BUNDLE": {
+          "instruction": "classify_gagne_event",
+          "purpose": "Classify instructional event type (E1-E9)"
+        },
+        "E-L06-EXP-BUNDLE": {
+          "instruction": "classify_kolb_mode",
+          "purpose": "Classify experiential mode (CE/RO/AC/AE/MX)"
+        },
+        "E-L06-PRF-BUNDLE": {
+          "instruction": "classify_dreyfus_level",
+          "purpose": "Classify target proficiency level (P1-P5: Novice to Expert)"
+        },
+        "E-L06-PSY-BUNDLE": {
+          "instruction": "classify_simpson_psychomotor",
+          "purpose": "Classify psychomotor level (S1-S7 or NA if not applicable)"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-1 framework for taxonomy rules",
+        "2. Receive objective_tree and intake_mode from CP-LD-1",
+        "3. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "4. Instruct L01 context elements (MC, EF, CS, GEN bundles)",
+        "5. FOR EACH objective in objective_tree:",
+        "   5a. Instruct E-L06-COG-BUNDLE: classify Bloom level (BT1-BT6) and Webb DOK (DK1-DK4)",
+        "   5b. Instruct E-L06-STR-BUNDLE: classify SOLO level (R1-R5)",
+        "   5c. Instruct E-L06-HUM-BUNDLE: identify Fink categories present",
+        "   5d. Instruct E-L06-PRC-BUNDLE: classify Gagné event (E1-E9)",
+        "   5e. Instruct E-L06-EXP-BUNDLE: classify Kolb mode (CE/RO/AC/AE/MX)",
+        "   5f. Instruct E-L06-PRF-BUNDLE: classify Dreyfus level (P1-P5)",
+        "   5g. Instruct E-L06-PSY-BUNDLE: classify Simpson level (S1-S7 or NA)",
+        "   5h. Classify Krathwohl affective level (K1-K5 or NA) inline",
+        "6. Cross-validate all 8 dimensions for consistency",
+        "7. Apply interpretation_logic",
+        "8. Emit taxonomy_classification with all segment codes"
+      ],
+      "interpretation_logic": {
+        "CLEAR_CLASSIFICATION": {
+          "condition": "all_8_dimensions_classified AND no_conflicts",
+          "action": "emit_taxonomy_classification"
+        },
+        "AMBIGUOUS_CLASSIFICATION": {
+          "condition": "any_dimension_uncertain",
+          "action": "refine_objective_wording"
+        },
+        "MISALIGNED_CLASSIFICATION": {
+          "condition": "dimension_conflicts_detected",
+          "action": "recommend_objective_decomposition"
+        },
+        "SSOT_RANGE_MISMATCH": {
+          "condition": "ssot_type_present AND classification_outside_typical_range",
+          "action": "flag_for_review_but_allow",
+          "note": "Ranges are typical, not mandatory. Log deviation for advising."
+        },
+        "personality_adjustments": {
+          "high_openness": "favour higher taxonomy levels (analyze, evaluate, create)",
+          "low_openness": "ensure solid foundation at lower levels before advancing",
+          "high_conscientiousness": "include metacognitive dimension objectives"
+        }
+      },
+      "outputs": {
+        "primary": "taxonomy_classification",
+        "secondary": [
+          "prc_code",
+          "cog_code",
+          "dok_code",
+          "str_code",
+          "exp_code",
+          "aff_code",
+          "psy_code",
+          "prf_code"
+        ],
+        "signature_segments": {
+          "description": "Ready for CP-LD-8 to assemble into LOOS or SOS signature",
+          "format": {
+            "LOOS": "OBJ06-{PRC}-{COG}-{STR}-{EXP}-{AFF}-{PSY}-{PRF}-{EVD}",
+            "SOS": "SOS{TYPE}{PRC}{COG}{DOK}{STR}{EXP}{AFF}{PSY}{PRF}{EVD}"
+          }
+        }
+      },
+      "loop_policy": {
+        "strategy": "single_pass",
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot achieve unambiguous taxonomy classification."
+      },
+      "upstream": [
+        "PH-LODA-2"
+      ],
+      "downstream": [
+        "PH-LODA-4"
+      ]
+    },
+    {
+      "phase_id": "PH-LODA-3",
+      "was": "CP-LD-3",
+      "phase_name": "Complexity Analyzer",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-MAI-BUNDLE",
+        "E-L01-EF-BUNDLE",
+        "E-L01-CS-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "derive_sensitivity_thresholds",
+          "purpose": "Get personality-informed stress and capacity thresholds (N for frustration, C for persistence)"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_planning_capacity",
+          "purpose": "Evaluate cognitive planning and strategy capacity"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "assess_affective_tolerance",
+          "purpose": "Evaluate stress reactivity and frustration tolerance"
+        },
+        "E-L01-EF-BUNDLE": {
+          "instruction": "analyse_error_cost_impact",
+          "purpose": "Assess how errors affect learning trajectory"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_time_constraints",
+          "purpose": "Identify time and resource constraints"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-2 framework for complexity analysis rules",
+        "2. Receive classified_objectives from CP-LD-2",
+        "3. Instruct E-L01-PER-BRIDGE: derive_sensitivity_thresholds",
+        "4. Receive personality-adjusted thresholds (N→frustration, C→persistence)",
+        "5. Instruct E-L01-MC-BUNDLE: assess_planning_capacity",
+        "6. Instruct E-L01-MAI-BUNDLE: assess_affective_tolerance",
+        "7. Instruct E-L01-EF-BUNDLE: analyse_error_cost_impact",
+        "8. Instruct E-L01-CS-BUNDLE: evaluate_time_constraints",
+        "9. Receive evidence bundles from all Elements",
+        "10. Calculate intrinsic cognitive load from objective complexity",
+        "11. Calculate affective demand with personality adjustment",
+        "12. Estimate time requirements based on load and capacity",
+        "13. Determine supervision level recommendation",
+        "14. Apply interpretation_logic with personality adjustments",
+        "15. Emit complexity_score with time_estimate"
+      ],
+      "interpretation_logic": {
+        "MANAGEABLE_COMPLEXITY": {
+          "condition": "total_load <= learner_capacity AND affective_demand <= personality_adjusted_threshold",
+          "action": "proceed_with_standard_scaffolding"
+        },
+        "CHALLENGING_COMPLEXITY": {
+          "condition": "total_load > learner_capacity * 0.8 OR affective_demand > frustration_threshold * 0.8",
+          "action": "recommend_enhanced_scaffolding_or_chunking"
+        },
+        "EXCESSIVE_COMPLEXITY": {
+          "condition": "total_load > learner_capacity * 1.2 OR affective_demand > frustration_threshold",
+          "action": "require_decomposition_or_prerequisite_completion"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "lower affective demand threshold by 20%",
+          "high_conscientiousness": "higher persistence expectation - can handle sustained complexity",
+          "low_conscientiousness": "chunk into smaller complexity units",
+          "high_openness": "tolerate higher cognitive ambiguity"
+        }
+      },
+      "outputs": {
+        "primary": "complexity_score",
+        "secondary": [
+          "cognitive_demand",
+          "affective_demand",
+          "time_estimate",
+          "supervision_level"
+        ]
+      },
+      "loop_policy": {
+        "strategy": "single_pass",
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot determine complexity - insufficient learner data."
+      },
+      "upstream": [
+        "PH-LODA-3"
+      ],
+      "downstream": [
+        "PH-LODA-5"
+      ]
+    },
+    {
+      "phase_id": "PH-LODA-4",
+      "was": "CP-LD-4",
+      "phase_name": "Success Criteria Generator",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-EF-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-MAI-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed criteria presentation (C for detail, N for threshold sensitivity)"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_self_monitoring_capacity",
+          "purpose": "Evaluate learner's ability to self-assess against criteria"
+        },
+        "E-L01-EF-BUNDLE": {
+          "instruction": "analyse_error_attribution_patterns",
+          "purpose": "Understand how learner interprets success/failure"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_assessment_constraints",
+          "purpose": "Identify practical constraints on assessment"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "assess_mastery_orientation",
+          "purpose": "Evaluate learner's mastery vs performance orientation"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-3 framework for success criteria rules",
+        "2. Receive objectives and taxonomy_levels from CP-LD-2",
+        "3. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "4. Receive personality preferences (C for detail, N for framing)",
+        "5. Instruct E-L01-MC-BUNDLE: assess_self_monitoring_capacity",
+        "6. Instruct E-L01-EF-BUNDLE: analyse_error_attribution_patterns",
+        "7. Instruct E-L01-CS-BUNDLE: evaluate_assessment_constraints",
+        "8. Instruct E-L01-MAI-BUNDLE: assess_mastery_orientation",
+        "9. Receive evidence bundles from all Elements",
+        "10. Generate observable behavior descriptions for each objective",
+        "11. Specify conditions of performance",
+        "12. Define mastery threshold (personality-adjusted)",
+        "13. Determine evidence requirements and measurement type",
+        "14. Apply interpretation_logic with personality adjustments",
+        "15. Emit success_criteria with mastery_threshold"
+      ],
+      "interpretation_logic": {
+        "WELL_DEFINED_CRITERIA": {
+          "condition": "behavior_observable AND conditions_specified AND threshold_measurable",
+          "action": "emit_success_criteria"
+        },
+        "PARTIAL_CRITERIA": {
+          "condition": "behavior_observable AND (conditions_vague OR threshold_missing)",
+          "action": "refine_criteria_with_examples"
+        },
+        "VAGUE_CRITERIA": {
+          "condition": "behavior_not_observable OR threshold_not_measurable",
+          "action": "rewrite_objective_with_action_verbs"
+        },
+        "personality_adjustments": {
+          "high_conscientiousness": "provide detailed rubrics with multiple levels",
+          "low_conscientiousness": "provide simple pass/fail criteria with clear examples",
+          "high_neuroticism": "frame criteria positively, emphasize growth not perfection",
+          "performance_oriented": "include comparison benchmarks",
+          "mastery_oriented": "emphasize personal progress criteria"
+        }
+      },
+      "outputs": {
+        "primary": "success_criteria",
+        "secondary": [
+          "mastery_threshold",
+          "evidence_requirements",
+          "measurement_type"
+        ]
+      },
+      "loop_policy": {
+        "strategy": "iterate_until_valid",
+        "reinterpretation_max": 3,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot define measurable success criteria."
+      },
+      "upstream": [
+        "PH-LODA-4"
+      ],
+      "downstream": [
+        "PH-LODA-6"
+      ]
+    },
+    {
+      "phase_id": "PH-LODA-5",
+      "was": "CP-LD-5",
+      "phase_name": "Prerequisite Mapper",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-REP-BUNDLE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-GEN-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed gap analysis approach (C for thoroughness, O for flexibility)"
+        },
+        "E-L01-REP-BUNDLE": {
+          "instruction": "assess_knowledge_representation",
+          "purpose": "Evaluate current knowledge structure and gaps"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_prior_knowledge_activation",
+          "purpose": "Evaluate ability to access and apply prior knowledge"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_domain_dependencies",
+          "purpose": "Identify domain-specific prerequisite requirements"
+        },
+        "E-L01-GEN-BUNDLE": {
+          "instruction": "gather_curriculum_sequence",
+          "purpose": "Collect curriculum-defined prerequisite chains"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-4 framework for prerequisite mapping rules",
+        "2. Receive objective_tree from CP-LD-1",
+        "3. Receive learner_profile from LOPA handoff",
+        "4. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "5. Receive personality preferences (C for thoroughness, O for flexibility)",
+        "6. Instruct E-L01-REP-BUNDLE: assess_knowledge_representation",
+        "7. Instruct E-L01-MC-BUNDLE: assess_prior_knowledge_activation",
+        "8. Instruct E-L01-CS-BUNDLE: evaluate_domain_dependencies",
+        "9. Instruct E-L01-GEN-BUNDLE: gather_curriculum_sequence",
+        "10. Receive evidence bundles from all Elements",
+        "11. Map each objective to required prior knowledge",
+        "12. Compare requirements against learner's current state",
+        "13. Identify gaps and remediation options",
+        "14. Apply interpretation_logic with personality adjustments",
+        "15. Emit prerequisite_map with gap_analysis"
+      ],
+      "interpretation_logic": {
+        "FULLY_READY": {
+          "condition": "all_prerequisites_met AND no_critical_gaps",
+          "action": "emit_readiness_confirmed"
+        },
+        "PARTIALLY_READY": {
+          "condition": "some_prerequisites_met AND gaps_remediation_available",
+          "action": "emit_remediation_path"
+        },
+        "NOT_READY": {
+          "condition": "critical_prerequisites_missing OR gaps_not_remediatable_inline",
+          "action": "recommend_foundation_sequence"
+        },
+        "personality_adjustments": {
+          "high_conscientiousness": "require thorough prerequisite verification before proceeding",
+          "low_conscientiousness": "allow just-in-time prerequisite review",
+          "high_openness": "allow flexible prerequisite paths with exploration",
+          "low_openness": "enforce linear prerequisite completion"
+        }
+      },
+      "outputs": {
+        "primary": "prerequisite_map",
+        "secondary": [
+          "gap_analysis",
+          "remediation_suggestions",
+          "readiness_flags"
+        ]
+      },
+      "loop_policy": {
+        "strategy": "single_pass",
+        "reinterpretation_max": 2,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot determine prerequisite status without additional assessment data."
+      },
+      "upstream": [
+        "PH-LODA-5"
+      ],
+      "downstream": [
+        "PH-LODA-7"
+      ]
+    },
+    {
+      "phase_id": "PH-LODA-6",
+      "was": "CP-LD-6",
+      "phase_name": "Motivation Alignment Engine",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-MAI-BUNDLE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-GEN-BUNDLE",
+        "E-L01-TLD-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_full_personality_context",
+          "purpose": "Get full personality profile including RIASEC for vocational alignment, E for social, O for novelty"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "assess_motivation_orientation",
+          "purpose": "Evaluate intrinsic/extrinsic motivation patterns"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_goal_setting_approach",
+          "purpose": "Evaluate preferred goal framing and autonomy needs"
+        },
+        "E-L01-GEN-BUNDLE": {
+          "instruction": "gather_career_interests",
+          "purpose": "Collect vocational interests and career aspirations"
+        },
+        "E-L01-TLD-BUNDLE": {
+          "instruction": "assess_temporal_preferences",
+          "purpose": "Evaluate time horizons and future orientation"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-5 framework for motivation alignment rules",
+        "2. Receive objectives from CP-LD-1",
+        "3. Receive complexity_scores from CP-LD-3",
+        "4. Instruct E-L01-PER-BRIDGE: get_full_personality_context",
+        "5. Receive personality preferences including RIASEC profile",
+        "6. Instruct E-L01-MAI-BUNDLE: assess_motivation_orientation",
+        "7. Instruct E-L01-MC-BUNDLE: assess_goal_setting_approach",
+        "8. Instruct E-L01-GEN-BUNDLE: gather_career_interests",
+        "9. Instruct E-L01-TLD-BUNDLE: assess_temporal_preferences",
+        "10. Receive evidence bundles from all Elements",
+        "11. Analyze alignment between objectives and intrinsic motivations",
+        "12. Map objectives to RIASEC interest areas",
+        "13. Generate relevance framing for each objective",
+        "14. Determine autonomy support level",
+        "15. Apply interpretation_logic with personality adjustments",
+        "16. Emit motivation_alignment with engagement_hooks"
+      ],
+      "interpretation_logic": {
+        "STRONG_ALIGNMENT": {
+          "condition": "intrinsic_motivation_match AND career_relevance_high AND interest_overlap_strong",
+          "action": "emphasize_autonomy_and_exploration"
+        },
+        "MODERATE_ALIGNMENT": {
+          "condition": "some_motivation_match OR career_relevance_moderate",
+          "action": "provide_relevance_bridges_and_choice"
+        },
+        "WEAK_ALIGNMENT": {
+          "condition": "low_intrinsic_motivation AND low_career_relevance",
+          "action": "provide_external_incentives_and_clear_utility"
+        },
+        "personality_adjustments": {
+          "high_extraversion": "emphasize collaborative and social aspects",
+          "high_openness": "emphasize novelty, creativity, and exploration",
+          "riasec_R": "connect to practical, hands-on applications",
+          "riasec_I": "connect to analytical and investigative aspects",
+          "riasec_A": "connect to creative and expressive opportunities",
+          "riasec_S": "connect to helping and collaborative contexts",
+          "riasec_E": "connect to leadership and influence opportunities",
+          "riasec_C": "connect to systematic and organizational aspects"
+        }
+      },
+      "outputs": {
+        "primary": "motivation_alignment",
+        "secondary": [
+          "relevance_framing",
+          "engagement_hooks",
+          "autonomy_support_level"
+        ]
+      },
+      "loop_policy": {
+        "strategy": "single_pass",
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot establish motivation alignment - insufficient profile data."
+      },
+      "upstream": [
+        "PH-LODA-6"
+      ],
+      "downstream": [
+        "PH-LODA-8"
+      ]
+    },
+    {
+      "phase_id": "PH-LODA-7",
+      "was": "CP-LD-7",
+      "phase_name": "Assessment Strategy Designer",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-EF-BUNDLE",
+        "E-L01-MAI-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-MC-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed assessment preferences (N for stakes sensitivity, E for format preference)"
+        },
+        "E-L01-EF-BUNDLE": {
+          "instruction": "analyse_feedback_preferences",
+          "purpose": "Understand preferred feedback timing and format"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "assess_test_anxiety_indicators",
+          "purpose": "Evaluate anxiety and stakes sensitivity"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_assessment_modality_constraints",
+          "purpose": "Identify practical constraints on assessment formats"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_metacognitive_awareness",
+          "purpose": "Evaluate readiness for self-assessment components"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-6 framework for assessment design rules",
+        "2. Receive objectives, taxonomy_levels from CP-LD-2",
+        "3. Receive success_criteria from CP-LD-4",
+        "4. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "5. Receive personality preferences (N for stakes, E for format)",
+        "6. Instruct E-L01-EF-BUNDLE: analyse_feedback_preferences",
+        "7. Instruct E-L01-MAI-BUNDLE: assess_test_anxiety_indicators",
+        "8. Instruct E-L01-CS-BUNDLE: evaluate_assessment_modality_constraints",
+        "9. Instruct E-L01-MC-BUNDLE: assess_metacognitive_awareness",
+        "10. Receive evidence bundles from all Elements",
+        "11. Match assessment types to taxonomy levels",
+        "12. Apply anxiety mitigation for high-N learners",
+        "13. Design rubric aligned to success criteria",
+        "14. Determine assessment timing (formative/summative)",
+        "15. Apply interpretation_logic with personality adjustments",
+        "16. Emit assessment_blueprint with rubric_structure"
+      ],
+      "interpretation_logic": {
+        "STANDARD_ASSESSMENT": {
+          "condition": "low_test_anxiety AND no_accessibility_constraints AND standard_format_acceptable",
+          "action": "design_standard_assessment_aligned_to_taxonomy"
+        },
+        "ACCOMMODATED_ASSESSMENT": {
+          "condition": "moderate_test_anxiety OR accessibility_constraints OR preference_for_alternatives",
+          "action": "design_alternative_assessment_with_accommodations"
+        },
+        "LOW_STAKES_PROGRESSIVE": {
+          "condition": "high_test_anxiety OR preference_for_continuous_assessment",
+          "action": "design_portfolio_or_mastery_based_assessment"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "low-stakes formative assessments, growth framing, practice opportunities",
+          "low_neuroticism": "can handle summative high-stakes assessments",
+          "high_extraversion": "allow oral presentations, group demonstrations, discussions",
+          "low_extraversion": "prefer written, individual, asynchronous formats",
+          "high_conscientiousness": "detailed rubrics appreciated, self-assessment components",
+          "high_openness": "allow creative demonstration formats"
+        }
+      },
+      "outputs": {
+        "primary": "assessment_blueprint",
+        "secondary": [
+          "assessment_type",
+          "assessment_timing",
+          "anxiety_mitigation_strategies",
+          "rubric_structure"
+        ]
+      },
+      "loop_policy": {
+        "strategy": "single_pass",
+        "reinterpretation_max": 2,
+        "more_data_max": 1,
+        "escalation_condition": "Cannot design valid assessment within constraints."
+      },
+      "upstream": [
+        "PH-LODA-7"
+      ],
+      "downstream": [
+        "PH-LODA-9"
+      ]
+    },
+    {
+      "phase_id": "PH-LODA-8",
+      "was": "CP-LD-8",
+      "phase_name": "Downstream Handoff Compiler",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-GEN-BUNDLE",
+        "E-L01-MML-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_full_personality_context",
+          "purpose": "Package full personality context for downstream agents"
+        },
+        "E-L01-GEN-BUNDLE": {
+          "instruction": "validate_completeness",
+          "purpose": "Verify all required outputs are present and valid"
+        },
+        "E-L01-MML-BUNDLE": {
+          "instruction": "assess_multimodal_requirements",
+          "purpose": "Identify modality preferences for L05 handoff"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-LD-7 framework for handoff validation rules",
+        "2. Collect all outputs from CP-LD-1 through CP-LD-7",
+        "3. Determine intake_mode (curriculum/teacher/student)",
+        "4. FOR EACH objective in objective_tree:",
+        "   4a. Retrieve taxonomy_classification segments from CP-LD-2",
+        "   4b. IF intake_mode is curriculum OR teacher: assemble LOOS signature",
+        "   4c. IF intake_mode is student: assemble SOS signature (include ssot_type)",
+        "   4d. Validate signature format",
+        "5. Instruct E-L01-PER-BRIDGE: get_full_personality_context",
+        "6. Instruct E-L01-GEN-BUNDLE: validate_completeness",
+        "7. Instruct E-L01-MML-BUNDLE: assess_multimodal_requirements",
+        "8. Validate all required fields are present",
+        "9. Check cross-reference integrity (objectives→criteria→assessment→signature)",
+        "10. Package personality context for downstream agents",
+        "11. Include objective_signatures in handoff bundle",
+        "12. Structure output for CogniStruct (theory mapping)",
+        "13. Structure output for CSA (sequencing + signatures)",
+        "14. Structure output for CLEA (context binding)",
+        "15. Apply interpretation_logic",
+        "16. Emit instructional_path_spec with objective_signatures"
+      ],
+      "interpretation_logic": {
+        "COMPLETE_HANDOFF": {
+          "condition": "all_required_inputs_present AND all_validations_passed AND signatures_generated",
+          "action": "emit_instructional_path_spec_with_signatures"
+        },
+        "PARTIAL_HANDOFF": {
+          "condition": "critical_inputs_present AND non_critical_gaps_acceptable",
+          "action": "emit_with_gap_annotations"
+        },
+        "BLOCKED_HANDOFF": {
+          "condition": "critical_inputs_missing OR validation_failures OR signature_generation_failed",
+          "action": "return_to_failed_compound"
+        },
+        "personality_context_package": {
+          "trait_scores": "Full FFM + MBTI + Enneagram + RIASEC",
+          "state_modifiers": "E-L01-PER-BRIDGE transformations for downstream use",
+          "pedagogical_implications": "Key adjustments for content, sequencing, and context agents"
+        }
+      },
+      "outputs": {
+        "primary": "instructional_path_spec",
+        "secondary": [
+          "objective_signatures",
+          "loda_handoff_bundle",
+          "downstream_requirements",
+          "personality_context_package"
+        ],
+        "objective_signatures": {
+          "description": "Array of LOOS or SOS signatures, one per objective",
+          "format_depends_on": "intake_mode"
+        }
+      },
+      "loop_policy": {
+        "strategy": "iterate_until_complete",
+        "reinterpretation_max": 3,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot compile complete handoff - missing critical LODA outputs."
+      },
+      "upstream": [
+        "PH-LODA-8"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-LD-1",
+      "CP-LD-2",
+      "CP-LD-3",
+      "CP-LD-4",
+      "CP-LD-5",
+      "CP-LD-6",
+      "CP-LD-7",
+      "CP-LD-8"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

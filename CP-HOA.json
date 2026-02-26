@@ -1,0 +1,301 @@
+{
+  "compound_id": "CP-HOA",
+  "compound_name": "Holistic Outcomes Assessment Master Compound",
+  "layer": "L06",
+  "agent": "HOA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-HOA",
+  "theoretical_foundation": {
+    "primary_theory": "Holistic Outcomes Assessment Framework",
+    "application": "10-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L06-COG-BUNDLE",
+    "E-L06-EVD-BUNDLE",
+    "E-L06-EXP-BUNDLE",
+    "E-L06-HUM-BUNDLE",
+    "E-L06-MML-BUNDLE",
+    "E-L06-PRC-BUNDLE",
+    "E-L06-PRF-BUNDLE",
+    "E-L06-PSY-BUNDLE",
+    "E-L06-STR-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-HOA-1",
+      "was": "CP-HOA-1",
+      "phase_name": "Bloom's Level Classifier",
+      "calls_elements": [
+        "E-L06-COG-BUNDLE",
+        "E-L06-MML-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "cognitive_level",
+        "secondary": [
+          "bloom_classification",
+          "cognitive_complexity",
+          "level_confidence"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [],
+      "downstream": [
+        "PH-HOA-3"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-2",
+      "was": "CP-HOA-10",
+      "phase_name": "Assessment Handoff Compiler",
+      "calls_elements": [
+        "E-L06-COG-BUNDLE",
+        "E-L06-STR-BUNDLE",
+        "E-L06-PRF-BUNDLE",
+        "E-L06-HUM-BUNDLE",
+        "E-L06-EXP-BUNDLE",
+        "E-L06-PSY-BUNDLE",
+        "E-L06-PRC-BUNDLE",
+        "E-L06-MML-BUNDLE",
+        "E-L06-EVD-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "assessment_spec",
+        "secondary": [
+          "proficiency_summary",
+          "learning_gaps",
+          "downstream_handoff"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HOA-2"
+      ],
+      "downstream": [
+        "PH-HOA-4"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-3",
+      "was": "CP-HOA-2",
+      "phase_name": "SOLO Structure Analyzer",
+      "calls_elements": [
+        "E-L06-STR-BUNDLE",
+        "E-L06-COG-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "structural_level",
+        "secondary": [
+          "solo_classification",
+          "structural_complexity",
+          "element_count"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HOA-3"
+      ],
+      "downstream": [
+        "PH-HOA-5"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-4",
+      "was": "CP-HOA-3",
+      "phase_name": "Fink's Significance Evaluator",
+      "calls_elements": [
+        "E-L06-HUM-BUNDLE",
+        "E-L06-COG-BUNDLE",
+        "E-L06-EXP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "humanistic_dimensions",
+        "secondary": [
+          "significance_profile",
+          "integration_level",
+          "caring_indicators"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HOA-4"
+      ],
+      "downstream": [
+        "PH-HOA-6"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-5",
+      "was": "CP-HOA-4",
+      "phase_name": "Gagné Events Aligner",
+      "calls_elements": [
+        "E-L06-PRC-BUNDLE",
+        "E-L06-COG-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "event_alignment",
+        "secondary": [
+          "gagne_events_covered",
+          "instructional_completeness",
+          "sequence_validity"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HOA-5"
+      ],
+      "downstream": [
+        "PH-HOA-7"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-6",
+      "was": "CP-HOA-5",
+      "phase_name": "Kolb Phase Identifier",
+      "calls_elements": [
+        "E-L06-EXP-BUNDLE",
+        "E-L06-HUM-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "experiential_phase",
+        "secondary": [
+          "kolb_stage",
+          "cycle_position",
+          "reflection_depth"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HOA-6"
+      ],
+      "downstream": [
+        "PH-HOA-8"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-7",
+      "was": "CP-HOA-6",
+      "phase_name": "Dreyfus Stage Assessor",
+      "calls_elements": [
+        "E-L06-PRF-BUNDLE",
+        "E-L06-COG-BUNDLE",
+        "E-L06-PSY-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "proficiency_stage",
+        "secondary": [
+          "dreyfus_level",
+          "contextual_judgment",
+          "rule_dependency"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HOA-7"
+      ],
+      "downstream": [
+        "PH-HOA-9"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-8",
+      "was": "CP-HOA-7",
+      "phase_name": "Simpson Motor Evaluator",
+      "calls_elements": [
+        "E-L06-PSY-BUNDLE",
+        "E-L06-PRF-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "psychomotor_level",
+        "secondary": [
+          "simpson_classification",
+          "motor_complexity",
+          "automation_level"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HOA-8"
+      ],
+      "downstream": [
+        "PH-HOA-10"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-9",
+      "was": "CP-HOA-8",
+      "phase_name": "Multi-Taxonomy Synthesizer",
+      "calls_elements": [
+        "E-L06-COG-BUNDLE",
+        "E-L06-STR-BUNDLE",
+        "E-L06-PRF-BUNDLE",
+        "E-L06-HUM-BUNDLE",
+        "E-L06-EXP-BUNDLE",
+        "E-L06-PSY-BUNDLE",
+        "E-L06-MML-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "holistic_profile",
+        "secondary": [
+          "cross_taxonomy_alignment",
+          "development_gaps",
+          "strength_areas"
+        ]
+      },
+      "loop_policy": "iterate_until_stable",
+      "upstream": [
+        "PH-HOA-9"
+      ],
+      "downstream": [
+        "PH-HOA-11"
+      ]
+    },
+    {
+      "phase_id": "PH-HOA-10",
+      "was": "CP-HOA-9",
+      "phase_name": "Outcomes Feedback Generator",
+      "calls_elements": [
+        "E-L06-COG-BUNDLE",
+        "E-L06-STR-BUNDLE",
+        "E-L06-HUM-BUNDLE",
+        "E-L06-PRF-BUNDLE",
+        "E-L06-EXP-BUNDLE",
+        "E-L06-PRC-BUNDLE",
+        "E-L06-EVD-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "feedback_recommendations",
+        "secondary": [
+          "growth_pathways",
+          "intervention_priorities",
+          "next_steps"
+        ]
+      },
+      "loop_policy": "iterate_until_stable",
+      "upstream": [
+        "PH-HOA-10"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-HOA-1",
+      "CP-HOA-10",
+      "CP-HOA-2",
+      "CP-HOA-3",
+      "CP-HOA-4",
+      "CP-HOA-5",
+      "CP-HOA-6",
+      "CP-HOA-7",
+      "CP-HOA-8",
+      "CP-HOA-9"
+    ],
+    "original_count": 10,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

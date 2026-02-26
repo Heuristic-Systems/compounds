@@ -1,0 +1,765 @@
+{
+  "compound_id": "CP-CSA",
+  "compound_name": "Content Sequencing Agent Master Compound",
+  "layer": "L02",
+  "agent": "CSA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-CSA",
+  "theoretical_foundation": {
+    "primary_theory": "Instructional Sequencing Theory",
+    "application": "10-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L02-DSC-LICENSE",
+    "E-L02-DSC-OER",
+    "E-L02-DSC-SEGMENT",
+    "E-L02-DSC-YOUTUBE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-CSA-1",
+      "was": "CP-CSA-0",
+      "phase_name": "Content Specification Generator",
+      "element_instructions": {
+        "E-L02-SQ-BUNDLE": {
+          "instruction": "validate_prerequisites",
+          "purpose": "Verify content prerequisites align with scaffold layer dependencies"
+        },
+        "E-L02-CI-BUNDLE": {
+          "instruction": "check_competency_scaffolding",
+          "purpose": "Verify content competency tags match scaffold layer requirements"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE scaffold_layers, sequencing_parameters, pacing_guidance from CP-CS-8 (CogniStruct)",
+        "2. RECEIVE learner_context from LOPA, platform_constraints from CLEA",
+        "3. For each scaffold_layer:",
+        "   3a. DETERMINE optimal content_type based on learning_objective and learner_preferences",
+        "   3b. CALCULATE depth and length based on difficulty_sequence and pacing_guidance",
+        "   3c. SPECIFY prerequisites from prior scaffold layers",
+        "   3d. GENERATE complete content_specification (type, depth, length, difficulty, topic)",
+        "4. INSTRUCT E-L02-SQ-BUNDLE: validate_prerequisites are achievable",
+        "5. INSTRUCT E-L02-CS-BUNDLE: validate_time_budget against learner_availability",
+        "6. RECEIVE evidence from elements",
+        "7. INTERPRET: Apply decision_conditions",
+        "8. EMIT: content_specification_list, specification_sequence to CP-CSA-1, CP-CSA-2, CP-CSA-3"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "all scaffold_layers have complete specifications",
+            "then": "FULL_SPECIFICATION"
+          },
+          {
+            "if": "total_time_budget exceeds learner_availability",
+            "then": "COMPRESS_SPECIFICATIONS"
+          },
+          {
+            "if": "modality conflicts with platform_constraints",
+            "then": "ALTERNATIVE_MODALITY"
+          },
+          {
+            "if": "specification incomplete (missing type/depth/length)",
+            "then": "FLAG_FOR_COMPLETION"
+          }
+        ],
+        "fallback": "ESCALATE_TO_HUMAN_REVIEW"
+      },
+      "outputs": {
+        "primary": "content_specification_list",
+        "secondary": [
+          "specification_sequence",
+          "time_budget_per_layer",
+          "modality_requirements",
+          "content_type_sequence"
+        ],
+        "specification_schema": {
+          "per_scaffold_layer": {
+            "layer_id": "string",
+            "content_type": "video|interactive|reading|assessment|simulation|discussion|practice|case_study|animation|podcast|webcast|ebook|gamified|ar_vr|role_play|concept_map|flashcard|demonstration|experiment|research|narration",
+            "depth": "introductory|intermediate|advanced|expert",
+            "length_minutes": "integer",
+            "difficulty": "1-5 scale",
+            "topic": "string from scaffold",
+            "prerequisites": "array of prior layer_ids",
+            "learning_objective": "string from LODA",
+            "accessibility_requirements": "array"
+          }
+        }
+      },
+      "loop_policy": "iterate_until_full_coverage_or_escalate",
+      "upstream": [],
+      "downstream": [
+        "PH-CSA-3"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-2",
+      "was": "CP-CSA-1",
+      "phase_name": "Prerequisite Validator",
+      "element_instructions": {
+        "E-L02-SQ-BUNDLE": {
+          "instruction": "validate_prerequisites",
+          "purpose": "Verify prerequisite dependency structure is valid DAG"
+        },
+        "E-L02-CI-BUNDLE": {
+          "instruction": "validate_cross_references",
+          "purpose": "Ensure content cross-references are valid"
+        },
+        "E-L02-CS-BUNDLE": {
+          "instruction": "check_prerequisite_skills",
+          "purpose": "Verify learner has required prerequisite skills"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE content_specification_list, specification_sequence from CP-CSA-0",
+        "2. RECEIVE content_ordering_rules from CP-CS-8 (CogniStruct)",
+        "3. INSTRUCT E-L02-SQ-BUNDLE: validate_prerequisites are achievable in specification order",
+        "4. INSTRUCT E-L02-CI-BUNDLE: validate prerequisite competencies are specified earlier",
+        "5. INSTRUCT E-L02-CS-BUNDLE: check learner has required foundational skills",
+        "6. RECEIVE evidence from all elements",
+        "7. INTERPRET: Apply decision_conditions",
+        "8. If VIOLATION: request CP-CSA-0 to re-specify with constraints",
+        "9. EMIT: validated_specifications, prerequisite_status to CP-CSA-2, CP-CSA-5"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "SQ-BUNDLE.prerequisite_status == VALID AND CI-BUNDLE.integrity_status == PASS",
+            "then": "PROCEED"
+          },
+          {
+            "if": "SQ-BUNDLE.prerequisite_status == VIOLATION",
+            "then": "REORDER_SEQUENCE"
+          },
+          {
+            "if": "CS-BUNDLE.constraint_status == VIOLATION",
+            "then": "FLAG_SKILL_GAP"
+          }
+        ],
+        "fallback": "BLOCK_AND_REPORT"
+      },
+      "outputs": {
+        "primary": "validated_specifications",
+        "secondary": [
+          "dependency_graph",
+          "prerequisite_status",
+          "specification_validity"
+        ]
+      },
+      "loop_policy": "iterate_until_valid",
+      "upstream": [
+        "PH-CSA-2"
+      ],
+      "downstream": [
+        "PH-CSA-4"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-3",
+      "was": "CP-CSA-2",
+      "phase_name": "Sequence Coherence Optimizer",
+      "element_instructions": {
+        "E-L02-SQ-BUNDLE": {
+          "instruction": "full_sequence_assessment",
+          "purpose": "Evaluate coherence, cognitive load, pacing, and overlap"
+        },
+        "E-L02-CI-BUNDLE": {
+          "instruction": "check_competency_scaffolding",
+          "purpose": "Verify competency scaffolding alignment"
+        },
+        "E-L02-MD-BUNDLE": {
+          "instruction": "assess_content_modality_fit",
+          "purpose": "Check content-modality alignment for cognitive load"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE validated_specifications from CP-CSA-1",
+        "2. INSTRUCT E-L02-SQ-BUNDLE: full_sequence_assessment on specification order",
+        "3. INSTRUCT E-L02-CI-BUNDLE: check_competency_scaffolding alignment",
+        "4. INSTRUCT E-L02-MD-BUNDLE: assess_modality_transitions for cognitive load",
+        "5. RECEIVE evidence from all elements",
+        "6. INTERPRET: Apply decision_conditions",
+        "7. Calculate cognitive_load_profile across specification sequence",
+        "8. EMIT: coherence_score, pacing_plan to CP-CSA-4, CP-CSA-7"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "SQ-BUNDLE.coherence_score >= 70",
+            "then": "COHERENT"
+          },
+          {
+            "if": "SQ-BUNDLE.load_profile.max > cognitive_load_limits",
+            "then": "REDISTRIBUTE_LOAD"
+          },
+          {
+            "if": "SQ-BUNDLE.coherence_score < 50",
+            "then": "MAJOR_RESEQUENCE"
+          }
+        ],
+        "fallback": "GENERATE_PACING_PLAN"
+      },
+      "outputs": {
+        "primary": "coherence_score",
+        "secondary": [
+          "cognitive_load_profile",
+          "pacing_plan"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-CSA-3"
+      ],
+      "downstream": [
+        "PH-CSA-5"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-4",
+      "was": "CP-CSA-3",
+      "phase_name": "Platform Compatibility Checker",
+      "element_instructions": {
+        "E-L02-PF-BUNDLE": {
+          "instruction": "full_platform_assessment",
+          "purpose": "Comprehensive platform feasibility evaluation"
+        },
+        "E-L02-MD-BUNDLE": {
+          "instruction": "check_device_capabilities",
+          "purpose": "Verify device can render content modalities"
+        },
+        "E-L02-CS-BUNDLE": {
+          "instruction": "assess_time_budget",
+          "purpose": "Ensure platform delivery fits time constraints"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE content_specification_list from CP-CSA-0",
+        "2. RECEIVE platform_specification from CLEA context",
+        "3. For each specification: CHECK if content_type is deliverable on platform",
+        "4. INSTRUCT E-L02-PF-BUNDLE: full_platform_assessment for specified modalities",
+        "5. INSTRUCT E-L02-MD-BUNDLE: check_device_capabilities for each content_type",
+        "6. INSTRUCT E-L02-CS-BUNDLE: assess_time_budget for total specification length",
+        "7. RECEIVE evidence from all elements",
+        "8. INTERPRET: Apply decision_conditions",
+        "9. If modality unsupported: GENERATE alternative specification (e.g., video → audio)",
+        "10. EMIT: platform_status, modality_alternatives to CP-CSA-4, CP-CSA-6"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "PF-BUNDLE.platform_status == READY for all specified modalities",
+            "then": "PROCEED"
+          },
+          {
+            "if": "PF-BUNDLE.platform_status == DEGRADED (some modalities unsupported)",
+            "then": "GENERATE_ALTERNATIVES"
+          },
+          {
+            "if": "specified video but no video capability",
+            "then": "RESPECIFY_AS_AUDIO_OR_TEXT"
+          },
+          {
+            "if": "CS-BUNDLE.time_budget_status == EXCEEDED",
+            "then": "COMPRESS_SPECIFICATIONS"
+          }
+        ],
+        "fallback": "GENERATE_MODALITY_ALTERNATIVES"
+      },
+      "outputs": {
+        "primary": "platform_status",
+        "secondary": [
+          "compatibility_report",
+          "modality_alternatives",
+          "fallback_specifications"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-CSA-4"
+      ],
+      "downstream": [
+        "PH-CSA-6"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-5",
+      "was": "CP-CSA-4",
+      "phase_name": "Modality Selector",
+      "element_instructions": {
+        "E-L02-MD-BUNDLE": {
+          "instruction": "full_modality_assessment",
+          "purpose": "Comprehensive modality fit and accessibility evaluation"
+        },
+        "E-L02-MML-BUNDLE": {
+          "instruction": "get_modality_preferences",
+          "purpose": "Retrieve learner modality preferences from LOPA"
+        },
+        "E-L02-PF-BUNDLE": {
+          "instruction": "check_api_availability",
+          "purpose": "Verify modality rendering APIs are available"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE content_types from CP-CSA-2 coherence optimization",
+        "2. RECEIVE platform_status from CP-CSA-3",
+        "3. INSTRUCT E-L02-MD-BUNDLE: full_modality_assessment",
+        "4. INSTRUCT E-L02-MML-BUNDLE: get_modality_preferences",
+        "5. INSTRUCT E-L02-PF-BUNDLE: check_api_availability",
+        "6. RECEIVE evidence from all elements",
+        "7. INTERPRET: Apply decision_conditions to select optimal modality",
+        "8. EMIT: modality_map, accessibility_compliance to CP-CSA-7"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "MD-BUNDLE.accessibility_status == COMPLIANT AND MML-BUNDLE.confidence >= 0.7",
+            "then": "USE_PREFERRED_MODALITY"
+          },
+          {
+            "if": "MD-BUNDLE.accessibility_status == PARTIAL",
+            "then": "GENERATE_ALTERNATIVES"
+          },
+          {
+            "if": "MD-BUNDLE.accessibility_status == NON_COMPLIANT",
+            "then": "FORCE_ACCESSIBLE_MODE"
+          },
+          {
+            "if": "PF-BUNDLE.api_status.video == false",
+            "then": "FALLBACK_TO_AUDIO"
+          }
+        ],
+        "fallback": "USE_DEFAULT_MODALITY"
+      },
+      "outputs": {
+        "primary": "modality_map",
+        "secondary": [
+          "accessibility_compliance",
+          "device_adaptation",
+          "modality_preference"
+        ]
+      },
+      "loop_policy": "iterate_until_optimal",
+      "upstream": [
+        "PH-CSA-5"
+      ],
+      "downstream": [
+        "PH-CSA-7"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-6",
+      "was": "CP-CSA-5",
+      "phase_name": "Content Integrity Auditor",
+      "element_instructions": {
+        "E-L02-CI-BUNDLE": {
+          "instruction": "full_integrity_assessment",
+          "purpose": "Comprehensive content integrity validation"
+        },
+        "E-L02-SQ-BUNDLE": {
+          "instruction": "detect_overlap",
+          "purpose": "Check for content duplication or overlap"
+        },
+        "E-L02-CS-BUNDLE": {
+          "instruction": "check_regulatory_compliance",
+          "purpose": "Verify content meets regulatory requirements"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE content_units from CP-CSA-1 validated sequence",
+        "2. INSTRUCT E-L02-CI-BUNDLE: full_integrity_assessment",
+        "3. INSTRUCT E-L02-SQ-BUNDLE: detect_overlap",
+        "4. INSTRUCT E-L02-CS-BUNDLE: check_regulatory_compliance",
+        "5. RECEIVE evidence from all elements",
+        "6. INTERPRET: Apply decision_conditions",
+        "7. Generate terminology_report for any issues",
+        "8. EMIT: integrity_status, version_conflicts to CP-CSA-6, CP-CSA-7"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "CI-BUNDLE.integrity_status == PASS",
+            "then": "PROCEED"
+          },
+          {
+            "if": "CI-BUNDLE.version_conflicts.length > 0",
+            "then": "RESOLVE_VERSIONS"
+          },
+          {
+            "if": "CI-BUNDLE.terminology_issues.length > 0",
+            "then": "FLAG_TERMINOLOGY"
+          },
+          {
+            "if": "CI-BUNDLE.integrity_status == FAIL",
+            "then": "BLOCK_SEQUENCE"
+          }
+        ],
+        "fallback": "MANUAL_REVIEW_REQUIRED"
+      },
+      "outputs": {
+        "primary": "integrity_status",
+        "secondary": [
+          "version_conflicts",
+          "terminology_report"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-CSA-6"
+      ],
+      "downstream": [
+        "PH-CSA-8"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-7",
+      "was": "CP-CSA-6",
+      "phase_name": "Constraint Enforcer",
+      "element_instructions": {
+        "E-L02-CS-BUNDLE": {
+          "instruction": "full_constraint_assessment",
+          "purpose": "Comprehensive constraint validation"
+        },
+        "E-L02-PF-BUNDLE": {
+          "instruction": "assess_bandwidth_constraints",
+          "purpose": "Verify bandwidth feasibility for delivery"
+        },
+        "E-L02-MD-BUNDLE": {
+          "instruction": "validate_accessibility_formats",
+          "purpose": "Ensure accessibility constraint compliance"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE sequence_plan from CP-CSA-3 and CP-CSA-5",
+        "2. INSTRUCT E-L02-CS-BUNDLE: full_constraint_assessment",
+        "3. INSTRUCT E-L02-PF-BUNDLE: assess_bandwidth_constraints",
+        "4. INSTRUCT E-L02-MD-BUNDLE: validate_accessibility_formats",
+        "5. RECEIVE evidence from all elements",
+        "6. INTERPRET: Apply decision_conditions",
+        "7. Generate compliance_report with any violations",
+        "8. EMIT: constraint_status, time_budget_status to CP-CSA-7"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "CS-BUNDLE.constraint_status == PASS",
+            "then": "PROCEED"
+          },
+          {
+            "if": "CS-BUNDLE.constraint_status == WARNING",
+            "then": "FLAG_FOR_REVIEW"
+          },
+          {
+            "if": "CS-BUNDLE.constraint_status == VIOLATION",
+            "then": "BLOCK_SEQUENCE"
+          },
+          {
+            "if": "CS-BUNDLE.time_budget_status == EXCEEDED",
+            "then": "COMPRESS_OR_SPLIT"
+          }
+        ],
+        "fallback": "ESCALATE_TO_GOVERNANCE"
+      },
+      "outputs": {
+        "primary": "constraint_status",
+        "secondary": [
+          "compliance_report",
+          "time_budget_status"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-CSA-7"
+      ],
+      "downstream": [
+        "PH-CSA-9"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-8",
+      "was": "CP-CSA-7",
+      "phase_name": "MSA Handoff Compiler",
+      "element_instructions": {
+        "E-L02-MD-BUNDLE": {
+          "instruction": "full_modality_assessment",
+          "purpose": "Final modality specification for MSA"
+        },
+        "E-L02-SQ-BUNDLE": {
+          "instruction": "full_sequence_assessment",
+          "purpose": "Final sequence coherence for handoff"
+        },
+        "E-L02-CI-BUNDLE": {
+          "instruction": "full_integrity_assessment",
+          "purpose": "Final content integrity check"
+        },
+        "E-L02-CS-BUNDLE": {
+          "instruction": "validate_accessibility",
+          "purpose": "Final accessibility compliance for MSA"
+        },
+        "E-L02-MML-BUNDLE": {
+          "instruction": "get_modality_preferences",
+          "purpose": "Learner preferences for MSA adaptation"
+        },
+        "E-L02-PF-BUNDLE": {
+          "instruction": "full_platform_assessment",
+          "purpose": "Platform constraints for MSA delivery"
+        },
+        "E-L02-CNT-BUNDLE": {
+          "instruction": "verify_content_readiness",
+          "purpose": "Verify all content assets are ready for MSA"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE content_assets_manifest, generation_requests from CP-CSA-8",
+        "2. RECEIVE complete outputs from CP-CSA-2, CP-CSA-4, CP-CSA-5, CP-CSA-6",
+        "3. INSTRUCT E-L02-CNT-BUNDLE: verify_content_readiness for all assets",
+        "4. INSTRUCT all 6 other elements for final verification",
+        "5. RECEIVE evidence from all elements",
+        "6. INTERPRET: Apply decision_conditions",
+        "7. Compile msa_handoff_spec with specifications + actual content assets",
+        "8. Include generation_requests for specs that need AI content creation",
+        "9. Generate delivery_schedule based on platform constraints",
+        "10. EMIT: msa_handoff_spec, content_assets_manifest, generation_requests to MSA (L05)"
+      ],
+      "interpretation_logic": {
+        "decision_conditions": [
+          {
+            "if": "all_elements.status == PASS",
+            "then": "COMPILE_HANDOFF"
+          },
+          {
+            "if": "any_element.status == WARNING",
+            "then": "COMPILE_WITH_FLAGS"
+          },
+          {
+            "if": "any_element.status == FAIL",
+            "then": "ABORT_HANDOFF"
+          }
+        ],
+        "fallback": "RETURN_TO_CP-CSA-1"
+      },
+      "outputs": {
+        "primary": "msa_handoff_spec",
+        "secondary": [
+          "content_assets_manifest",
+          "generation_requests",
+          "delivery_schedule",
+          "modality_requirements"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-CSA-8"
+      ],
+      "downstream": [
+        "PH-CSA-10"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-9",
+      "was": "CP-CSA-8",
+      "phase_name": "Content Acquisition Router",
+      "element_instructions": {
+        "E-L02-CNT-BUNDLE": {
+          "instruction": "search_and_match",
+          "purpose": "Search content catalog for assets matching each specification"
+        },
+        "E-L02-CI-BUNDLE": {
+          "instruction": "evaluate_content_quality",
+          "purpose": "Score matched/uploaded content against specification rubric"
+        },
+        "E-L02-MD-BUNDLE": {
+          "instruction": "verify_modality_format",
+          "purpose": "Verify content format matches specified modality"
+        }
+      },
+      "execution_flow": [
+        "1. RECEIVE content_specification_list, validated_specifications from upstream",
+        "2. INSTRUCT E-L02-CNT-BUNDLE: search_and_match for each specification",
+        "3. For each specification:",
+        "   3a. IF catalog match score >= 0.75: route = MATCH, record asset reference",
+        "   3b. ELSE IF user has uploaded content for this spec:",
+        "       - INSTRUCT E-L02-CI-BUNDLE: evaluate_content_quality",
+        "       - IF score >= 0.70: route = UPLOAD, record uploaded asset",
+        "   3c. ELSE IF discovery_enabled:",
+        "       - DELEGATE to CP-CSA-9 with topic, keywords, duration, quality_threshold",
+        "       - IF CP-CSA-9 returns FOUND: route = DISCOVER, record discovered asset with segment",
+        "   3d. ELSE IF generation_permitted: route = GENERATE, create generation_request",
+        "   3e. ELSE: flag as UNRESOLVED",
+        "4. INSTRUCT E-L02-MD-BUNDLE: verify_modality_format for all MATCH/UPLOAD/DISCOVER assets",
+        "5. Compile content_assets_manifest with all routes and assets",
+        "6. RECEIVE evidence from all elements",
+        "7. INTERPRET: Apply decision_conditions",
+        "8. EMIT: content_assets_manifest, generation_requests to CP-CSA-7 (MSA Handoff)"
+      ],
+      "interpretation_logic": {
+        "routing_algorithm": [
+          {
+            "step": 1,
+            "action": "For each specification, SEARCH content catalog via E-L02-CNT-BUNDLE"
+          },
+          {
+            "step": 2,
+            "action": "If catalog_match.score >= 0.75, route = MATCH"
+          },
+          {
+            "step": 3,
+            "action": "If no match AND uploaded_content exists for spec, route = UPLOAD"
+          },
+          {
+            "step": 4,
+            "action": "Evaluate uploaded content against spec rubric"
+          },
+          {
+            "step": 5,
+            "action": "If upload.score >= 0.70, accept UPLOAD route"
+          },
+          {
+            "step": 6,
+            "action": "If no match AND no upload AND discovery_enabled, delegate to CP-CSA-9 (Content Discovery)"
+          },
+          {
+            "step": 7,
+            "action": "If CP-CSA-9 returns FOUND with score >= quality_threshold, route = DISCOVER"
+          },
+          {
+            "step": 8,
+            "action": "If discovery fails or not enabled AND generation_permitted, route = GENERATE"
+          },
+          {
+            "step": 9,
+            "action": "If no route possible, flag as UNRESOLVED"
+          }
+        ],
+        "discovery_delegation": {
+          "delegate_to": "CP-CSA-9",
+          "passes": [
+            "topic",
+            "keywords",
+            "content_type",
+            "target_duration_seconds",
+            "quality_threshold"
+          ],
+          "receives": [
+            "discovered_content",
+            "segment_info",
+            "embed_url",
+            "transcript_excerpt"
+          ],
+          "on_success": "route = DISCOVER, include discovered asset in manifest",
+          "on_failure": "fallback to GENERATE or UNRESOLVED"
+        },
+        "decision_conditions": [
+          {
+            "if": "all specifications have route (MATCH/UPLOAD/DISCOVER/GENERATE)",
+            "then": "FULL_ACQUISITION"
+          },
+          {
+            "if": "any specification UNRESOLVED",
+            "then": "ESCALATE_FOR_CONTENT"
+          },
+          {
+            "if": "GENERATE routes exist",
+            "then": "INCLUDE_GENERATION_REQUESTS_IN_HANDOFF"
+          },
+          {
+            "if": "DISCOVER routes exist",
+            "then": "INCLUDE_DISCOVERED_ASSETS_WITH_SEGMENTS"
+          }
+        ],
+        "fallback": "ESCALATE_TO_HUMAN_FOR_CONTENT_PROVISION"
+      },
+      "outputs": {
+        "primary": "content_assets_manifest",
+        "secondary": [
+          "acquisition_routes",
+          "match_scores",
+          "generation_requests",
+          "unresolved_specifications"
+        ],
+        "manifest_schema": {
+          "per_specification": {
+            "spec_id": "string (from specification_sequence)",
+            "route": "MATCH | UPLOAD | DISCOVER | GENERATE",
+            "content_asset": {
+              "asset_id": "string",
+              "asset_type": "text | video | audio | interactive | ...",
+              "source": "catalog | upload | discovered | pending_generation",
+              "location": "URI or content reference",
+              "format": "mime type or format identifier"
+            },
+            "match_score": "0.0-1.0",
+            "evaluation_details": {
+              "type_match": "score",
+              "topic_alignment": "score",
+              "depth_match": "score",
+              "length_compliance": "score",
+              "difficulty_alignment": "score"
+            },
+            "discovery_details": {
+              "source_platform": "youtube | khan_academy | mit_ocw | oer_commons",
+              "source_url": "original content URL",
+              "embed_url": "embeddable URL with segment params",
+              "segment": {
+                "start_seconds": "number",
+                "end_seconds": "number",
+                "duration_seconds": "number"
+              },
+              "transcript_excerpt": "text of segment",
+              "relevance_score": "0-100",
+              "quality_score": "0-100",
+              "license": {
+                "type": "license identifier",
+                "attribution_required": "boolean",
+                "attribution_text": "string"
+              }
+            }
+          }
+        }
+      },
+      "loop_policy": "iterate_until_all_specifications_resolved_or_escalate",
+      "upstream": [
+        "PH-CSA-9"
+      ],
+      "downstream": [
+        "PH-CSA-11"
+      ]
+    },
+    {
+      "phase_id": "PH-CSA-10",
+      "was": "CP-CSA-9",
+      "phase_name": "Content Discovery Router",
+      "calls_elements": [
+        "E-L02-DSC-YOUTUBE",
+        "E-L02-DSC-OER",
+        "E-L02-DSC-SEGMENT",
+        "E-L02-DSC-LICENSE"
+      ],
+      "upstream": [
+        "PH-CSA-10"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-CSA-0",
+      "CP-CSA-1",
+      "CP-CSA-2",
+      "CP-CSA-3",
+      "CP-CSA-4",
+      "CP-CSA-5",
+      "CP-CSA-6",
+      "CP-CSA-7",
+      "CP-CSA-8",
+      "CP-CSA-9"
+    ],
+    "original_count": 10,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

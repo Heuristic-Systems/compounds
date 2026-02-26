@@ -1,0 +1,230 @@
+{
+  "compound_id": "CP-MIA",
+  "compound_name": "Multimodal Interaction Agent Master Compound",
+  "layer": "L05",
+  "agent": "MIA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MIA",
+  "theoretical_foundation": {
+    "primary_theory": "Mayer's Cognitive Theory of Multimedia Learning",
+    "supporting_theories": [
+      "Dual Coding Theory (Paivio)",
+      "Cognitive Load Theory (Sweller)",
+      "OER Curation Principles",
+      "WCAG 2.1 Accessibility Standards",
+      "Agent Handoff Protocol"
+    ],
+    "application": "Four-phase pipeline: Content Processing → Mayer Audit → Quality Assurance → Output Synthesis"
+  },
+  "input_schema": {
+    "msa_specification": {
+      "content_source_decision": "CURATE_EXISTING | AUGMENT | GENERATE_NEW",
+      "discovered_content": {
+        "asset_id": "string (optional - present if CURATE or AUGMENT)",
+        "source_url": "string",
+        "embed_url": "string",
+        "segment": "object",
+        "transcript_excerpt": "string",
+        "license": "object"
+      },
+      "modality_allocations": "object",
+      "accessibility_requirements": "array"
+    }
+  },
+  "calls_elements": [
+    "E-L05-MCP-MAYER",
+    "E-L05-MCG-GENERATOR",
+    "E-L05-MQS-QUALITY",
+    "E-L05-GEN-MIAHANDOFF"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-MIA-1",
+      "was": "CP-MIA-1",
+      "phase_name": "Multimodal Content Processor",
+      "calls_elements": ["E-L05-MCP-MAYER", "E-L05-MCG-GENERATOR"],
+      "element_instructions": {
+        "E-L05-MCP-MAYER": "Evaluate Mayer principle compliance for curated OR generated content",
+        "E-L05-MCG-GENERATOR": "Assess content quality (curated requires less generation scoring)"
+      },
+      "execution_flow": [
+        "1. Receive MSA specification with content_source_decision",
+        "2. BRANCH based on content_source_decision:",
+        "",
+        "   CURATE_EXISTING path:",
+        "   - Receive discovered_content from MSA (originally from CSA)",
+        "   - Verify content still accessible (URL check)",
+        "   - Apply accessibility overlays (captions, transcripts, alt-text)",
+        "   - Validate segment boundaries are pedagogically sound",
+        "   - Skip generation — wrap existing content",
+        "   - Evaluate Mayer compliance on wrapped package",
+        "",
+        "   AUGMENT path:",
+        "   - Use discovered_content as base",
+        "   - Identify gaps vs learning objectives",
+        "   - Generate supplementary content for gaps only",
+        "   - Apply accessibility overlays to both existing and generated",
+        "   - Evaluate Mayer compliance on combined package",
+        "",
+        "   GENERATE_NEW path:",
+        "   - Generate content for each specified modality from scratch",
+        "   - Apply full Mayer principle compliance during generation",
+        "   - Evaluate generation quality across all modalities",
+        "",
+        "3. Aggregate scores and determine outcome",
+        "4. If below threshold, iterate (regenerate OR flag for manual curation)"
+      ],
+      "interpretation_logic": {
+        "decision_mode": "branch_then_weighted_mean",
+        "branch_weights": {
+          "CURATE_EXISTING": { "mayer_compliance": 0.60, "accessibility_overlay_quality": 0.40 },
+          "AUGMENT": { "mayer_compliance": 0.45, "generation_quality": 0.30, "integration_quality": 0.25 },
+          "GENERATE_NEW": { "mayer_compliance": 0.50, "generation_quality": 0.50 }
+        },
+        "gates": { "msa_compliance": 70, "content_accessible": true },
+        "thresholds": { "proceed": 70, "revise": 50, "regenerate_or_escalate": 0 }
+      },
+      "outputs": {
+        "primary": "content_package",
+        "secondary": ["content_source_used", "mayer_compliance_score", "generation_quality_score", "accessibility_overlay_status", "attribution_requirements", "revision_recommendations"]
+      },
+      "upstream": [],
+      "downstream": ["PH-MIA-2"]
+    },
+    {
+      "phase_id": "PH-MIA-2",
+      "was": "CP-MIA-2",
+      "phase_name": "Mayer Principles Auditor",
+      "calls_elements": ["E-L05-MCP-MAYER", "E-L05-MQS-QUALITY"],
+      "element_instructions": {
+        "E-L05-MCP-MAYER": "Perform detailed evaluation of all 12 Mayer principles with individual scores",
+        "E-L05-MQS-QUALITY": "Provide Mayer overall score as part of quality assessment"
+      },
+      "execution_flow": [
+        "1. Receive generated content from PH-MIA-1",
+        "2. Instruct E-L05-MCP-MAYER to evaluate all 12 principles individually",
+        "3. Identify principles with scores below threshold",
+        "4. Generate specific improvement recommendations per principle",
+        "5. Determine overall Mayer compliance status"
+      ],
+      "interpretation_logic": {
+        "decision_mode": "all_must_pass_minimum",
+        "minimum_per_principle": 40,
+        "critical_principles": ["coherence", "multimedia", "modality"],
+        "thresholds": { "compliant": 70, "partial": 50, "noncompliant": 0 }
+      },
+      "outputs": {
+        "primary": "mayer_audit_report",
+        "secondary": ["principle_scores", "violations_list", "improvement_recommendations", "overall_mayer_score"]
+      },
+      "upstream": ["PH-MIA-1"],
+      "downstream": ["PH-MIA-3"]
+    },
+    {
+      "phase_id": "PH-MIA-3",
+      "was": "CP-MIA-3",
+      "phase_name": "Content Quality Assurance Agent",
+      "calls_elements": ["E-L05-MCG-GENERATOR", "E-L05-MQS-QUALITY"],
+      "element_instructions": {
+        "E-L05-MCG-GENERATOR": "Verify objective coverage and MSA compliance",
+        "E-L05-MQS-QUALITY": "Run full quality assessment including accuracy, accessibility, engagement"
+      },
+      "execution_flow": [
+        "1. Receive content with Mayer audit from PH-MIA-2",
+        "2. Instruct E-L05-MQS-QUALITY to run quality assessments",
+        "3. Check factual accuracy gate (hard fail if < 70)",
+        "4. Check accessibility gate (hard fail if < 60)",
+        "5. Evaluate sensory balance, cognitive load, engagement",
+        "6. Aggregate quality scores with gate enforcement",
+        "7. Determine delivery approval status"
+      ],
+      "interpretation_logic": {
+        "decision_mode": "gate_then_mean",
+        "gates": { "factual_accuracy": 70, "accessibility": 60 },
+        "weights": {
+          "sensory_balance": 0.20,
+          "cognitive_load": 0.25,
+          "engagement": 0.20,
+          "accuracy": 0.20,
+          "accessibility": 0.15
+        },
+        "thresholds": { "approved": 70, "conditional": 60, "blocked": 0 }
+      },
+      "outputs": {
+        "primary": "quality_assurance_verdict",
+        "secondary": ["dimension_scores", "gate_results", "quality_issues", "delivery_recommendation"]
+      },
+      "upstream": ["PH-MIA-2"],
+      "downstream": ["PH-MIA-4"]
+    },
+    {
+      "phase_id": "PH-MIA-4",
+      "was": "CP-MIA-4",
+      "phase_name": "MIA Output Synthesizer",
+      "calls_elements": ["E-L05-MQS-QUALITY", "E-L05-GEN-MIAHANDOFF"],
+      "element_instructions": {
+        "E-L05-MQS-QUALITY": "Provide final aggregated quality metrics for output package",
+        "E-L05-GEN-MIAHANDOFF": "Validate handoff completeness for L06 agents"
+      },
+      "execution_flow": [
+        "1. Receive quality-assured content from PH-MIA-3",
+        "2. Compile all upstream results (generation, Mayer, quality)",
+        "3. Instruct E-L05-GEN-MIAHANDOFF to validate handoff readiness",
+        "4. Build final MIA output package",
+        "5. Generate delivery manifest with rendering instructions",
+        "6. Add accessibility overlays as required",
+        "7. Determine handoff readiness status",
+        "8. Emit to L06 agents if ready"
+      ],
+      "interpretation_logic": {
+        "decision_mode": "completeness_check",
+        "required_fields": ["content_assets", "mayer_scores", "quality_scores", "accessibility_overlays", "delivery_manifest"],
+        "thresholds": { "ready": 90, "needs_work": 70, "not_ready": 0 }
+      },
+      "outputs": {
+        "primary": "mia_output_package",
+        "secondary": ["mia_signature", "delivery_manifest", "quality_summary", "handoff_metadata"]
+      },
+      "upstream": ["PH-MIA-3"],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {
+    "receives_from": {
+      "MSA": "msa_specification (content_source_decision, discovered_content, modality_allocations)"
+    },
+    "emits_to": {
+      "L06_agents": "mia_output_package (content_assets, mayer_scores, quality_scores, delivery_manifest)"
+    }
+  },
+  "failure_modes": [
+    {
+      "mode": "content_inaccessible",
+      "trigger": "Curated content URL unreachable",
+      "action": "Escalate to manual review or switch to GENERATE_NEW path"
+    },
+    {
+      "mode": "mayer_noncompliant",
+      "trigger": "Mean Mayer score < 60 OR critical principle < 40",
+      "action": "Major redesign required — loop back to PH-MIA-1"
+    },
+    {
+      "mode": "quality_blocked",
+      "trigger": "Factual accuracy < 70 OR accessibility < 60",
+      "action": "Content blocked — must fix before delivery"
+    },
+    {
+      "mode": "handoff_not_ready",
+      "trigger": "Missing critical fields in output package",
+      "action": "Must complete package before L06 handoff"
+    }
+  ],
+  "metadata": {
+    "consolidated_from": ["CP-MIA-1", "CP-MIA-2", "CP-MIA-3", "CP-MIA-4"],
+    "original_count": 4,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

@@ -1,0 +1,765 @@
+{
+  "compound_id": "CP-CLEA",
+  "compound_name": "Contextual Learning Environment Agent Master Compound",
+  "layer": "L03",
+  "agent": "CLEA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-CLEA",
+  "theoretical_foundation": {
+    "primary_theory": "Bronfenbrenner's Ecological Systems Theory (EST)",
+    "application": "Nine-phase pipeline: EST level assessments → barrier/enabler synthesis → EPR readiness gate"
+  },
+  "calls_elements": [
+    "E-L03-CHR-BUNDLE",
+    "E-L03-EPR-HUMAN-BUNDLE",
+    "E-L03-EPR-TECH-BUNDLE",
+    "E-L03-EXO-BUNDLE",
+    "E-L03-MAC-BUNDLE",
+    "E-L03-MES-BUNDLE",
+    "E-L03-MIC-BUNDLE",
+    "E-L03-MML-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-CLEA-1",
+      "was": "CP-CLEA-1",
+      "phase_name": "Microsystem Assessor",
+      "calls_elements": [
+        "E-L03-MIC-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-MIC-BUNDLE": {
+          "instruction": "full_microsystem_assessment",
+          "purpose": "Gather complete microsystem evidence across all dimensions"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-0 framework for microsystem assessment rules",
+        "2. Receive device_data, space_data, time_data, social_data",
+        "3. Instruct E-L03-MIC-BUNDLE: full_microsystem_assessment",
+        "4. Receive complete microsystem evidence bundle",
+        "5. Apply barrier detection (any score < 40)",
+        "6. Apply strength detection (any score > 70)",
+        "7. Calculate aggregated microsystem status",
+        "8. Apply interpretation_logic",
+        "9. Emit microsystem_status with barriers and strengths"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Check failed_hard_gates from Element BEFORE aggregate scoring",
+          "if_any_failed": "band = BLOCKED regardless of aggregate score",
+          "hard_gates_source": "E-L03-MIC-BUNDLE.failed_hard_gates",
+          "blocked_response": "Emit BLOCKED status with failed gate details for human review"
+        },
+        "FULLY_ENABLED": {
+          "condition": "all_dimensions >= 70 AND no_critical_barriers AND hard_gate_status == PASS",
+          "band": "ROBUST",
+          "action": "emit_microsystem_enabled"
+        },
+        "PARTIALLY_ENABLED": {
+          "condition": "most_dimensions >= 50 AND barriers_addressable AND hard_gate_status == PASS",
+          "band": "FRAGILE",
+          "action": "emit_with_barrier_flags"
+        },
+        "SIGNIFICANTLY_CONSTRAINED": {
+          "condition": "critical_dimensions < 40 OR multiple_barriers OR hard_gate_status == FAIL",
+          "band": "BLOCKED",
+          "action": "emit_constraint_summary_for_adaptation"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "weight emotional_safety higher in barrier detection",
+          "low_extraversion": "privacy_adequacy more important than social_support",
+          "high_conscientiousness": "routine_predictability weighted higher"
+        }
+      },
+      "upstream": [],
+      "downstream": [
+        "PH-CLEA-2"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-2",
+      "was": "CP-CLEA-2",
+      "phase_name": "Mesosystem Coherence Evaluator",
+      "calls_elements": [
+        "E-L03-MES-BUNDLE",
+        "E-L03-MIC-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-MES-BUNDLE": {
+          "instruction": "full_mesosystem_assessment",
+          "purpose": "Gather complete mesosystem coherence evidence"
+        },
+        "E-L03-MIC-BUNDLE": {
+          "instruction": "assess_social_context",
+          "purpose": "Get microsystem social context for cross-reference"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-1 framework for mesosystem coherence rules",
+        "2. Receive home_context, school_context, routine_data",
+        "3. Receive microsystem_status from CP-CLEA-1",
+        "4. Instruct E-L03-MES-BUNDLE: full_mesosystem_assessment",
+        "5. Instruct E-L03-MIC-BUNDLE: assess_social_context",
+        "6. Receive evidence bundles from Elements",
+        "7. Analyze connection quality between contexts",
+        "8. Detect disconnects and inconsistencies",
+        "9. Apply interpretation_logic",
+        "10. Emit mesosystem_coherence with disconnect analysis"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Mesosystem has no hard gates - coherence is aggregated",
+          "hard_gates_source": "None - mesosystem cannot hard-block",
+          "note": "Coherence failures trigger intervention planning, not hard blocks"
+        },
+        "HIGHLY_COHERENT": {
+          "condition": "all_connections >= 70 AND no_disconnects",
+          "band": "ROBUST",
+          "action": "emit_coherent_mesosystem"
+        },
+        "MODERATELY_COHERENT": {
+          "condition": "most_connections >= 50 AND disconnects_manageable",
+          "band": "FRAGILE",
+          "action": "emit_with_disconnect_flags"
+        },
+        "LOW_COHERENCE": {
+          "condition": "critical_connections < 50 OR major_disconnects",
+          "band": "BLOCKED",
+          "action": "emit_coherence_concerns_for_intervention"
+        },
+        "personality_adjustments": {
+          "high_conscientiousness": "expectation_coherence weighted higher",
+          "low_openness": "identity_continuity more critical",
+          "high_neuroticism": "communication_quality for emotional support weighted higher"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-1"
+      ],
+      "downstream": [
+        "PH-CLEA-3"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-3",
+      "was": "CP-CLEA-3",
+      "phase_name": "Exosystem Enablement Checker",
+      "calls_elements": [
+        "E-L03-EXO-BUNDLE",
+        "E-L03-MES-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-EXO-BUNDLE": {
+          "instruction": "full_exosystem_assessment",
+          "purpose": "Gather complete exosystem enablement evidence"
+        },
+        "E-L03-MES-BUNDLE": {
+          "instruction": "assess_platform_coordination",
+          "purpose": "Get mesosystem platform context for cross-reference"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-2 framework for exosystem enablement rules",
+        "2. Receive institutional_status, platform_data, resource_data",
+        "3. Instruct E-L03-EXO-BUNDLE: full_exosystem_assessment",
+        "4. Instruct E-L03-MES-BUNDLE: assess_platform_coordination",
+        "5. Receive evidence bundles from Elements",
+        "6. Check critical factor gates (access, connectivity, platform)",
+        "7. Identify blocking vs addressable barriers",
+        "8. Apply interpretation_logic",
+        "9. Emit exosystem_enablement with barrier analysis"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Check failed_hard_gates from Element BEFORE aggregate scoring",
+          "if_any_failed": "band = BLOCKED regardless of aggregate score",
+          "hard_gates_source": "E-L03-EXO-BUNDLE.failed_hard_gates",
+          "blocked_response": "Emit BLOCKED status with connectivity/platform gate details for escalation"
+        },
+        "FULLY_ENABLED": {
+          "condition": "all_critical_factors >= 70 AND no_blocking_barriers AND hard_gate_status == PASS",
+          "band": "ROBUST",
+          "action": "emit_exosystem_enabled"
+        },
+        "PARTIALLY_ENABLED": {
+          "condition": "critical_factors >= 40 AND barriers_workaround_available AND hard_gate_status == PASS",
+          "band": "FRAGILE",
+          "action": "emit_with_workaround_recommendations"
+        },
+        "BLOCKED": {
+          "condition": "any_critical_factor < 30 OR insurmountable_barriers OR hard_gate_status == FAIL",
+          "band": "BLOCKED",
+          "action": "emit_blocking_barriers_for_escalation"
+        },
+        "personality_adjustments": {
+          "high_conscientiousness": "platform_stability and reliability weighted higher",
+          "high_neuroticism": "technical_support availability more critical",
+          "low_openness": "platform_consistency more important than feature richness"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-2"
+      ],
+      "downstream": [
+        "PH-CLEA-4"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-4",
+      "was": "CP-CLEA-4",
+      "phase_name": "Macrosystem Alignment Analyzer",
+      "calls_elements": [
+        "E-L03-MAC-BUNDLE",
+        "E-L03-EXO-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-MAC-BUNDLE": {
+          "instruction": "full_macrosystem_assessment",
+          "purpose": "Gather complete macrosystem alignment and equity evidence"
+        },
+        "E-L03-EXO-BUNDLE": {
+          "instruction": "assess_policy_context",
+          "purpose": "Get exosystem policy context for equity cross-reference"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-3 framework for macrosystem alignment rules",
+        "2. Receive cultural_context, socioeconomic_data, curriculum_metadata",
+        "3. Instruct E-L03-MAC-BUNDLE: full_macrosystem_assessment",
+        "4. Instruct E-L03-EXO-BUNDLE: assess_policy_context",
+        "5. Receive evidence bundles from Elements",
+        "6. Analyze cultural alignment patterns",
+        "7. Apply equity-sensitive analysis",
+        "8. Identify cultural assets and barriers",
+        "9. Apply interpretation_logic",
+        "10. Emit macrosystem_alignment with equity_assessment"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Macrosystem has no hard gates - structural barriers use equity adjustments",
+          "hard_gates_source": "None - macrosystem cannot hard-block",
+          "note": "Equity flags trigger human review and cultural bridging, not hard blocks"
+        },
+        "WELL_ALIGNED": {
+          "condition": "cultural_valuation >= 70 AND no_equity_flags AND knowledge_legitimate",
+          "band": "ROBUST",
+          "action": "emit_aligned_macrosystem"
+        },
+        "PARTIALLY_ALIGNED": {
+          "condition": "some_alignment AND equity_flags_addressable",
+          "band": "FRAGILE",
+          "action": "emit_with_cultural_bridging_recommendations"
+        },
+        "MISALIGNED": {
+          "condition": "low_cultural_valuation OR critical_equity_flags OR knowledge_delegitimized",
+          "band": "BLOCKED",
+          "action": "emit_equity_concerns_for_L04_and_adaptation"
+        },
+        "personality_adjustments": {
+          "high_openness": "more tolerant of cultural diversity in content",
+          "low_openness": "cultural_fit more critical for engagement",
+          "riasec_S": "community and social aspects of cultural alignment weighted higher"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-3"
+      ],
+      "downstream": [
+        "PH-CLEA-5"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-5",
+      "was": "CP-CLEA-5",
+      "phase_name": "Chronosystem Stability Monitor",
+      "calls_elements": [
+        "E-L03-CHR-BUNDLE",
+        "E-L03-MIC-BUNDLE",
+        "E-L03-MES-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-CHR-BUNDLE": {
+          "instruction": "full_chronosystem_assessment",
+          "purpose": "Gather complete temporal stability and transition evidence"
+        },
+        "E-L03-MIC-BUNDLE": {
+          "instruction": "assess_time_context",
+          "purpose": "Get current time availability for recovery assessment"
+        },
+        "E-L03-MES-BUNDLE": {
+          "instruction": "assess_routine_alignment",
+          "purpose": "Get routine stability for temporal context"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-4 framework for chronosystem stability rules",
+        "2. Receive transition_history, disruption_log, participation_history",
+        "3. Instruct E-L03-CHR-BUNDLE: full_chronosystem_assessment",
+        "4. Instruct E-L03-MIC-BUNDLE: assess_time_context",
+        "5. Instruct E-L03-MES-BUNDLE: assess_routine_alignment",
+        "6. Receive evidence bundles from Elements",
+        "7. Calculate current transition load",
+        "8. Assess recovery window availability",
+        "9. Evaluate disruption accumulation",
+        "10. Apply interpretation_logic with personality adjustments",
+        "11. Emit chronosystem_stability with risk assessment"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Chronosystem has no hard gates - temporal disruption uses protective pauses",
+          "hard_gates_source": "None - chronosystem cannot hard-block",
+          "note": "High transition load triggers protective measures, not hard blocks"
+        },
+        "STABLE": {
+          "condition": "transition_load <= 1 AND recovery_window_adequate AND no_disruption_accumulation",
+          "band": "ROBUST",
+          "action": "emit_stable_chronosystem"
+        },
+        "TRANSITIONING": {
+          "condition": "transition_load <= 2 AND recovery_possible",
+          "band": "FRAGILE",
+          "action": "emit_with_transition_support_recommendations"
+        },
+        "UNSTABLE": {
+          "condition": "transition_load > 2 OR high_disruption_accumulation OR participation_decay",
+          "band": "BLOCKED",
+          "action": "emit_stability_concerns_for_protective_measures"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "lower transition_load threshold, require more recovery time",
+          "high_conscientiousness": "can handle structured transitions better",
+          "low_openness": "transitions more disruptive, need more gradual change"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-4"
+      ],
+      "downstream": [
+        "PH-CLEA-6"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-6",
+      "was": "CP-CLEA-6",
+      "phase_name": "Barrier Synthesizer",
+      "calls_elements": [
+        "E-L03-MIC-BUNDLE",
+        "E-L03-MES-BUNDLE",
+        "E-L03-EXO-BUNDLE",
+        "E-L03-MAC-BUNDLE",
+        "E-L03-CHR-BUNDLE",
+        "E-L03-EPR-TECH-BUNDLE",
+        "E-L03-EPR-HUMAN-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-MIC-BUNDLE": {
+          "instruction": "full_microsystem_assessment",
+          "purpose": "Gather microsystem barriers if not already received"
+        },
+        "E-L03-MES-BUNDLE": {
+          "instruction": "full_mesosystem_assessment",
+          "purpose": "Gather mesosystem disconnects if not already received"
+        },
+        "E-L03-EXO-BUNDLE": {
+          "instruction": "full_exosystem_assessment",
+          "purpose": "Gather exosystem barriers if not already received"
+        },
+        "E-L03-MAC-BUNDLE": {
+          "instruction": "assess_equity_context",
+          "purpose": "Gather macrosystem equity barriers"
+        },
+        "E-L03-CHR-BUNDLE": {
+          "instruction": "full_chronosystem_assessment",
+          "purpose": "Gather chronosystem transition risks"
+        },
+        "E-L03-EPR-TECH-BUNDLE": {
+          "instruction": "check_all_tech_gates",
+          "purpose": "Evaluate technology hard gates for barrier classification"
+        },
+        "E-L03-EPR-HUMAN-BUNDLE": {
+          "instruction": "assess_full_human_readiness",
+          "purpose": "Evaluate human context for barrier weighting"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-5 framework for barrier synthesis rules",
+        "2. Receive assessments from CP-CLEA-1 through CP-CLEA-5",
+        "3. Extract barriers from each EST level assessment",
+        "4. If any assessments missing, instruct Elements directly",
+        "5. Classify barriers by severity using construct rules",
+        "6. Identify barrier interactions and cascade chains",
+        "7. Apply priority algorithm: severity × urgency × actionability",
+        "8. Extract strengths for leverage identification",
+        "9. Apply interpretation_logic",
+        "10. Emit barrier_inventory with priority_interventions"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Aggregate all failed_hard_gates from upstream compounds",
+          "if_any_failed": "band = BLOCKED - synthesize hard gate failures as CRITICAL severity",
+          "hard_gates_source": "Aggregated from CP-CLEA-1 (MIC) and CP-CLEA-3 (EXO)",
+          "blocked_response": "Include hard gate failures in barrier inventory as highest priority"
+        },
+        "FEW_BARRIERS": {
+          "condition": "total_barriers <= 2 AND no_critical_barriers AND no_failed_hard_gates",
+          "band": "ROBUST",
+          "action": "emit_minimal_barrier_inventory"
+        },
+        "MODERATE_BARRIERS": {
+          "condition": "total_barriers <= 5 AND barriers_addressable AND no_failed_hard_gates",
+          "band": "FRAGILE",
+          "action": "emit_prioritized_barrier_inventory"
+        },
+        "SIGNIFICANT_BARRIERS": {
+          "condition": "total_barriers > 5 OR cascade_chains_detected OR critical_barriers OR failed_hard_gates",
+          "band": "BLOCKED",
+          "action": "emit_comprehensive_barrier_analysis_with_escalation"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "weight emotional and stability barriers higher in severity",
+          "high_conscientiousness": "can manage more barriers if structured support provided",
+          "low_openness": "routine disruption barriers weighted higher"
+        },
+        "severity_classification": {
+          "CRITICAL": "barrier_prevents_participation_entirely",
+          "HIGH": "barrier_significantly_impairs_learning",
+          "MODERATE": "barrier_creates_friction_but_manageable",
+          "LOW": "barrier_is_minor_inconvenience"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-5"
+      ],
+      "downstream": [
+        "PH-CLEA-7"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-7",
+      "was": "CP-CLEA-7",
+      "phase_name": "Context Adaptation Strategist",
+      "calls_elements": [
+        "E-L03-MIC-BUNDLE",
+        "E-L03-EXO-BUNDLE",
+        "E-L03-MAC-BUNDLE",
+        "E-L03-MES-BUNDLE",
+        "E-L03-CHR-BUNDLE",
+        "E-L03-MML-BUNDLE",
+        "E-L03-EPR-TECH-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-MIC-BUNDLE": {
+          "instruction": "assess_device_context",
+          "purpose": "Get device constraints for adaptation feasibility"
+        },
+        "E-L03-EXO-BUNDLE": {
+          "instruction": "assess_resource_availability",
+          "purpose": "Get resource constraints for strategy feasibility"
+        },
+        "E-L03-MAC-BUNDLE": {
+          "instruction": "assess_cultural_valuation",
+          "purpose": "Get cultural context for culturally responsive adaptation"
+        },
+        "E-L03-MES-BUNDLE": {
+          "instruction": "assess_communication_quality",
+          "purpose": "Get communication channels for coordination"
+        },
+        "E-L03-CHR-BUNDLE": {
+          "instruction": "assess_recovery_capacity",
+          "purpose": "Get timing constraints for adaptation pacing"
+        },
+        "E-L03-MML-BUNDLE": {
+          "instruction": "assess_modality_constraints",
+          "purpose": "Get modality preferences for adaptation format"
+        },
+        "E-L03-EPR-TECH-BUNDLE": {
+          "instruction": "compute_technology_constraints",
+          "purpose": "Get technology constraints for adaptation feasibility"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-6 framework for adaptation strategy rules",
+        "2. Receive barrier_inventory from CP-CLEA-6",
+        "3. Extract strength_inventory from barrier synthesis",
+        "4. Instruct Elements for feasibility constraints",
+        "5. Receive constraint evidence from Elements",
+        "6. For each priority barrier, identify strategy type",
+        "7. Match barriers with available strengths",
+        "8. Generate strategy options within constraints",
+        "9. Apply personality adjustments to strategy format",
+        "10. Validate strategy feasibility",
+        "11. Apply interpretation_logic",
+        "12. Emit adaptation_strategies with resource_requirements"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Check if any barriers in inventory are from failed hard gates",
+          "if_any_failed": "No adaptation can overcome hard gate - escalate immediately",
+          "hard_gates_source": "barrier_inventory.failed_hard_gates from CP-CLEA-6",
+          "blocked_response": "Emit ESCALATION_REQUIRED with hard_gate_failure flag"
+        },
+        "STRENGTH_BASED": {
+          "condition": "strengths_available AND can_leverage_for_barriers AND no_failed_hard_gates",
+          "band": "ROBUST",
+          "action": "generate_strength_leverage_strategies"
+        },
+        "MITIGATION_BASED": {
+          "condition": "barriers_addressable AND resources_available AND no_failed_hard_gates",
+          "band": "FRAGILE",
+          "action": "generate_mitigation_strategies"
+        },
+        "COMPENSATION_REQUIRED": {
+          "condition": "barriers_not_directly_addressable BUT workarounds_possible AND no_failed_hard_gates",
+          "band": "FRAGILE",
+          "action": "generate_compensation_strategies"
+        },
+        "ESCALATION_REQUIRED": {
+          "condition": "barriers_structural OR resources_insufficient OR failed_hard_gates",
+          "band": "BLOCKED",
+          "action": "generate_escalation_with_equity_flag"
+        },
+        "personality_adjustments": {
+          "high_conscientiousness": "structured, detailed adaptation plans",
+          "low_conscientiousness": "simple, flexible adaptation with checkpoints",
+          "high_neuroticism": "include emotional support and safety nets",
+          "high_openness": "offer multiple adaptation pathways",
+          "high_extraversion": "include collaborative and social adaptations",
+          "low_extraversion": "include independent and asynchronous options"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-6"
+      ],
+      "downstream": [
+        "PH-CLEA-8"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-8",
+      "was": "CP-CLEA-8",
+      "phase_name": "Ecological Handoff Compiler",
+      "calls_elements": [
+        "E-L03-MIC-BUNDLE",
+        "E-L03-MES-BUNDLE",
+        "E-L03-EXO-BUNDLE",
+        "E-L03-MAC-BUNDLE",
+        "E-L03-CHR-BUNDLE",
+        "E-L03-MML-BUNDLE",
+        "E-L03-EPR-TECH-BUNDLE",
+        "E-L03-EPR-HUMAN-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-MIC-BUNDLE": {
+          "instruction": "full_microsystem_assessment",
+          "purpose": "Validate microsystem data completeness"
+        },
+        "E-L03-MES-BUNDLE": {
+          "instruction": "full_mesosystem_assessment",
+          "purpose": "Validate mesosystem data completeness"
+        },
+        "E-L03-EXO-BUNDLE": {
+          "instruction": "full_exosystem_assessment",
+          "purpose": "Validate exosystem data completeness"
+        },
+        "E-L03-MAC-BUNDLE": {
+          "instruction": "full_macrosystem_assessment",
+          "purpose": "Validate macrosystem data completeness"
+        },
+        "E-L03-CHR-BUNDLE": {
+          "instruction": "full_chronosystem_assessment",
+          "purpose": "Validate chronosystem data completeness"
+        },
+        "E-L03-MML-BUNDLE": {
+          "instruction": "full_multimodal_assessment",
+          "purpose": "Get modality constraints for MSA handoff"
+        },
+        "E-L03-EPR-TECH-BUNDLE": {
+          "instruction": "compute_technology_constraints",
+          "purpose": "Get technology constraint profile for CSA/MSA handoff"
+        },
+        "E-L03-EPR-HUMAN-BUNDLE": {
+          "instruction": "assess_full_human_readiness",
+          "purpose": "Get human readiness for adaptation packaging"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-7 framework for handoff validation rules",
+        "2. Collect all outputs from CP-CLEA-1 through CP-CLEA-7",
+        "3. Validate completeness of required inputs",
+        "4. If gaps detected, instruct Elements for missing data",
+        "5. Compile context_vector from all assessments",
+        "6. Generate constraint_summary for quick reference",
+        "7. Extract opportunity_signals from strengths",
+        "8. Package for CogniStruct: cultural + knowledge context",
+        "9. Package for CSA: time + device + adaptation context",
+        "10. Package for MSA: modality + accessibility context",
+        "11. Package for L04: equity + ethics context",
+        "12. Package for LAA: assessment context",
+        "13. Validate all packages against handoff contracts",
+        "14. Apply interpretation_logic",
+        "15. Emit context_vector with downstream_handoff_packages"
+      ],
+      "interpretation_logic": {
+        "gate_first_evaluation": {
+          "rule": "Include all failed_hard_gates in handoff packages",
+          "if_any_failed": "hard_gate_status = FAIL must be first item in all handoff packages",
+          "hard_gates_source": "Aggregated from all upstream compounds",
+          "handoff_requirement": "Downstream agents receive BLOCKED band if any hard gate failed",
+          "transparency_mandate": "All agents receive identical hard_gate_status"
+        },
+        "COMPLETE_HANDOFF": {
+          "condition": "all_required_inputs_present AND all_validations_passed",
+          "band": "ROBUST",
+          "action": "emit_full_context_vector"
+        },
+        "PARTIAL_HANDOFF": {
+          "condition": "critical_inputs_present AND non_critical_gaps_acceptable",
+          "band": "FRAGILE",
+          "action": "emit_with_gap_annotations"
+        },
+        "BLOCKED_HANDOFF": {
+          "condition": "critical_inputs_missing OR validation_failures OR hard_gate_status == FAIL",
+          "band": "BLOCKED",
+          "action": "return_to_failed_compound"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-7"
+      ],
+      "downstream": [
+        "PH-CLEA-9"
+      ]
+    },
+    {
+      "phase_id": "PH-CLEA-9",
+      "was": "CP-CLEA-EPR",
+      "phase_name": "Ecological Participation Readiness Evaluator",
+      "calls_elements": [
+        "E-L03-EPR-TECH-BUNDLE",
+        "E-L03-EPR-HUMAN-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L03-EPR-TECH-BUNDLE": {
+          "primary_instruction": "check_all_tech_gates",
+          "purpose": "Evaluate all technology hard gates for PASS/FAIL",
+          "execute_first": true,
+          "secondary_instruction": "compute_technology_constraints",
+          "secondary_purpose": "Generate technology constraint profile for MSA/CSA handoff",
+          "execute_on": "tech_gates_pass"
+        },
+        "E-L03-EPR-HUMAN-BUNDLE": {
+          "instruction": "assess_full_human_readiness",
+          "purpose": "Evaluate human context for adaptation recommendations",
+          "execute_if": "tech_gates_pass OR force_human_assessment"
+        }
+      },
+      "execution_flow": [
+        "1. Read K-CLEA-EPR-TECH and K-CLEA-EPR-HUMAN frameworks",
+        "2. Receive device_data, connectivity_data, platform_status",
+        "3. Instruct E-L03-EPR-TECH-BUNDLE: check_all_tech_gates",
+        "4. IF any tech gate FAIL → emit TECH_BLOCKED, skip remaining steps",
+        "5. IF all tech gates PASS → Instruct E-L03-EPR-TECH-BUNDLE: compute_technology_constraints",
+        "6. Receive technology_constraint_profile (allowed_modalities, bandwidth_tier, etc.)",
+        "7. Receive optional human context data",
+        "8. Instruct E-L03-EPR-HUMAN-BUNDLE: assess_full_human_readiness",
+        "9. Combine tech readiness, tech constraints, and human results",
+        "10. Apply interpretation_logic to determine overall status",
+        "11. Emit participation_readiness + technology_constraint_profile for L05 handoff"
+      ],
+      "interpretation_logic": {
+        "evaluation_sequence": {
+          "step_1": "Evaluate Technology hard gates via E-L03-EPR-TECH-BUNDLE",
+          "step_2": "IF tech BLOCKED → emit TECH_BLOCKED with resolution path",
+          "step_3": "IF tech PASS → Evaluate Human context via E-L03-EPR-HUMAN-BUNDLE",
+          "step_4": "Combine tech and human assessments for unified readiness"
+        },
+        "READY_OPTIMAL": {
+          "condition": "tech_status == TECH_READY AND human_status == HUMAN_THRIVING",
+          "tech_band": "ROBUST",
+          "human_band": "ROBUST",
+          "overall_band": "ROBUST",
+          "action": "proceed_with_standard_learning_path"
+        },
+        "READY_ADAPTED": {
+          "condition": "tech_status == TECH_READY AND human_status in [HUMAN_SUPPORTED, HUMAN_CHALLENGED]",
+          "tech_band": "ROBUST",
+          "human_band": "FRAGILE",
+          "overall_band": "FRAGILE",
+          "action": "proceed_with_adaptation_strategies"
+        },
+        "TECH_BLOCKED": {
+          "condition": "tech_status == TECH_BLOCKED",
+          "tech_band": "BLOCKED",
+          "human_band": "NOT_EVALUATED",
+          "overall_band": "BLOCKED",
+          "action": "emit_tech_resolution_path",
+          "resolution_options": [
+            "Provide alternative device",
+            "Resolve connectivity issue",
+            "Wait for platform restoration",
+            "Escalate to IT support"
+          ]
+        },
+        "HUMAN_VULNERABLE": {
+          "condition": "tech_status == TECH_READY AND human_status == HUMAN_VULNERABLE",
+          "tech_band": "ROBUST",
+          "human_band": "BLOCKED",
+          "overall_band": "FRAGILE",
+          "action": "trigger_human_support_intervention",
+          "note": "Human BLOCKED never stops system - triggers human support"
+        }
+      },
+      "upstream": [
+        "PH-CLEA-8"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {
+    "receives_from": {
+      "Personality": "personality_state_modifiers (N for emotional safety, E for social support, C for routine needs)",
+      "LOPA": "learner_state_vector (current learner state)"
+    },
+    "emits_to": {
+      "L04_Ethical_Core": "context_vector (ecological constraints for ethical evaluation)",
+      "CSA": "context_vector (ecological constraints for content sequencing)",
+      "MSA": "context_vector (bandwidth/access constraints for modality selection)"
+    }
+  },
+  "failure_modes": [
+    {
+      "mode": "blocked_est_level",
+      "trigger": "Critical barrier at any EST level blocks progress",
+      "action": "Escalate to supervisor or human review"
+    },
+    {
+      "mode": "epr_gate_fail",
+      "trigger": "Ecological/personal readiness below threshold",
+      "action": "Recommend intervention before proceeding"
+    },
+    {
+      "mode": "insufficient_context_data",
+      "trigger": "Cannot assess one or more EST levels",
+      "action": "Use conservative defaults, flag for data collection"
+    }
+  ],
+  "metadata": {
+    "consolidated_from": [
+      "CP-CLEA-1",
+      "CP-CLEA-2",
+      "CP-CLEA-3",
+      "CP-CLEA-4",
+      "CP-CLEA-5",
+      "CP-CLEA-6",
+      "CP-CLEA-7",
+      "CP-CLEA-8",
+      "CP-CLEA-EPR"
+    ],
+    "original_count": 9,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

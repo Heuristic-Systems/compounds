@@ -1,0 +1,376 @@
+{
+  "compound_id": "CP-HICE",
+  "compound_name": "Human-Institutional Co-Evolution Master Compound",
+  "layer": "L07",
+  "agent": "HICE",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-HICE",
+  "theoretical_foundation": {
+    "primary_theory": "Human-Institutional Co-Evolution Theory",
+    "application": "13-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L07-AEB-BUNDLE",
+    "E-L07-ASM-BUNDLE",
+    "E-L07-CTX-BUNDLE",
+    "E-L07-EPI-BUNDLE",
+    "E-L07-ERT-BUNDLE",
+    "E-L07-ETH-BUNDLE",
+    "E-L07-IAA-BUNDLE",
+    "E-L07-IFB-BUNDLE",
+    "E-L07-INT-BUNDLE",
+    "E-L07-MML-BUNDLE",
+    "E-L07-PED-BUNDLE",
+    "E-L07-RCR-BUNDLE",
+    "E-L07-STR-BUNDLE",
+    "E-L07-UNC-BUNDLE",
+    "E-L07-VPS-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-HICE-1",
+      "was": "CP-HICE-1",
+      "phase_name": "Epistemic Anomaly Router",
+      "calls_elements": [
+        "E-L07-EPI-BUNDLE",
+        "E-L07-UNC-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "epistemic_status",
+        "secondary": [
+          "anomaly_persistence",
+          "theory_gauge",
+          "research_escalation"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [],
+      "downstream": [
+        "PH-HICE-3"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-2",
+      "was": "CP-HICE-10",
+      "phase_name": "Identity & Interop Verifier",
+      "calls_elements": [
+        "E-L07-IAA-BUNDLE",
+        "E-L07-IFB-BUNDLE",
+        "E-L07-AEB-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "identity_status",
+        "secondary": [
+          "federation_valid",
+          "interop_compliance",
+          "access_verified"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-2"
+      ],
+      "downstream": [
+        "PH-HICE-4"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-3",
+      "was": "CP-HICE-11",
+      "phase_name": "Change Control Manager",
+      "calls_elements": [
+        "E-L07-RCR-BUNDLE",
+        "E-L07-VPS-BUNDLE",
+        "E-L07-AEB-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "change_status",
+        "secondary": [
+          "freeze_active",
+          "rollback_ready",
+          "renewal_due"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-3"
+      ],
+      "downstream": [
+        "PH-HICE-5"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-4",
+      "was": "CP-HICE-12",
+      "phase_name": "Human Escalation Compiler",
+      "calls_elements": [
+        "E-L07-EPI-BUNDLE",
+        "E-L07-ETH-BUNDLE",
+        "E-L07-INT-BUNDLE",
+        "E-L07-UNC-BUNDLE",
+        "E-L07-CTX-BUNDLE",
+        "E-L07-PED-BUNDLE",
+        "E-L07-ASM-BUNDLE",
+        "E-L07-STR-BUNDLE",
+        "E-L07-ERT-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "escalation_spec",
+        "secondary": [
+          "human_routing",
+          "context_bundle",
+          "decision_support"
+        ]
+      },
+      "loop_policy": "iterate_until_stable",
+      "upstream": [
+        "PH-HICE-4"
+      ],
+      "downstream": [
+        "PH-HICE-6"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-5",
+      "was": "CP-HICE-13",
+      "phase_name": "Multimodal Governance Evaluator",
+      "calls_elements": [
+        "E-L07-MML-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "modality_governance_status",
+        "secondary": [
+          "narrowing_risk_assessment",
+          "challenge_modality_recommendation",
+          "modality_diversity_score"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-5"
+      ],
+      "downstream": [
+        "PH-HICE-7"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-6",
+      "was": "CP-HICE-2",
+      "phase_name": "Uncertainty Escalation Router",
+      "calls_elements": [
+        "E-L07-UNC-BUNDLE",
+        "E-L07-EPI-BUNDLE",
+        "E-L07-CTX-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "confidence_level",
+        "secondary": [
+          "saturation_status",
+          "uncertainty_escalation",
+          "calibration_need"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-6"
+      ],
+      "downstream": [
+        "PH-HICE-8"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-7",
+      "was": "CP-HICE-3",
+      "phase_name": "Context Drift Detector",
+      "calls_elements": [
+        "E-L07-CTX-BUNDLE",
+        "E-L07-ETH-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "context_status",
+        "secondary": [
+          "drift_detected",
+          "ambiguity_level",
+          "policy_alignment"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-7"
+      ],
+      "downstream": [
+        "PH-HICE-9"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-8",
+      "was": "CP-HICE-4",
+      "phase_name": "Ethical Escalation Router",
+      "calls_elements": [
+        "E-L07-ETH-BUNDLE",
+        "E-L07-ASM-BUNDLE",
+        "E-L07-STR-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "ethical_status",
+        "secondary": [
+          "conflict_detected",
+          "stakes_level",
+          "ethics_escalation"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-8"
+      ],
+      "downstream": [
+        "PH-HICE-10"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-9",
+      "was": "CP-HICE-5",
+      "phase_name": "Pedagogical Governance Monitor",
+      "calls_elements": [
+        "E-L07-PED-BUNDLE",
+        "E-L07-EPI-BUNDLE",
+        "E-L07-CTX-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "pedagogical_status",
+        "secondary": [
+          "optimisation_ceiling",
+          "deadlock_detected",
+          "innovation_need"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-9"
+      ],
+      "downstream": [
+        "PH-HICE-11"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-10",
+      "was": "CP-HICE-6",
+      "phase_name": "Assessment Validity Checker",
+      "calls_elements": [
+        "E-L07-ASM-BUNDLE",
+        "E-L07-ETH-BUNDLE",
+        "E-L07-PED-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "assessment_status",
+        "secondary": [
+          "validity_concern",
+          "harm_potential",
+          "assessment_escalation"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-10"
+      ],
+      "downstream": [
+        "PH-HICE-12"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-11",
+      "was": "CP-HICE-7",
+      "phase_name": "Strategic Values Assessor",
+      "calls_elements": [
+        "E-L07-STR-BUNDLE",
+        "E-L07-ETH-BUNDLE",
+        "E-L07-INT-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "strategic_status",
+        "secondary": [
+          "values_alignment",
+          "impact_level",
+          "strategic_escalation"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-11"
+      ],
+      "downstream": [
+        "PH-HICE-13"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-12",
+      "was": "CP-HICE-8",
+      "phase_name": "Integration Coherence Monitor",
+      "calls_elements": [
+        "E-L07-INT-BUNDLE",
+        "E-L07-CTX-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "integration_status",
+        "secondary": [
+          "coherence_level",
+          "cascade_risk",
+          "integration_escalation"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-12"
+      ],
+      "downstream": [
+        "PH-HICE-14"
+      ]
+    },
+    {
+      "phase_id": "PH-HICE-13",
+      "was": "CP-HICE-9",
+      "phase_name": "Educator Role Transition Manager",
+      "calls_elements": [
+        "E-L07-ERT-BUNDLE",
+        "E-L07-PED-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "role_transition_status",
+        "secondary": [
+          "coaching_capacity",
+          "oversight_readiness",
+          "transition_support"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-HICE-13"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-HICE-1",
+      "CP-HICE-10",
+      "CP-HICE-11",
+      "CP-HICE-12",
+      "CP-HICE-13",
+      "CP-HICE-2",
+      "CP-HICE-3",
+      "CP-HICE-4",
+      "CP-HICE-5",
+      "CP-HICE-6",
+      "CP-HICE-7",
+      "CP-HICE-8",
+      "CP-HICE-9"
+    ],
+    "original_count": 13,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

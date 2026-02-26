@@ -1,0 +1,700 @@
+{
+  "compound_id": "CP-MP5",
+  "compound_name": "MP5 Synthesis-Integration Gate Master Compound",
+  "layer": "MP05",
+  "agent": "MP5",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MP5",
+  "theoretical_foundation": {
+    "primary_theory": "IRP Synthesis and Quality Gates",
+    "application": "26-phase pipeline"
+  },
+  "calls_elements": [
+    "MP05-E-ASM-001",
+    "MP05-E-ASM-002",
+    "MP05-E-ASM-003",
+    "MP05-E-EVD-001",
+    "MP05-E-EVD-002",
+    "MP05-E-EVL-001",
+    "MP05-E-EVL-002",
+    "MP05-E-EVL-003",
+    "MP05-E-GAT-001",
+    "MP05-E-GAT-002",
+    "MP05-E-GAT-003",
+    "MP05-E-GAT-004",
+    "MP05-E-GAT-005",
+    "MP05-E-GAT-006",
+    "MP05-E-INT-001",
+    "MP05-E-INT-002",
+    "MP05-E-INT-003",
+    "MP05-E-KNW-001",
+    "MP05-E-KNW-002",
+    "MP05-E-KNW-003",
+    "MP05-E-KNW-004",
+    "MP05-E-KNW-005",
+    "MP05-E-OUT-001",
+    "MP05-E-OUT-002",
+    "MP05-E-OUT-003",
+    "MP05-E-REL-001",
+    "MP05-E-SYN-001",
+    "MP05-E-SYN-002",
+    "MP05-E-SYN-003"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-MP5-1",
+      "was": "CP-MP5-0.1_Schema_Validator",
+      "phase_name": "Schema Validator",
+      "calls_elements": [
+        "MP05-E-INT-001"
+      ],
+      "outputs": [
+        {
+          "name": "schema_validation_result",
+          "type": "ValidationResult",
+          "description": "VALID | INVALID with field-level errors"
+        }
+      ],
+      "validation_rules": [
+        {
+          "rule_id": "SCH-001",
+          "field": "mp4_run_id",
+          "check": "exists && type === string",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule_id": "SCH-002",
+          "field": "grounding_results",
+          "check": "exists && type === array && length > 0",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule_id": "SCH-003",
+          "field": "regional_bindings",
+          "check": "exists && type === object",
+          "severity": "HIGH"
+        },
+        {
+          "rule_id": "SCH-004",
+          "field": "ecological_coverage",
+          "check": "exists && type === object",
+          "severity": "HIGH"
+        },
+        {
+          "rule_id": "SCH-005",
+          "field": "drift_analysis",
+          "check": "exists && type === object",
+          "severity": "MEDIUM"
+        },
+        {
+          "rule_id": "SCH-006",
+          "field": "composite_score",
+          "check": "exists && type === number && value >= 0 && value <= 100",
+          "severity": "CRITICAL"
+        }
+      ],
+      "upstream": [],
+      "downstream": [
+        "PH-MP5-3"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-2",
+      "was": "CP-MP5-0.2_Traceability_Checker",
+      "phase_name": "Traceability Checker",
+      "calls_elements": [
+        "MP05-E-INT-002"
+      ],
+      "outputs": [
+        {
+          "name": "traceability_result",
+          "type": "TraceabilityResult",
+          "description": "COMPLETE | PARTIAL | BROKEN with link inventory"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-2"
+      ],
+      "downstream": [
+        "PH-MP5-4"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-3",
+      "was": "CP-MP5-0.3_Completeness_Assessor",
+      "phase_name": "Completeness Assessor",
+      "calls_elements": [
+        "MP05-E-INT-003"
+      ],
+      "outputs": [
+        {
+          "name": "completeness_result",
+          "type": "CompletenessResult",
+          "description": "COMPLETE | PARTIAL | INSUFFICIENT with coverage matrix"
+        },
+        {
+          "name": "intake_validation_summary",
+          "type": "IntakeValidationSummary",
+          "description": "Aggregated result from all three intake compounds"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-3"
+      ],
+      "downstream": [
+        "PH-MP5-5"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-4",
+      "was": "CP-MP5-1.1_Scope_Definer",
+      "phase_name": "Scope Definer",
+      "calls_elements": [
+        "MP05-E-SYN-001"
+      ],
+      "outputs": [
+        {
+          "name": "scope_definition",
+          "type": "ScopeDefinition",
+          "description": "Layers, domains, capabilities, and constraints in scope"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-4"
+      ],
+      "downstream": [
+        "PH-MP5-6"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-5",
+      "was": "CP-MP5-1.2_Dependency_Mapper",
+      "phase_name": "Dependency Mapper",
+      "calls_elements": [
+        "MP05-E-SYN-002"
+      ],
+      "outputs": [
+        {
+          "name": "dependency_graph",
+          "type": "DependencyGraph",
+          "description": "DAG of layer/component dependencies with integration order"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-5"
+      ],
+      "downstream": [
+        "PH-MP5-7"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-6",
+      "was": "CP-MP5-1.3_IRP_Assembler",
+      "phase_name": "IRP Assembler",
+      "calls_elements": [
+        "MP05-E-SYN-003"
+      ],
+      "outputs": [
+        {
+          "name": "integration_release_plan",
+          "type": "IntegrationReleasePlan",
+          "description": "Complete IRP ready for gate evaluation"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-6"
+      ],
+      "downstream": [
+        "PH-MP5-8"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-7",
+      "was": "CP-MP5-2.1_Critical_Gate_Evaluator",
+      "phase_name": "Critical Gate Evaluator",
+      "calls_elements": [
+        "MP05-E-GAT-001",
+        "MP05-E-GAT-002"
+      ],
+      "outputs": [
+        {
+          "name": "critical_gate_result",
+          "type": "GateEvaluationResult",
+          "description": "PASS | FAIL with detailed gate assessments"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-7"
+      ],
+      "downstream": [
+        "PH-MP5-9"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-8",
+      "was": "CP-MP5-2.2_High_Priority_Gate_Evaluator",
+      "phase_name": "High Priority Gate Evaluator",
+      "calls_elements": [
+        "MP05-E-GAT-003",
+        "MP05-E-GAT-004"
+      ],
+      "outputs": [
+        {
+          "name": "high_gate_result",
+          "type": "GateEvaluationResult",
+          "description": "PASS | CONDITIONAL with gate assessments"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-8"
+      ],
+      "downstream": [
+        "PH-MP5-10"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-9",
+      "was": "CP-MP5-2.3_Medium_Priority_Gate_Evaluator",
+      "phase_name": "Medium Priority Gate Evaluator",
+      "calls_elements": [
+        "MP05-E-GAT-005",
+        "MP05-E-GAT-006"
+      ],
+      "outputs": [
+        {
+          "name": "medium_gate_result",
+          "type": "GateEvaluationResult",
+          "description": "PASS | ADVISORY with gate assessments"
+        },
+        {
+          "name": "gate_evaluation_summary",
+          "type": "GateEvaluationSummary",
+          "description": "Aggregated result from all three gate compounds"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-9"
+      ],
+      "downstream": [
+        "PH-MP5-11"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-10",
+      "was": "CP-MP5-3.1_Artifact_Merger",
+      "phase_name": "Artifact Merger",
+      "calls_elements": [
+        "MP05-E-ASM-001"
+      ],
+      "outputs": [
+        {
+          "name": "merged_artifact_package",
+          "type": "MergedArtifactPackage",
+          "description": "Unified package of all integration artifacts"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-10"
+      ],
+      "downstream": [
+        "PH-MP5-12"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-11",
+      "was": "CP-MP5-3.2_Lineage_Linker",
+      "phase_name": "Lineage Linker",
+      "calls_elements": [
+        "MP05-E-ASM-002"
+      ],
+      "outputs": [
+        {
+          "name": "lineage_linked_package",
+          "type": "LineageLinkedPackage",
+          "description": "Artifacts with complete provenance chains"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-11"
+      ],
+      "downstream": [
+        "PH-MP5-13"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-12",
+      "was": "CP-MP5-3.3_Compendium_Validator",
+      "phase_name": "Compendium Validator",
+      "calls_elements": [
+        "MP05-E-ASM-003"
+      ],
+      "outputs": [
+        {
+          "name": "integration_compendium_for_mp6",
+          "type": "IntegrationCompendiumForMP6",
+          "description": "Validated compendium ready for MP6 governance audit"
+        },
+        {
+          "name": "assembly_validation_result",
+          "type": "AssemblyValidationResult",
+          "description": "VALID | INVALID with any issues"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-12"
+      ],
+      "downstream": [
+        "PH-MP5-14"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-13",
+      "was": "CP-MP5-3.4_Release_Validator",
+      "phase_name": "Release Validator",
+      "calls_elements": [
+        "MP05-E-REL-001"
+      ],
+      "outputs": [
+        {
+          "name": "release_validated_package",
+          "type": "ReleaseValidatedPackage",
+          "description": "Compendium artifacts validated for release readiness, provenance, and versioning"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-13"
+      ],
+      "downstream": [
+        "PH-MP5-15"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-14",
+      "was": "CP-MP5-4.1_Route_Determiner",
+      "phase_name": "Route Determiner",
+      "calls_elements": [
+        "MP05-E-OUT-001"
+      ],
+      "outputs": [
+        {
+          "name": "governance_route",
+          "type": "GovernanceRoute",
+          "description": "FORWARD_TO_MP6 | CONDITIONAL_FORWARD | EMIT_DIRECTIVE_BUNDLE"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-14"
+      ],
+      "downstream": [
+        "PH-MP5-16"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-15",
+      "was": "CP-MP5-4.2_Directive_Bundle_Generator",
+      "phase_name": "Directive Bundle Generator",
+      "calls_elements": [
+        "MP05-E-OUT-002"
+      ],
+      "outputs": [
+        {
+          "name": "directive_bundle",
+          "type": "DirectiveBundle",
+          "description": "Directives for Layer Agents (only if route === EMIT_DIRECTIVE_BUNDLE)"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-15"
+      ],
+      "downstream": [
+        "PH-MP5-17"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-16",
+      "was": "CP-MP5-4.3_Payload_Emitter",
+      "phase_name": "Payload Emitter",
+      "calls_elements": [
+        "MP05-E-OUT-003"
+      ],
+      "outputs": [
+        {
+          "name": "mp5_output",
+          "type": "Mp5Output",
+          "description": "Final MP5 output payload"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-16"
+      ],
+      "downstream": [
+        "PH-MP5-18"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-17",
+      "was": "CP-MP5-5.1_Evidence_Schema_Validator",
+      "phase_name": "Evidence Schema Validator",
+      "calls_elements": [
+        "MP05-E-EVD-001"
+      ],
+      "outputs": [
+        {
+          "name": "evidence_schema_result",
+          "type": "ValidationResult",
+          "description": "VALID | INVALID with field-level errors"
+        }
+      ],
+      "validation_rules": [
+        {
+          "rule_id": "EVD-SCH-001",
+          "field": "integration_run_id",
+          "check": "Must match a known IRP ID",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule_id": "EVD-SCH-002",
+          "field": "metrics",
+          "check": "At least one metric observation required",
+          "severity": "CRITICAL"
+        },
+        {
+          "rule_id": "EVD-SCH-003",
+          "field": "collection_period",
+          "check": "Start must be before end",
+          "severity": "HIGH"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-17"
+      ],
+      "downstream": [
+        "PH-MP5-19"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-18",
+      "was": "CP-MP5-5.2_Evidence_Integrity_Checker",
+      "phase_name": "Evidence Integrity Checker",
+      "calls_elements": [
+        "MP05-E-EVD-002"
+      ],
+      "outputs": [
+        {
+          "name": "evidence_intake_result",
+          "type": "EvidenceIntakeResult",
+          "description": "VALID | PARTIAL | INSUFFICIENT with integrity assessment"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-18"
+      ],
+      "downstream": [
+        "PH-MP5-20"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-19",
+      "was": "CP-MP5-6.1_Plan_Parser",
+      "phase_name": "Plan Parser",
+      "calls_elements": [
+        "MP05-E-EVL-001"
+      ],
+      "outputs": [
+        {
+          "name": "planned_expectations",
+          "type": "PlannedExpectations",
+          "description": "What the IRP expected to achieve"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-19"
+      ],
+      "downstream": [
+        "PH-MP5-21"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-20",
+      "was": "CP-MP5-6.2_Reality_Mapper",
+      "phase_name": "Reality Mapper",
+      "calls_elements": [
+        "MP05-E-EVL-002"
+      ],
+      "outputs": [
+        {
+          "name": "observed_reality",
+          "type": "ObservedReality",
+          "description": "Structured representation of what actually happened"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-20"
+      ],
+      "downstream": [
+        "PH-MP5-22"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-21",
+      "was": "CP-MP5-6.3_Variance_Analyzer",
+      "phase_name": "Variance Analyzer",
+      "calls_elements": [
+        "MP05-E-EVL-003"
+      ],
+      "outputs": [
+        {
+          "name": "evaluation_report",
+          "type": "EvaluationReport",
+          "description": "Complete variance analysis with insights for knowledge loop"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-21"
+      ],
+      "downstream": [
+        "PH-MP5-23"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-22",
+      "was": "CP-MP5-7.1_Principle_Refiner",
+      "phase_name": "Principle Refiner",
+      "calls_elements": [
+        "MP05-E-KNW-001"
+      ],
+      "outputs": [
+        {
+          "name": "refined_principles",
+          "type": "RefinedPrinciples",
+          "description": "Principle refinement recommendations for MP1"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-22"
+      ],
+      "downstream": [
+        "PH-MP5-24"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-23",
+      "was": "CP-MP5-7.2_Vision_Calibrator",
+      "phase_name": "Vision Calibrator",
+      "calls_elements": [
+        "MP05-E-KNW-002"
+      ],
+      "outputs": [
+        {
+          "name": "vision_calibration",
+          "type": "VisionCalibration",
+          "description": "Vision calibration recommendations for MP3"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-23"
+      ],
+      "downstream": [
+        "PH-MP5-25"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-24",
+      "was": "CP-MP5-7.3_Architecture_Insight_Extractor",
+      "phase_name": "Architecture Insight Extractor",
+      "calls_elements": [
+        "MP05-E-KNW-003"
+      ],
+      "outputs": [
+        {
+          "name": "architecture_insights",
+          "type": "ArchitectureInsights",
+          "description": "Architecture evolution recommendations for MP2"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-24"
+      ],
+      "downstream": [
+        "PH-MP5-26"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-25",
+      "was": "CP-MP5-7.4_Horizon_Signal_Detector",
+      "phase_name": "Horizon Signal Detector",
+      "calls_elements": [
+        "MP05-E-KNW-004"
+      ],
+      "outputs": [
+        {
+          "name": "new_horizon_signals",
+          "type": "NewHorizonSignals",
+          "description": "New strategic signals for L08 and MP3"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-25"
+      ],
+      "downstream": [
+        "PH-MP5-27"
+      ]
+    },
+    {
+      "phase_id": "PH-MP5-26",
+      "was": "CP-MP5-7.5_Knowledge_Loop_Emitter",
+      "phase_name": "Knowledge Loop Emitter",
+      "calls_elements": [
+        "MP05-E-KNW-005"
+      ],
+      "outputs": [
+        {
+          "name": "knowledge_loop_update",
+          "type": "KnowledgeLoopUpdate",
+          "description": "Complete knowledge update for MP1/MP2/MP3 injection"
+        }
+      ],
+      "upstream": [
+        "PH-MP5-26"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-MP5-0.1_Schema_Validator",
+      "CP-MP5-0.2_Traceability_Checker",
+      "CP-MP5-0.3_Completeness_Assessor",
+      "CP-MP5-1.1_Scope_Definer",
+      "CP-MP5-1.2_Dependency_Mapper",
+      "CP-MP5-1.3_IRP_Assembler",
+      "CP-MP5-2.1_Critical_Gate_Evaluator",
+      "CP-MP5-2.2_High_Priority_Gate_Evaluator",
+      "CP-MP5-2.3_Medium_Priority_Gate_Evaluator",
+      "CP-MP5-3.1_Artifact_Merger",
+      "CP-MP5-3.2_Lineage_Linker",
+      "CP-MP5-3.3_Compendium_Validator",
+      "CP-MP5-3.4_Release_Validator",
+      "CP-MP5-4.1_Route_Determiner",
+      "CP-MP5-4.2_Directive_Bundle_Generator",
+      "CP-MP5-4.3_Payload_Emitter",
+      "CP-MP5-5.1_Evidence_Schema_Validator",
+      "CP-MP5-5.2_Evidence_Integrity_Checker",
+      "CP-MP5-6.1_Plan_Parser",
+      "CP-MP5-6.2_Reality_Mapper",
+      "CP-MP5-6.3_Variance_Analyzer",
+      "CP-MP5-7.1_Principle_Refiner",
+      "CP-MP5-7.2_Vision_Calibrator",
+      "CP-MP5-7.3_Architecture_Insight_Extractor",
+      "CP-MP5-7.4_Horizon_Signal_Detector",
+      "CP-MP5-7.5_Knowledge_Loop_Emitter"
+    ],
+    "original_count": 26,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

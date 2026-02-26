@@ -1,0 +1,438 @@
+{
+  "compound_id": "CP-MP6",
+  "compound_name": "MP6 Four Pillars Gate Master Compound",
+  "layer": "MP06",
+  "agent": "MP6",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MP6",
+  "theoretical_foundation": {
+    "primary_theory": "Four Pillars Non-Compensatory Audit",
+    "application": "8-phase pipeline"
+  },
+  "calls_elements": [
+    "E-MP06-AUD-BUNDLE",
+    "E-MP06-CMP-BUNDLE",
+    "E-MP06-DEC-BUNDLE",
+    "E-MP06-EQT-BUNDLE",
+    "E-MP06-GOV-BUNDLE",
+    "E-MP06-MAT-BUNDLE",
+    "E-MP06-TIP-BUNDLE",
+    "E-MP06-VAL-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-MP6-1",
+      "was": "CP-MP6-1",
+      "phase_name": "Intake & Scoping Agent",
+      "calls_elements": [
+        "E-MP06-AUD-BUNDLE",
+        "E-MP06-CMP-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-AUD-BUNDLE": {
+          "instruction": "scope_audit_evidence",
+          "purpose": "Assess audit coverage, independence, and recency for scoping the audit perimeter"
+        },
+        "E-MP06-CMP-BUNDLE": {
+          "instruction": "check_compliance_prerequisites",
+          "purpose": "Verify minimum compliance artefacts are present (IRP, ICD, trace map, gate config)"
+        }
+      },
+      "interpretation_logic": {
+        "COMPLETE": {
+          "condition": "all required artefacts present AND scope defined",
+          "action": "emit audit_brief to CP-MP6-2"
+        },
+        "INCOMPLETE": {
+          "condition": "missing required artefacts",
+          "action": "request missing artefacts from upstream (MP5)"
+        }
+      },
+      "outputs": {
+        "primary": "audit_brief",
+        "secondary": [
+          "scope_boundaries",
+          "pillar_activation_flags",
+          "evidence_checklist"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [],
+      "downstream": [
+        "PH-MP6-3"
+      ]
+    },
+    {
+      "phase_id": "PH-MP6-2",
+      "was": "CP-MP6-2",
+      "phase_name": "Evidence Assembly Agent",
+      "calls_elements": [
+        "E-MP06-AUD-BUNDLE",
+        "E-MP06-CMP-BUNDLE",
+        "E-MP06-TIP-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-AUD-BUNDLE": {
+          "instruction": "gather_audit_evidence",
+          "purpose": "Collect audit trail records, coverage metrics, and independence assessments"
+        },
+        "E-MP06-CMP-BUNDLE": {
+          "instruction": "gather_compliance_evidence",
+          "purpose": "Collect charter compliance, ADR compliance, and governance process records"
+        },
+        "E-MP06-TIP-BUNDLE": {
+          "instruction": "gather_transparency_evidence",
+          "purpose": "Collect TIPS transparency records and whistleblower channel status"
+        }
+      },
+      "interpretation_logic": {
+        "ASSEMBLED": {
+          "condition": "all pillar evidence bundles contain minimum required data",
+          "action": "emit evidence_bundle to gates CP-MP6-3 through CP-MP6-6"
+        },
+        "PARTIAL": {
+          "condition": "some evidence missing but core data available",
+          "action": "proceed with available evidence, flag gaps in evidence_bundle metadata"
+        }
+      },
+      "outputs": {
+        "primary": "evidence_bundle",
+        "secondary": [
+          "efficacy_evidence",
+          "fairness_evidence",
+          "validity_evidence",
+          "governance_evidence"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-MP6-2"
+      ],
+      "downstream": [
+        "PH-MP6-4"
+      ]
+    },
+    {
+      "phase_id": "PH-MP6-3",
+      "was": "CP-MP6-3",
+      "phase_name": "Efficacy Gate Agent",
+      "calls_elements": [
+        "E-MP06-DEC-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-DEC-BUNDLE": {
+          "instruction": "evaluate_efficacy",
+          "purpose": "Compute SESOI (Hedges g) from pre/post outcome data and check against 0.20 threshold"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "Hedges g >= 0.20 with acceptable confidence interval",
+          "action": "forward efficacy_verdict=PASS to CP-MP6-7"
+        },
+        "FAIL": {
+          "condition": "Hedges g < 0.20",
+          "action": "forward efficacy_verdict=FAIL to CP-MP6-7, triggers QUARANTINE"
+        },
+        "INVESTIGATE": {
+          "condition": "insufficient data to compute effect size",
+          "action": "forward efficacy_verdict=INVESTIGATE to CP-MP6-7"
+        }
+      },
+      "outputs": {
+        "primary": "efficacy_verdict",
+        "secondary": [
+          "hedges_g_value",
+          "confidence_interval",
+          "sample_size",
+          "efficacy_rationale"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-MP6-3"
+      ],
+      "downstream": [
+        "PH-MP6-5"
+      ]
+    },
+    {
+      "phase_id": "PH-MP6-4",
+      "was": "CP-MP6-4",
+      "phase_name": "Fairness Gate Agent",
+      "calls_elements": [
+        "E-MP06-EQT-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-EQT-BUNDLE": {
+          "instruction": "evaluate_fairness",
+          "purpose": "Compute parity metrics across 4 dimensions (opportunity, exposure, error, latency) with context stratification and tradeoff policy"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "max parity gap <= 0.02 across all dimensions and strata",
+          "action": "forward fairness_verdict=PASS to CP-MP6-7"
+        },
+        "FAIL": {
+          "condition": "any parity dimension exceeds 0.02",
+          "action": "forward fairness_verdict=FAIL to CP-MP6-7, triggers QUARANTINE"
+        },
+        "NEAR_BREACH": {
+          "condition": "parity gap between 0.015 and 0.02",
+          "action": "forward fairness_verdict=PASS with warning to CP-MP6-7"
+        }
+      },
+      "outputs": {
+        "primary": "fairness_verdict",
+        "secondary": [
+          "parity_gap_values",
+          "stratification_report",
+          "breach_dimensions",
+          "tradeoff_analysis"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-MP6-4"
+      ],
+      "downstream": [
+        "PH-MP6-6"
+      ]
+    },
+    {
+      "phase_id": "PH-MP6-5",
+      "was": "CP-MP6-5",
+      "phase_name": "Validity Gate Agent",
+      "calls_elements": [
+        "E-MP06-VAL-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-VAL-BUNDLE": {
+          "instruction": "evaluate_validity",
+          "purpose": "Check reliability coefficients (alpha/omega >= 0.70), measurement invariance (configural-metric-scalar), and DIF detection"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "alpha AND omega >= 0.70, scalar invariance achieved, no significant DIF",
+          "action": "forward validity_verdict=PASS to CP-MP6-7"
+        },
+        "FAIL": {
+          "condition": "reliability below threshold OR significant DIF detected",
+          "action": "forward validity_verdict=FAIL to CP-MP6-7, triggers REDESIGN"
+        },
+        "INVESTIGATE": {
+          "condition": "partial invariance (metric but not scalar)",
+          "action": "forward validity_verdict=PASS with conditions to CP-MP6-7"
+        }
+      },
+      "outputs": {
+        "primary": "validity_verdict",
+        "secondary": [
+          "reliability_coefficients",
+          "invariance_level",
+          "dif_flags",
+          "adr_linkage_status"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-MP6-5"
+      ],
+      "downstream": [
+        "PH-MP6-7"
+      ]
+    },
+    {
+      "phase_id": "PH-MP6-6",
+      "was": "CP-MP6-6",
+      "phase_name": "Governance Gate Agent",
+      "calls_elements": [
+        "E-MP06-GOV-BUNDLE",
+        "E-MP06-AUD-BUNDLE",
+        "E-MP06-CMP-BUNDLE",
+        "E-MP06-TIP-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-GOV-BUNDLE": {
+          "instruction": "evaluate_governance",
+          "purpose": "Check event sourcing integrity, traceability (>= 0.90), contestability, POPIA, CARE principles"
+        },
+        "E-MP06-AUD-BUNDLE": {
+          "instruction": "verify_audit_integrity",
+          "purpose": "Cross-reference audit coverage and independence for governance verification"
+        },
+        "E-MP06-CMP-BUNDLE": {
+          "instruction": "verify_compliance_status",
+          "purpose": "Cross-reference charter and ADR compliance for governance verification"
+        },
+        "E-MP06-TIP-BUNDLE": {
+          "instruction": "verify_transparency",
+          "purpose": "Cross-reference TIPS framework compliance and whistleblower channel accessibility"
+        }
+      },
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "trace_coverage >= 0.90 AND POPIA compliant AND contestability path exists AND community oversight active",
+          "action": "forward governance_verdict=PASS to CP-MP6-7"
+        },
+        "FAIL": {
+          "condition": "trace_coverage < 0.90",
+          "action": "forward governance_verdict=FAIL to CP-MP6-7, triggers INVESTIGATE"
+        },
+        "INVESTIGATE": {
+          "condition": "partial compliance (POPIA or CARE gaps)",
+          "action": "forward governance_verdict=INVESTIGATE with remediation directive"
+        }
+      },
+      "outputs": {
+        "primary": "governance_verdict",
+        "secondary": [
+          "trace_coverage_score",
+          "contestability_report",
+          "popia_status",
+          "care_alignment_score",
+          "community_oversight_status"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-MP6-6"
+      ],
+      "downstream": [
+        "PH-MP6-8"
+      ]
+    },
+    {
+      "phase_id": "PH-MP6-7",
+      "was": "CP-MP6-7",
+      "phase_name": "Decision Synthesis Agent",
+      "calls_elements": [
+        "E-MP06-DEC-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-DEC-BUNDLE": {
+          "instruction": "synthesise_verdict",
+          "purpose": "Apply non-compensatory lexicographic synthesis to four pillar verdicts: justice (Fairness) > dignity (Governance) > effectiveness (Validity/Efficacy)"
+        }
+      },
+      "interpretation_logic": {
+        "PROMOTE": {
+          "condition": "all four pillars PASS",
+          "action": "emit synthesis_verdict=PROMOTE to CP-MP6-8"
+        },
+        "QUARANTINE": {
+          "condition": "Efficacy OR Fairness pillar FAIL",
+          "action": "emit synthesis_verdict=QUARANTINE to CP-MP6-8, intervention blocked"
+        },
+        "REDESIGN": {
+          "condition": "Validity pillar FAIL",
+          "action": "emit synthesis_verdict=REDESIGN to CP-MP6-8, instrument requires redesign"
+        },
+        "INVESTIGATE": {
+          "condition": "Governance pillar FAIL",
+          "action": "emit synthesis_verdict=INVESTIGATE to CP-MP6-8, audit trail insufficient"
+        }
+      },
+      "outputs": {
+        "primary": "synthesis_verdict",
+        "secondary": [
+          "lexicographic_trace",
+          "pillar_summary",
+          "blocking_pillars",
+          "remediation_priorities"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-MP6-7"
+      ],
+      "downstream": [
+        "PH-MP6-9"
+      ]
+    },
+    {
+      "phase_id": "PH-MP6-8",
+      "was": "CP-MP6-8",
+      "phase_name": "Directive Emission & Accountability Agent",
+      "calls_elements": [
+        "E-MP06-TIP-BUNDLE",
+        "E-MP06-MAT-BUNDLE",
+        "E-MP06-AUD-BUNDLE",
+        "E-MP06-CMP-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-MP06-TIP-BUNDLE": {
+          "instruction": "assess_transparency",
+          "purpose": "Apply TIPS framework: transparency, interpretability, proactive disclosure, stakeholder communication"
+        },
+        "E-MP06-MAT-BUNDLE": {
+          "instruction": "assess_maturity",
+          "purpose": "Evaluate institutional audit maturity level (M0/M1/M2) and recommend investments"
+        },
+        "E-MP06-AUD-BUNDLE": {
+          "instruction": "verify_audit_trail",
+          "purpose": "Verify audit trail completeness and recency for accountability reporting"
+        },
+        "E-MP06-CMP-BUNDLE": {
+          "instruction": "verify_compliance",
+          "purpose": "Check charter compliance, ADR compliance, and governance process compliance"
+        }
+      },
+      "interpretation_logic": {
+        "PROMOTE": {
+          "condition": "synthesis_verdict == PROMOTE",
+          "action": "generate_compliance_certificate + public_assurance_report"
+        },
+        "QUARANTINE": {
+          "condition": "synthesis_verdict == QUARANTINE",
+          "action": "generate_remediation_directives for failing Efficacy/Fairness pillars"
+        },
+        "REDESIGN": {
+          "condition": "synthesis_verdict == REDESIGN",
+          "action": "generate_redesign_plan for Validity pillar"
+        },
+        "INVESTIGATE": {
+          "condition": "synthesis_verdict == INVESTIGATE",
+          "action": "generate_investigation_scope for Governance pillar"
+        }
+      },
+      "outputs": {
+        "primary": "assurance_output",
+        "secondary": [
+          "directive_bundle",
+          "public_assurance_report",
+          "remediation_plan",
+          "maturity_assessment",
+          "compliance_certificate",
+          "handover_package"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-MP6-8"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-MP6-1",
+      "CP-MP6-2",
+      "CP-MP6-3",
+      "CP-MP6-4",
+      "CP-MP6-5",
+      "CP-MP6-6",
+      "CP-MP6-7",
+      "CP-MP6-8"
+    ],
+    "original_count": 8,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

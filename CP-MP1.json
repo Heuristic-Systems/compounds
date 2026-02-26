@@ -1,0 +1,263 @@
+{
+  "compound_id": "CP-MP1",
+  "compound_name": "MP1 Tiered Clearance Gate Master Compound",
+  "layer": "MP01",
+  "agent": "MP1",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-MP1",
+  "theoretical_foundation": {
+    "primary_theory": "Tiered Clearance Governance",
+    "application": "19-phase pipeline"
+  },
+  "calls_elements": [
+    "MP01-E-PCH-001",
+    "MP01-E-PCH-002",
+    "MP01-E-PCH-003"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-MP1-1",
+      "was": "MP01-C-CMP-001_Context_Comprehension_Engine",
+      "phase_name": "Context Comprehension Engine",
+      "upstream": [],
+      "downstream": [
+        "PH-MP1-3"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-2",
+      "was": "MP01-C-COH-001_Holistic_Coherence_Reasoner",
+      "phase_name": "Holistic Coherence Reasoner",
+      "calls_elements": [
+        "MP01-E-PCH-001"
+      ],
+      "upstream": [
+        "PH-MP1-2"
+      ],
+      "downstream": [
+        "PH-MP1-4"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-3",
+      "was": "MP01-C-COH-002_Feasibility_Reality_Check",
+      "phase_name": "Feasibility Reality Check",
+      "calls_elements": [
+        "MP01-E-PCH-002"
+      ],
+      "upstream": [
+        "PH-MP1-3"
+      ],
+      "downstream": [
+        "PH-MP1-5"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-4",
+      "was": "MP01-C-COH-003_Adaptation_Impact_Assessor",
+      "phase_name": "Adaptation Impact Assessor",
+      "calls_elements": [
+        "MP01-E-PCH-003"
+      ],
+      "upstream": [
+        "PH-MP1-4"
+      ],
+      "downstream": [
+        "PH-MP1-6"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-5",
+      "was": "MP01-C-DIR-001_Issue_Directive_Mapper",
+      "phase_name": "Issue-to-Directive Mapper",
+      "upstream": [
+        "PH-MP1-5"
+      ],
+      "downstream": [
+        "PH-MP1-7"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-6",
+      "was": "MP01-C-DIR-002_Directive_Rationale_Generator",
+      "phase_name": "Directive Rationale Generator",
+      "upstream": [
+        "PH-MP1-6"
+      ],
+      "downstream": [
+        "PH-MP1-8"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-7",
+      "was": "MP01-C-DIR-003_Directive_Bundle_Assembler",
+      "phase_name": "Directive Bundle Assembler",
+      "upstream": [
+        "PH-MP1-7"
+      ],
+      "downstream": [
+        "PH-MP1-9"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-8",
+      "was": "MP01-C-GOV-001_Decision_Synthesizer",
+      "phase_name": "Decision Synthesizer",
+      "upstream": [
+        "PH-MP1-8"
+      ],
+      "downstream": [
+        "PH-MP1-10"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-9",
+      "was": "MP01-C-GOV-002_Charter_Annotator",
+      "phase_name": "Charter Annotator",
+      "upstream": [
+        "PH-MP1-9"
+      ],
+      "downstream": [
+        "PH-MP1-11"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-10",
+      "was": "MP01-C-GOV-003_Rationale_Generator",
+      "phase_name": "Rationale Generator",
+      "upstream": [
+        "PH-MP1-10"
+      ],
+      "downstream": [
+        "PH-MP1-12"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-11",
+      "was": "MP01-C-GRD-001_Theory_Practice_Alignment",
+      "phase_name": "Theory-Practice Alignment Verifier",
+      "upstream": [
+        "PH-MP1-11"
+      ],
+      "downstream": [
+        "PH-MP1-13"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-12",
+      "was": "MP01-C-GRD-002_Objective_Content_Assessment_Triangle",
+      "phase_name": "Objective-Content-Assessment Triangle",
+      "upstream": [
+        "PH-MP1-12"
+      ],
+      "downstream": [
+        "PH-MP1-14"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-13",
+      "was": "MP01-C-GRD-003_Cognitive_Load_Auditor",
+      "phase_name": "Cognitive Load Auditor",
+      "upstream": [
+        "PH-MP1-13"
+      ],
+      "downstream": [
+        "PH-MP1-15"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-14",
+      "was": "MP01-C-INQ-001_Assumption_Excavator",
+      "phase_name": "Assumption Excavator",
+      "upstream": [
+        "PH-MP1-14"
+      ],
+      "downstream": [
+        "PH-MP1-16"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-15",
+      "was": "MP01-C-INQ-002_Representation_Auditor",
+      "phase_name": "Representation Auditor",
+      "upstream": [
+        "PH-MP1-15"
+      ],
+      "downstream": [
+        "PH-MP1-17"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-16",
+      "was": "MP01-C-INQ-003_Failure_Mode_Imaginer",
+      "phase_name": "Failure Mode Imaginer",
+      "upstream": [
+        "PH-MP1-16"
+      ],
+      "downstream": [
+        "PH-MP1-18"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-17",
+      "was": "MP01-C-TCL-001_Tiered_Clearance_Evaluator",
+      "phase_name": "Tiered Clearance Evaluator",
+      "upstream": [
+        "PH-MP1-17"
+      ],
+      "downstream": [
+        "PH-MP1-19"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-18",
+      "was": "MP01-C-TCL-002_Clearance_Signature_Encoder",
+      "phase_name": "Clearance Signature Encoder",
+      "upstream": [
+        "PH-MP1-18"
+      ],
+      "downstream": [
+        "PH-MP1-20"
+      ]
+    },
+    {
+      "phase_id": "PH-MP1-19",
+      "was": "MP01-C-TCL-003_Remediation_Handoff_Router",
+      "phase_name": "Remediation Handoff Router",
+      "upstream": [
+        "PH-MP1-19"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "MP01-C-CMP-001_Context_Comprehension_Engine",
+      "MP01-C-COH-001_Holistic_Coherence_Reasoner",
+      "MP01-C-COH-002_Feasibility_Reality_Check",
+      "MP01-C-COH-003_Adaptation_Impact_Assessor",
+      "MP01-C-DIR-001_Issue_Directive_Mapper",
+      "MP01-C-DIR-002_Directive_Rationale_Generator",
+      "MP01-C-DIR-003_Directive_Bundle_Assembler",
+      "MP01-C-GOV-001_Decision_Synthesizer",
+      "MP01-C-GOV-002_Charter_Annotator",
+      "MP01-C-GOV-003_Rationale_Generator",
+      "MP01-C-GRD-001_Theory_Practice_Alignment",
+      "MP01-C-GRD-002_Objective_Content_Assessment_Triangle",
+      "MP01-C-GRD-003_Cognitive_Load_Auditor",
+      "MP01-C-INQ-001_Assumption_Excavator",
+      "MP01-C-INQ-002_Representation_Auditor",
+      "MP01-C-INQ-003_Failure_Mode_Imaginer",
+      "MP01-C-TCL-001_Tiered_Clearance_Evaluator",
+      "MP01-C-TCL-002_Clearance_Signature_Encoder",
+      "MP01-C-TCL-003_Remediation_Handoff_Router"
+    ],
+    "original_count": 19,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

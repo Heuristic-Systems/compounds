@@ -1,0 +1,349 @@
+{
+  "compound_id": "CP-SFE",
+  "compound_name": "Strategic Foresight Engine Master Compound",
+  "layer": "L08",
+  "agent": "SFE",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-SFE",
+  "theoretical_foundation": {
+    "primary_theory": "Strategic Foresight and Futures Thinking",
+    "application": "12-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L08-DC-BUNDLE",
+    "E-L08-DH-BUNDLE",
+    "E-L08-EG-BUNDLE",
+    "E-L08-HS-BUNDLE",
+    "E-L08-IN-BUNDLE",
+    "E-L08-PF-BUNDLE",
+    "E-L08-PM-BUNDLE",
+    "E-L08-PR-BUNDLE",
+    "E-L08-RG-BUNDLE",
+    "E-L08-SD-BUNDLE",
+    "E-L08-SE-BUNDLE",
+    "E-L08-SL-BUNDLE",
+    "E-L08-SM-BUNDLE",
+    "E-L08-ST-BUNDLE",
+    "E-L08-TP-BUNDLE",
+    "E-L08-TR-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-SFE-1",
+      "was": "CP-SFE-1",
+      "phase_name": "Signal Lake Integrity Checker",
+      "calls_elements": [
+        "E-L08-SL-BUNDLE",
+        "E-L08-HS-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "signal_integrity",
+        "secondary": [
+          "source_diversity",
+          "inclusion_policy",
+          "licensing_status"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [],
+      "downstream": [
+        "PH-SFE-3"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-2",
+      "was": "CP-SFE-10",
+      "phase_name": "Research Governance Monitor",
+      "calls_elements": [
+        "E-L08-RG-BUNDLE",
+        "E-L08-IN-BUNDLE",
+        "E-L08-TP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "preregistration_status",
+        "secondary": [
+          "replication_archived",
+          "coi_declared",
+          "independence_valid"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-2"
+      ],
+      "downstream": [
+        "PH-SFE-4"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-3",
+      "was": "CP-SFE-11",
+      "phase_name": "Portfolio Rationality Checker",
+      "calls_elements": [
+        "E-L08-PF-BUNDLE",
+        "E-L08-SD-BUNDLE",
+        "E-L08-PM-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "portfolio_rational",
+        "secondary": [
+          "cap_adherence",
+          "evi_present",
+          "sunset_trigger_valid"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-3"
+      ],
+      "downstream": [
+        "PH-SFE-5"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-4",
+      "was": "CP-SFE-12",
+      "phase_name": "Foresight Handoff Compiler",
+      "calls_elements": [
+        "E-L08-DH-BUNDLE",
+        "E-L08-DC-BUNDLE",
+        "E-L08-PM-BUNDLE",
+        "E-L08-EG-BUNDLE",
+        "E-L08-SE-BUNDLE",
+        "E-L08-RG-BUNDLE",
+        "E-L08-PF-BUNDLE",
+        "E-L08-TP-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "foresight_spec",
+        "secondary": [
+          "audit_packet",
+          "recommendation_bundle",
+          "downstream_handoff"
+        ]
+      },
+      "loop_policy": "iterate_until_stable",
+      "upstream": [
+        "PH-SFE-4"
+      ],
+      "downstream": [
+        "PH-SFE-6"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-5",
+      "was": "CP-SFE-2",
+      "phase_name": "Horizon Scanner Monitor",
+      "calls_elements": [
+        "E-L08-HS-BUNDLE",
+        "E-L08-SL-BUNDLE",
+        "E-L08-PR-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "scan_quality",
+        "secondary": [
+          "bibliometric_health",
+          "trend_detection",
+          "topic_drift_alert"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-5"
+      ],
+      "downstream": [
+        "PH-SFE-7"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-6",
+      "was": "CP-SFE-3",
+      "phase_name": "Policy Radar Tracker",
+      "calls_elements": [
+        "E-L08-PR-BUNDLE",
+        "E-L08-SM-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "policy_coverage",
+        "secondary": [
+          "regulatory_alert",
+          "standards_posture",
+          "change_velocity"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-6"
+      ],
+      "downstream": [
+        "PH-SFE-8"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-7",
+      "was": "CP-SFE-4",
+      "phase_name": "Evidence Graph Validator",
+      "calls_elements": [
+        "E-L08-EG-BUNDLE",
+        "E-L08-RG-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "graph_validity",
+        "secondary": [
+          "link_integrity",
+          "evidence_grade",
+          "provenance_complete"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-7"
+      ],
+      "downstream": [
+        "PH-SFE-9"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-8",
+      "was": "CP-SFE-5",
+      "phase_name": "Evidence Translator",
+      "calls_elements": [
+        "E-L08-TR-BUNDLE",
+        "E-L08-EG-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "translation_quality",
+        "secondary": [
+          "operator_coverage",
+          "context_specificity",
+          "mapping_complete"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-8"
+      ],
+      "downstream": [
+        "PH-SFE-10"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-9",
+      "was": "CP-SFE-6",
+      "phase_name": "Scenario Discipline Auditor",
+      "calls_elements": [
+        "E-L08-SE-BUNDLE",
+        "E-L08-ST-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "scenario_discipline",
+        "secondary": [
+          "parameter_explicitness",
+          "cross_impact_valid",
+          "bayesian_audit"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-9"
+      ],
+      "downstream": [
+        "PH-SFE-11"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-10",
+      "was": "CP-SFE-7",
+      "phase_name": "Stress Test Verifier",
+      "calls_elements": [
+        "E-L08-ST-BUNDLE",
+        "E-L08-SE-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "stress_test_status",
+        "secondary": [
+          "l3_constraints_incorporated",
+          "l4_constraints_incorporated",
+          "boundary_valid"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-10"
+      ],
+      "downstream": [
+        "PH-SFE-12"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-11",
+      "was": "CP-SFE-8",
+      "phase_name": "Standards Compliance Checker",
+      "calls_elements": [
+        "E-L08-SM-BUNDLE",
+        "E-L08-PR-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "spec_diff_status",
+        "secondary": [
+          "test_coverage",
+          "compliance_readiness",
+          "execution_result"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-11"
+      ],
+      "downstream": [
+        "PH-SFE-13"
+      ]
+    },
+    {
+      "phase_id": "PH-SFE-12",
+      "was": "CP-SFE-9",
+      "phase_name": "Decision Hub Auditor",
+      "calls_elements": [
+        "E-L08-DH-BUNDLE",
+        "E-L08-DC-BUNDLE",
+        "E-L08-PM-BUNDLE"
+      ],
+      "outputs": {
+        "primary": "adp_complete",
+        "secondary": [
+          "trace_valid",
+          "lens_scores",
+          "decision_sound"
+        ]
+      },
+      "loop_policy": "single_pass",
+      "upstream": [
+        "PH-SFE-12"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP-SFE-1",
+      "CP-SFE-10",
+      "CP-SFE-11",
+      "CP-SFE-12",
+      "CP-SFE-2",
+      "CP-SFE-3",
+      "CP-SFE-4",
+      "CP-SFE-5",
+      "CP-SFE-6",
+      "CP-SFE-7",
+      "CP-SFE-8",
+      "CP-SFE-9"
+    ],
+    "original_count": 12,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}

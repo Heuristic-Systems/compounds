@@ -1,0 +1,724 @@
+{
+  "compound_id": "CP-LOPA",
+  "compound_name": "Learner Profile Agent Master Compound",
+  "layer": "L01",
+  "agent": "LOPA",
+  "version": "4.0.0",
+  "status": "ACTIVE",
+  "implements_construct": "K-LOPA",
+  "theoretical_foundation": {
+    "primary_theory": "Multi-domain Learner State Assessment",
+    "application": "7-phase pipeline"
+  },
+  "calls_elements": [
+    "E-L01-CONTEXT-BRIDGE",
+    "E-L01-CS-BUNDLE",
+    "E-L01-EF-BUNDLE",
+    "E-L01-GEN-BUNDLE",
+    "E-L01-MAI-BUNDLE",
+    "E-L01-MC-BUNDLE",
+    "E-L01-MML-BUNDLE",
+    "E-L01-PER-BRIDGE",
+    "E-L01-PRC-BUNDLE",
+    "E-L01-REP-BUNDLE",
+    "E-L01-TLD-BUNDLE"
+  ],
+  "phases": [
+    {
+      "phase_id": "PH-LOPA-1",
+      "was": "CP1",
+      "phase_name": "Learner Profile Synthesiser",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-CONTEXT-BRIDGE",
+        "E-L01-MAI-BUNDLE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-PRC-BUNDLE",
+        "E-L01-EF-BUNDLE",
+        "E-L01-REP-BUNDLE",
+        "E-L01-TLD-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-GEN-BUNDLE",
+        "E-L01-MML-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "compute_trait_baselines",
+          "purpose": "Transform personality traits into state-modulating parameters"
+        },
+        "E-L01-CONTEXT-BRIDGE": {
+          "instruction": "transform_ecological_context",
+          "purpose": "Transform CLEA context_vector into L01-consumable constraints"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "measure_motivational_state",
+          "purpose": "Gather motivational-affective evidence"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "measure_metacognitive_state",
+          "purpose": "Gather metacognitive and self-regulation evidence"
+        },
+        "E-L01-PRC-BUNDLE": {
+          "instruction": "measure_processing_capacity",
+          "purpose": "Gather cognitive load and capacity evidence"
+        },
+        "E-L01-EF-BUNDLE": {
+          "instruction": "measure_error_processing",
+          "purpose": "Gather error and feedback processing evidence"
+        },
+        "E-L01-REP-BUNDLE": {
+          "instruction": "measure_representation_state",
+          "purpose": "Gather knowledge representation evidence"
+        },
+        "E-L01-TLD-BUNDLE": {
+          "instruction": "measure_temporal_dynamics",
+          "purpose": "Gather temporal learning dynamics evidence"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "measure_contextual_constraints",
+          "purpose": "Gather contextual structure evidence"
+        },
+        "E-L01-GEN-BUNDLE": {
+          "instruction": "measure_system_state",
+          "purpose": "Gather general system evidence"
+        },
+        "E-L01-MML-BUNDLE": {
+          "instruction": "measure_modality_preferences",
+          "purpose": "Gather multimodal preferences for L05 handoff"
+        }
+      },
+      "execution_flow": [
+        "1. Read K1 framework for synthesis rules",
+        "2. If personality_profile_signature available, instruct E-L01-PER-BRIDGE: compute_trait_baselines",
+        "3. Receive personality_state_modifiers (baselines, thresholds, preferences)",
+        "4. Instruct all 9 state Elements with their respective instructions",
+        "5. Receive evidence bundles from all state Elements",
+        "6. Validate evidence quality (must pass CP7 first)",
+        "7. Apply personality_state_modifiers to weight/interpret state evidence",
+        "8. Normalise and timestamp-weight all signals",
+        "9. Compute per-family state estimates with personality-adjusted confidence",
+        "10. Run cross-family contradiction detection (personality-aware)",
+        "11. Extract modality_preference_profile from MML for L05 (personality-informed)",
+        "12. Aggregate into unified learner_state_vector with trait context",
+        "13. Apply interpretation_logic",
+        "14. Emit learner_state_vector with personality_state_modifiers"
+      ],
+      "interpretation_logic": {
+        "VALID_PROFILE": {
+          "condition": "core_family_coverage >= 3 AND aggregate_confidence >= 0.5",
+          "action": "emit_learner_state_vector"
+        },
+        "INCOMPLETE_PROFILE": {
+          "condition": "core_family_coverage < 3 OR aggregate_confidence < 0.5",
+          "action": "request_additional_evidence"
+        },
+        "contradiction_handling": {
+          "condition": "family_score_delta > 30",
+          "action": "flag_contradiction_and_weight_by_recency"
+        }
+      },
+      "outputs": {
+        "primary": "learner_state_vector",
+        "secondary": [
+          "confidence_scores",
+          "contradiction_flags",
+          "modality_preference_profile",
+          "personality_state_modifiers"
+        ],
+        "handoff": {
+          "modality_preference_profile": {
+            "target_layer": "L05",
+            "target_agent": "MSA"
+          }
+        }
+      },
+      "loop_policy": {
+        "reinterpretation_max": 5,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot satisfy State Synthesis requirements within bounded loops."
+      },
+      "upstream": [],
+      "downstream": [
+        "PH-LOPA-3"
+      ]
+    },
+    {
+      "phase_id": "PH-LOPA-2",
+      "was": "CP2",
+      "phase_name": "Objective Alignment Decision Unit",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-REP-BUNDLE",
+        "E-L01-TLD-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-MAI-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed risk thresholds and preferences"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "check_goal_alignment",
+          "purpose": "Assess goal clarity and strategy readiness"
+        },
+        "E-L01-REP-BUNDLE": {
+          "instruction": "assess_schema_integrity",
+          "purpose": "Check prerequisite knowledge representation"
+        },
+        "E-L01-TLD-BUNDLE": {
+          "instruction": "evaluate_transfer_readiness",
+          "purpose": "Check temporal readiness for new learning"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "measure_contextual_constraints",
+          "purpose": "Check task structure and constraints"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "assess_affective_risk",
+          "purpose": "Check motivational fit and frustration risk"
+        }
+      },
+      "execution_flow": [
+        "1. Read K2 framework for gating rules",
+        "2. Receive learner_state_profile from CP1",
+        "3. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "4. Receive personality-adjusted thresholds and preferences",
+        "5. Instruct E-L01-MC-BUNDLE: check_goal_alignment",
+        "6. Instruct E-L01-REP-BUNDLE: assess_schema_integrity",
+        "7. Instruct E-L01-TLD-BUNDLE: evaluate_transfer_readiness",
+        "8. Instruct E-L01-CS-BUNDLE: measure_contextual_constraints",
+        "9. Instruct E-L01-MAI-BUNDLE: assess_affective_risk",
+        "10. Receive evidence bundles from all Elements",
+        "11. Parse objective requirements (specificity, prerequisites)",
+        "12. Compute zpd_alignment using K2 formula with personality-adjusted margins",
+        "13. Check prerequisite coverage against thresholds",
+        "14. Assess motivational fit with personality-informed frustration tolerance",
+        "15. Apply interpretation_logic with personality adjustments",
+        "16. If CORRECTION_REQUIRED, generate personality-aware adjustment specification"
+      ],
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "zpd_aligned AND prerequisites_met AND motivational_fit_personality_adjusted",
+          "action": "approve_objective"
+        },
+        "CORRECTION_REQUIRED": {
+          "condition": "zpd_aligned AND (prerequisites_partial OR motivational_marginal)",
+          "action": "suggest_objective_adjustments_personality_informed"
+        },
+        "FAIL": {
+          "condition": "NOT zpd_aligned OR prerequisites_severely_unmet OR (high_N_score AND objective_too_challenging)",
+          "action": "reject_objective_with_personality_aware_alternative"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "widen safety margin for challenge level",
+          "high_openness": "allow stretch objectives beyond typical ZPD",
+          "low_conscientiousness": "require clearer milestones and structure",
+          "high_extraversion": "favour collaborative objectives"
+        }
+      },
+      "outputs": {
+        "primary": "objective_decision",
+        "primary_values": [
+          "PASS",
+          "CORRECTION_REQUIRED",
+          "FAIL"
+        ],
+        "secondary": [
+          "fit_score",
+          "zpd_alignment_score",
+          "prerequisite_coverage",
+          "adjustment_specification"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 5,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot satisfy Objective Gating requirements within bounded loops."
+      },
+      "upstream": [
+        "PH-LOPA-2"
+      ],
+      "downstream": [
+        "PH-LOPA-4"
+      ]
+    },
+    {
+      "phase_id": "PH-LOPA-3",
+      "was": "CP3",
+      "phase_name": "Pedagogy Integrity Decision Unit",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-TLD-BUNDLE",
+        "E-L01-EF-BUNDLE",
+        "E-L01-REP-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-PRC-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed feedback and processing preferences"
+        },
+        "E-L01-TLD-BUNDLE": {
+          "instruction": "check_spacing_alignment",
+          "purpose": "Verify spacing and retrieval practice alignment"
+        },
+        "E-L01-EF-BUNDLE": {
+          "instruction": "assess_feedback_interpretability",
+          "purpose": "Check feedback can be understood by learner"
+        },
+        "E-L01-REP-BUNDLE": {
+          "instruction": "verify_representational_fit",
+          "purpose": "Ensure representations match learner schema"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_task_structure",
+          "purpose": "Check task structure and processing demands"
+        },
+        "E-L01-PRC-BUNDLE": {
+          "instruction": "assess_processing_alignment",
+          "purpose": "Verify cognitive processing requirements"
+        }
+      },
+      "execution_flow": [
+        "1. Read K3 framework for pedagogy gating rules",
+        "2. Receive proposed_pedagogy, practice_structure, feedback_plan",
+        "3. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "4. Receive personality preferences (feedback style, exploration propensity, social preference)",
+        "5. Instruct E-L01-TLD-BUNDLE: check_spacing_alignment",
+        "6. Instruct E-L01-EF-BUNDLE: assess_feedback_interpretability",
+        "7. Instruct E-L01-REP-BUNDLE: verify_representational_fit",
+        "8. Instruct E-L01-CS-BUNDLE: evaluate_task_structure",
+        "9. Instruct E-L01-PRC-BUNDLE: assess_processing_alignment",
+        "10. Receive evidence bundles from all Elements",
+        "11. Parse proposed pedagogy structure",
+        "12. Validate feedback style against N/A personality thresholds",
+        "13. Validate pedagogy type against O/E personality preferences",
+        "14. Compile violations and compute personality-adjusted integrity_score",
+        "15. Apply interpretation_logic with personality adjustments",
+        "16. If CORRECTION_REQUIRED, generate personality-informed correction_specification"
+      ],
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "spacing_aligned AND feedback_interpretable_for_personality AND representations_fit AND processing_appropriate",
+          "action": "approve_pedagogy_plan"
+        },
+        "CORRECTION_REQUIRED": {
+          "condition": "minor_violations_detected AND fixable_without_redesign",
+          "action": "generate_personality_informed_correction_specification"
+        },
+        "FAIL": {
+          "condition": "critical_violations OR fundamental_mismatch OR feedback_incompatible_with_personality",
+          "action": "reject_with_personality_aware_redesign_guidance"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "require gentler feedback framing, avoid harsh critique",
+          "low_agreeableness": "allow more direct/blunt feedback style",
+          "high_openness": "favour exploratory/discovery-based pedagogy",
+          "low_openness": "favour structured/procedural pedagogy",
+          "high_conscientiousness": "include detailed progress tracking",
+          "low_extraversion": "reduce collaborative/social pedagogy demands"
+        }
+      },
+      "outputs": {
+        "primary": "pedagogy_decision",
+        "primary_values": [
+          "PASS",
+          "CORRECTION_REQUIRED",
+          "FAIL"
+        ],
+        "secondary": [
+          "integrity_score",
+          "violation_list",
+          "correction_specification"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 5,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot satisfy Pedagogy Gating requirements within bounded loops."
+      },
+      "upstream": [
+        "PH-LOPA-3"
+      ],
+      "downstream": [
+        "PH-LOPA-5"
+      ]
+    },
+    {
+      "phase_id": "PH-LOPA-4",
+      "was": "CP4",
+      "phase_name": "Scaffolding Plan Generator",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-MAI-BUNDLE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-PRC-BUNDLE",
+        "E-L01-CS-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "derive_sensitivity_thresholds",
+          "purpose": "Get personality-informed stress and support thresholds"
+        },
+        "E-L01-MAI-BUNDLE": {
+          "instruction": "assess_motivational_state",
+          "purpose": "Gather stress, frustration tolerance, engagement levels"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "evaluate_metacognitive_capacity",
+          "purpose": "Check self-regulation and monitoring capabilities"
+        },
+        "E-L01-PRC-BUNDLE": {
+          "instruction": "measure_cognitive_load",
+          "purpose": "Assess fatigue, interference, processing demands"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_task_constraints",
+          "purpose": "Check error costs, complexity, time constraints"
+        }
+      },
+      "execution_flow": [
+        "1. Read K4 framework for scaffolding selection rules",
+        "2. Receive task_specification and learner_state_profile",
+        "3. Instruct E-L01-PER-BRIDGE: derive_sensitivity_thresholds",
+        "4. Receive personality-adjusted thresholds (N→stress, C→regulation, O→exploration)",
+        "5. Instruct E-L01-MAI-BUNDLE: assess_motivational_state",
+        "6. Instruct E-L01-MC-BUNDLE: evaluate_metacognitive_capacity",
+        "7. Instruct E-L01-PRC-BUNDLE: measure_cognitive_load",
+        "8. Instruct E-L01-CS-BUNDLE: evaluate_task_constraints",
+        "9. Receive evidence bundles from all Elements",
+        "10. Apply personality_state_modifiers to adjust thresholds",
+        "11. Determine baseline support_intensity using personality-adjusted evidence",
+        "12. Define timing_triggers based on task structure and personality",
+        "13. Generate fade_rules based on learning trajectory and C_baseline",
+        "14. Apply interpretation_logic with personality adjustments",
+        "15. Compile scaffolding_plan with personality-informed contingency_actions"
+      ],
+      "interpretation_logic": {
+        "HIGH_SUPPORT": {
+          "condition": "(stress > personality_adjusted_threshold) OR low_self_regulation OR high_cognitive_load OR (high_N_score AND stress > 40)",
+          "action": "generate_intensive_scaffolding"
+        },
+        "MODERATE_SUPPORT": {
+          "condition": "moderate_indicators AND (self_regulation >= C_baseline * 0.7)",
+          "action": "generate_adaptive_scaffolding_with_fade"
+        },
+        "MINIMAL_SUPPORT": {
+          "condition": "low_stress AND (self_regulation >= C_baseline) AND manageable_load",
+          "action": "generate_just_in_time_scaffolding"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "lower stress intervention threshold by 15%",
+          "low_conscientiousness": "increase scaffolding structure and check-ins",
+          "high_openness": "allow more exploration before scaffolding",
+          "low_extraversion": "prefer asynchronous scaffolding over interactive"
+        }
+      },
+      "outputs": {
+        "primary": "scaffolding_plan",
+        "secondary": [
+          "support_intensity",
+          "fade_rules",
+          "timing_triggers",
+          "contingency_actions"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 5,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot satisfy Scaffolding Selection requirements within bounded loops."
+      },
+      "upstream": [
+        "PH-LOPA-4"
+      ],
+      "downstream": [
+        "PH-LOPA-6"
+      ]
+    },
+    {
+      "phase_id": "PH-LOPA-5",
+      "was": "CP5",
+      "phase_name": "Representation Repair Router",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-REP-BUNDLE",
+        "E-L01-EF-BUNDLE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-CS-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed repair approach preferences"
+        },
+        "E-L01-REP-BUNDLE": {
+          "instruction": "detect_representational_breakdowns",
+          "purpose": "Check for schema gaps, misconceptions, fragmentation"
+        },
+        "E-L01-EF-BUNDLE": {
+          "instruction": "analyse_error_patterns",
+          "purpose": "Identify systematic errors and calibration issues"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "assess_metacognitive_awareness",
+          "purpose": "Check if learner is aware of their representational state"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_repair_constraints",
+          "purpose": "Assess time and resource constraints for repair"
+        }
+      },
+      "execution_flow": [
+        "1. Read K5 framework for representation repair rules",
+        "2. Receive target_concept and learner_state_profile",
+        "3. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "4. Receive personality preferences (N for messaging, O for approach variety, C for structure)",
+        "5. Instruct E-L01-REP-BUNDLE: detect_representational_breakdowns",
+        "6. Instruct E-L01-EF-BUNDLE: analyse_error_patterns",
+        "7. Instruct E-L01-MC-BUNDLE: assess_metacognitive_awareness",
+        "8. Instruct E-L01-CS-BUNDLE: evaluate_repair_constraints",
+        "9. Receive evidence bundles from all Elements",
+        "10. Classify breakdown_type if breakdowns detected",
+        "11. Assess repair stress level against N threshold",
+        "12. Generate personality-informed repair_pathway (structured vs exploratory)",
+        "13. Define progression_gate with personality-appropriate messaging",
+        "14. Apply interpretation_logic with personality adjustments",
+        "15. Return repair_decision with personality-informed pathway or PASS"
+      ],
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "no_breakdowns_detected AND schema_intact",
+          "action": "allow_progression"
+        },
+        "REPAIR_REQUIRED": {
+          "condition": "breakdowns_detected AND repairable_within_bounds",
+          "action": "generate_personality_informed_repair_pathway"
+        },
+        "BLOCKED": {
+          "condition": "severe_breakdown OR prerequisite_missing OR (high_N_score AND repair_too_stressful)",
+          "action": "block_progression_with_personality_aware_remediation"
+        },
+        "personality_adjustments": {
+          "high_neuroticism": "frame repair as growth opportunity, not failure; gentler messaging",
+          "high_openness": "offer exploratory repair paths with multiple approaches",
+          "low_openness": "offer single clear structured repair path",
+          "high_conscientiousness": "provide detailed repair criteria and progress tracking",
+          "low_conscientiousness": "chunk repair into smaller, frequent checkpoints"
+        }
+      },
+      "outputs": {
+        "primary": "repair_decision",
+        "primary_values": [
+          "PASS",
+          "REPAIR_REQUIRED",
+          "BLOCKED"
+        ],
+        "secondary": [
+          "breakdown_type",
+          "repair_pathway",
+          "progression_gate",
+          "repair_criteria"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 5,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot satisfy Representation Repair requirements within bounded loops."
+      },
+      "upstream": [
+        "PH-LOPA-5"
+      ],
+      "downstream": [
+        "PH-LOPA-7"
+      ]
+    },
+    {
+      "phase_id": "PH-LOPA-6",
+      "was": "CP6",
+      "phase_name": "Temporal Schedule Optimiser",
+      "calls_elements": [
+        "E-L01-PER-BRIDGE",
+        "E-L01-TLD-BUNDLE",
+        "E-L01-PRC-BUNDLE",
+        "E-L01-CS-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-PER-BRIDGE": {
+          "instruction": "get_personality_context",
+          "purpose": "Get personality-informed scheduling preferences"
+        },
+        "E-L01-TLD-BUNDLE": {
+          "instruction": "extract_temporal_dynamics",
+          "purpose": "Gather decay rates, consolidation patterns, transfer windows"
+        },
+        "E-L01-PRC-BUNDLE": {
+          "instruction": "assess_processing_capacity",
+          "purpose": "Check available cognitive resources for scheduling"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "evaluate_scheduling_constraints",
+          "purpose": "Identify time windows, session limits, environmental factors"
+        }
+      },
+      "execution_flow": [
+        "1. Read K6 framework for temporal scheduling rules",
+        "2. Receive target_content, retention_goals, available_time_windows",
+        "3. Instruct E-L01-PER-BRIDGE: get_personality_context",
+        "4. Receive personality preferences (C for session length/adherence, N for buffer needs, E for social preference)",
+        "5. Instruct E-L01-TLD-BUNDLE: extract_temporal_dynamics",
+        "6. Instruct E-L01-PRC-BUNDLE: assess_processing_capacity",
+        "7. Instruct E-L01-CS-BUNDLE: evaluate_scheduling_constraints",
+        "8. Receive evidence bundles from all Elements",
+        "9. Calculate decay and saturation constraints",
+        "10. Adjust session lengths based on C score (high-C = longer ok, low-C = shorter)",
+        "11. Add buffer time for high-N learners to reduce cramming stress",
+        "12. Generate spacing_plan with personality-informed session structure",
+        "13. Define retrieval_schedule (solo vs social based on E score)",
+        "14. Add transfer_bridging_events with format variety for high-O",
+        "15. Apply interpretation_logic with personality adjustments",
+        "16. Return temporal_schedule with personality_schedule_notes"
+      ],
+      "interpretation_logic": {
+        "OPTIMAL_SCHEDULE": {
+          "condition": "time_windows_sufficient AND decay_rates_known AND processing_capacity_adequate",
+          "action": "generate_personality_optimised_schedule"
+        },
+        "CONSTRAINED_SCHEDULE": {
+          "condition": "time_windows_limited OR processing_capacity_marginal",
+          "action": "generate_personality_aware_prioritised_schedule"
+        },
+        "MINIMAL_SCHEDULE": {
+          "condition": "severe_constraints OR insufficient_data",
+          "action": "generate_minimum_viable_schedule_with_personality_adaptations"
+        },
+        "personality_adjustments": {
+          "high_conscientiousness": "longer sessions acceptable, stricter adherence expected",
+          "low_conscientiousness": "shorter sessions with more frequent reminders",
+          "high_neuroticism": "avoid cramming, prefer distributed practice with buffer time",
+          "high_extraversion": "include social/collaborative review sessions",
+          "low_extraversion": "favour solo review sessions",
+          "high_openness": "include variety in review formats"
+        }
+      },
+      "outputs": {
+        "primary": "temporal_schedule",
+        "secondary": [
+          "spacing_plan",
+          "retrieval_schedule",
+          "transfer_bridging_events",
+          "schedule_confidence"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 3,
+        "more_data_max": 2,
+        "escalation_condition": "Cannot satisfy Temporal Scheduling requirements within bounded loops."
+      },
+      "upstream": [
+        "PH-LOPA-6"
+      ],
+      "downstream": [
+        "PH-LOPA-8"
+      ]
+    },
+    {
+      "phase_id": "PH-LOPA-7",
+      "was": "CP7",
+      "phase_name": "Evidence Quality Controller",
+      "calls_elements": [
+        "E-L01-EF-BUNDLE",
+        "E-L01-CS-BUNDLE",
+        "E-L01-MC-BUNDLE",
+        "E-L01-GEN-BUNDLE"
+      ],
+      "element_instructions": {
+        "E-L01-EF-BUNDLE": {
+          "instruction": "assess_feedback_usability",
+          "purpose": "Check signal interpretability"
+        },
+        "E-L01-CS-BUNDLE": {
+          "instruction": "measure_contextual_constraints",
+          "purpose": "Check signal context validity"
+        },
+        "E-L01-MC-BUNDLE": {
+          "instruction": "evaluate_control_calibration",
+          "purpose": "Check metacognitive signal quality"
+        },
+        "E-L01-GEN-BUNDLE": {
+          "instruction": "validate_evidence_quality",
+          "purpose": "Cross-family coherence check"
+        }
+      },
+      "execution_flow": [
+        "1. Read K0 framework for quality rules",
+        "2. Instruct E-L01-EF-BUNDLE: assess_feedback_usability",
+        "3. Instruct E-L01-CS-BUNDLE: measure_contextual_constraints",
+        "4. Instruct E-L01-MC-BUNDLE: evaluate_control_calibration",
+        "5. Instruct E-L01-GEN-BUNDLE: validate_evidence_quality",
+        "6. Receive evidence bundles from all Elements",
+        "7. Count family coverage (require >= 2)",
+        "8. Check signal recency against K0 thresholds",
+        "9. Compute aggregate confidence",
+        "10. Apply interpretation_logic to decide",
+        "11. Emit quality_decision with report"
+      ],
+      "interpretation_logic": {
+        "PASS": {
+          "condition": "family_coverage >= 2 AND recency_ok AND aggregate_confidence >= 0.7",
+          "action": "proceed_to_downstream"
+        },
+        "WARNING": {
+          "condition": "family_coverage >= 2 AND (recency_partial OR aggregate_confidence >= 0.5)",
+          "action": "proceed_with_caution_flag"
+        },
+        "FAIL": {
+          "condition": "family_coverage < 2 OR aggregate_confidence < 0.5",
+          "action": "block_and_request_more_evidence"
+        }
+      },
+      "outputs": {
+        "primary": "quality_decision",
+        "primary_values": [
+          "PASS",
+          "WARNING",
+          "FAIL"
+        ],
+        "secondary": [
+          "evidence_quality_score",
+          "family_coverage_report",
+          "recency_report",
+          "recommendations"
+        ]
+      },
+      "loop_policy": {
+        "reinterpretation_max": 3,
+        "more_data_max": 3,
+        "escalation_condition": "Cannot satisfy Evidence Integrity requirements within bounded loops."
+      },
+      "upstream": [
+        "PH-LOPA-7"
+      ],
+      "downstream": []
+    }
+  ],
+  "cross_agent_handoffs": {},
+  "failure_modes": [],
+  "metadata": {
+    "consolidated_from": [
+      "CP1",
+      "CP2",
+      "CP3",
+      "CP4",
+      "CP5",
+      "CP6",
+      "CP7"
+    ],
+    "original_count": 7,
+    "consolidation_date": "2025-07-14",
+    "schema_version": "4.0.0",
+    "architecture": "master-compound-phases"
+  }
+}
